@@ -7,7 +7,14 @@ if (!article) throw new Error('Missing article: llm-task-cost-paradox');
 const { Content } = await render(article);
 ---
 
-<BaseLayout title={article.data.title} description={article.data.description} current="articles">
+<BaseLayout
+  title={article.data.title}
+  description={article.data.description}
+  current="articles"
+  ogType="article"
+  image="/og/llm-task-cost-paradox.png"
+  imageAlt="The LLM Task-Cost Paradox — why better AI can cost more per task"
+>
   <section class="page-intro">
     <div class="wrap intro-row">
       <div><div class="article-kicker">{article.data.kicker}</div><h1>Why better AI can cost more <em>per task.</em></h1></div>
@@ -24,8 +31,8 @@ const { Content } = await render(article);
       </div>
     </article>
     <aside class="article-aside">
-      <div><div class="aside-title">Filed under</div><p>AI economics<br />Human-computer work<br />Responsible use</p></div>
-      <div><div class="aside-title">Article note</div><p>Part I introduces the cost model. A later piece will examine what responsible use means when attention is part of the bill.</p><a href="/about/">About the publication ↗</a></div>
+      <div><h2 class="aside-title">Filed under</h2><p>AI economics<br />Human-computer work<br />Responsible use</p></div>
+      <div><h2 class="aside-title">Article note</h2><p>Part I introduces the cost model. A later piece will examine what responsible use means when attention is part of the bill.</p><a href="/about/">About the publication ↗</a></div>
     </aside>
   </section>
 </BaseLayout>

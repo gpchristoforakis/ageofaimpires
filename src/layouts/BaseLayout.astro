@@ -8,10 +8,23 @@ interface Props {
   description: string;
   current?: 'articles' | 'frameworks' | 'notebook' | 'about';
   image?: string;
+  imageAlt?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  canonical?: boolean;
 }
 
-const { title, description, current, image = '/favicon.svg' } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const {
+  title,
+  description,
+  current,
+  image = '/og/default.png',
+  imageAlt = 'Age of AI Empires publication card',
+  ogType = 'website',
+  noindex = false,
+  canonical: includeCanonical = true,
+} = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
 ---
 
@@ -23,39 +36,60 @@ const socialImage = new URL(image, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {includeCanonical && <link rel="canonical" href={canonicalUrl} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Age of AI Empires" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {includeCanonical && <meta property="og:url" content={canonicalUrl} />}
     <meta property="og:image" content={socialImage} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <SiteHeader current={current} />
-    <main><slot /></main>
+    <main id="main-content" tabindex="-1"><slot /></main>
     <SiteFooter />
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
       const nav = document.querySelector<HTMLElement>('[data-site-nav]');
 
       if (toggle && nav) {
-        toggle.addEventListener('click', () => {
-          const isOpen = nav.classList.toggle('is-open');
+        const firstLink = nav.querySelector<HTMLAnchorElement>('a');
+
+        const setMenuState = (isOpen: boolean, restoreFocus = false) => {
+          nav.classList.toggle('is-open', isOpen);
           toggle.setAttribute('aria-expanded', String(isOpen));
           toggle.textContent = isOpen ? 'Close' : 'Menu';
+
+          if (isOpen) firstLink?.focus();
+          else if (restoreFocus) toggle.focus();
+        };
+
+        toggle.addEventListener('click', () => {
+          const isOpen = toggle.getAttribute('aria-expanded') !== 'true';
+          setMenuState(isOpen, !isOpen);
         });
 
         nav.addEventListener('click', (event) => {
           if (event.target instanceof HTMLAnchorElement) {
-            nav.classList.remove('is-open');
-            toggle.setAttribute('aria-expanded', 'false');
-            toggle.textContent = 'Menu';
+            setMenuState(false, true);
+          }
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            setMenuState(false, true);
           }
         });
       }
