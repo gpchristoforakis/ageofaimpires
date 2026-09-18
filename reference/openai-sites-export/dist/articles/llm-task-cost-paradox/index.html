@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The LLM Task-Cost Paradox — Age of AI Empires</title>
+    <meta name="description" content="Why better AI can cost more per task, even when the price per token falls." />
+    <link rel="canonical" href="https://ageofaimpires.com/articles/llm-task-cost-paradox/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav-wrap">
+        <a class="wordmark" href="/">AGE OF <span>AI</span> EMPIRES</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">
+          <a href="/articles/llm-task-cost-paradox/" aria-current="page">Articles</a>
+          <a href="/frameworks/">Frameworks</a>
+          <a href="/notebook/">Notebook</a>
+          <a href="/about/">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro">
+        <div class="wrap intro-row">
+          <div>
+            <div class="article-kicker">Part I / The LLM Task-Cost Paradox</div>
+            <h1>Why better AI can cost more <em>per task.</em></h1>
+          </div>
+          <div class="intro-aside">
+            <p>Token prices tell us what computation costs. They do not tell us what it costs to actually get something done.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap content-layout">
+        <article class="article-content">
+          <p>There is a seductive way to talk about AI economics: find the price per token, compare models, pick the cheaper one, and call the difference savings.</p>
+          <p>It is not wrong. It is simply incomplete in the way a fuel receipt is incomplete. The receipt tells you what the car consumed. It does not tell you whether you arrived, how many times you circled the block, or whether you stopped for an entirely new destination because the scenery looked interesting.</p>
+          <p>For real people doing real work, the unit that matters is rarely the token. It is the <strong>completed task</strong>.</p>
+
+          <div class="pullquote">The cost of AI-assisted work is not just the cost of producing an answer. It is the cost of reaching a useful stopping point.</div>
+
+          <h2>Start with the car, not the engine</h2>
+          <p>Imagine comparing two cars. One has a smaller engine and uses less fuel. The other is faster, more comfortable, and better at navigating unfamiliar roads. If both are driven once around the same empty track, the first car wins on fuel economy.</p>
+          <p>That is the token-price comparison.</p>
+          <p>Now give the cars a job: deliver a fragile package across a city, during a strike, while the address keeps changing. The better car may consume more fuel per minute because it drives farther and offers more options. But it may still be cheaper to use if it reaches the right address with fewer wrong turns, fewer damaged packages, and less human intervention.</p>
+          <p>The relevant question is no longer “Which engine is cheaper?” It is “Which car gets the package delivered at the lowest total cost?”</p>
+
+          <h2>The task has a budget, even when the prompt does not</h2>
+          <p>Every AI-assisted task has a practical budget made of more than money. It consumes some combination of:</p>
+          <ul>
+            <li>direct model and software cost;</li>
+            <li>the user’s time and attention;</li>
+            <li>review, correction, and verification effort;</li>
+            <li>the cost of mistakes that survive into the next step; and</li>
+            <li>the extra work created when a useful answer expands the original assignment.</li>
+          </ul>
+          <p>That last category is easy to miss because it often feels like a benefit. A model proposes a sharper angle, a second audience, a better diagram, a more ambitious deliverable. The work becomes more interesting. It can also become larger than the task that justified starting it.</p>
+
+          <h2>Effective Task Cost</h2>
+          <p>To make the hidden parts visible, we need a broader unit. Call it <strong>Effective Task Cost</strong>:</p>
+
+          <div class="formula">
+            <div class="equation">ETC = Direct Cost + Remediation Leakage + Expansion Leakage</div>
+            <div class="explain">A practical model for what the completed task consumes—not a claim that every cost can be measured perfectly.</div>
+          </div>
+
+          <p><strong>Direct Cost</strong> is the part that platforms make easiest to display: subscriptions, API usage, tokens, tools, and infrastructure.</p>
+          <p><strong>Remediation Leakage</strong> is what gets spent fixing weak output: additional prompts, retries, comparisons, fact-checking, rewrites, manual cleanup, and the cost of correcting a mistake downstream.</p>
+          <p><strong>Expansion Leakage</strong> is what gets spent after the model or the user widens the scope: new versions, extra pages, bonus analysis, alternative designs, additional channels, or a better idea that quietly turns a small job into a project.</p>
+
+          <h2>The first leak: underperformance</h2>
+          <p>A weak model can look inexpensive because its direct charge is low. But if it needs three rounds of repair, the cheap first answer is not the cheap task.</p>
+          <p>This is familiar outside AI. A low-cost contractor who produces work that must be redone is not low-cost. A bargain flight that requires a hotel at the wrong airport is not a bargain. A slow car can be economical if the road is clear; it is less economical when it misses every junction.</p>
+          <p>Remediation is not only the model’s fault. A vague brief, missing context, unrealistic quality bar, or poor review process can create the same leakage with an excellent model. The point is not to assign blame. The point is to count the work that actually happened.</p>
+
+          <h2>The second leak: overperformance</h2>
+          <p>The more interesting leak is the one that arrives wearing a helpful smile.</p>
+          <p>Well-configured models are increasingly good at extending a task. They notice adjacent opportunities. They suggest a cleaner structure, a companion document, a landing page, a diagram, a checklist, a content plan. Sometimes that is exactly what a capable collaborator should do.</p>
+          <p>But every useful extension creates a choice: accept it, reject it, or park it for later. If the user accepts every attractive branch in the same working session, the original budget becomes fiction.</p>
+          <p>This is not a reason to make models less imaginative. It is a reason to distinguish <strong>useful discovery</strong> from <strong>committed scope</strong>.</p>
+
+          <h2>Find the completion boundary</h2>
+          <p>Most tasks have a point at which the original job is done. The document is good enough to send. The page is ready to publish. The analysis answers the question. The code runs and has passed the checks that matter.</p>
+          <p>Call that point the <strong>completion boundary</strong>.</p>
+          <div class="boundary-diagram" aria-label="A diagram showing the main route to completion, corrective detours before the boundary, and optional branches after it.">
+            <div class="diagram-title">The task route</div>
+            <div class="boundary-track">
+              <div class="main-track"></div>
+              <div class="branch"></div>
+              <div class="optional"></div>
+              <span class="diagram-label start">Start</span>
+              <span class="diagram-label boundary">Completion boundary</span>
+              <span class="diagram-label finish">Done</span>
+            </div>
+            <div class="diagram-caption"><span>Before the line: corrections are part of finishing.</span><span>After the line: extensions are new work.</span></div>
+          </div>
+          <p>Before the boundary, retries and corrections belong to the cost of the task. After the boundary, a new branch may be valuable—but it should be treated as a new decision, with a new budget.</p>
+          <p>The boundary is not a magical number. It is a management habit. Without one, an AI conversation can continue indefinitely because each answer creates another plausible next move.</p>
+
+          <h2>Task cost is not task value</h2>
+          <p>A larger task cost is not automatically bad. A long conversation may produce an outcome worth far more than the time and money consumed. A short one may produce a cheap answer that is useless.</p>
+          <p>That means Effective Task Cost is only half of the decision. The other half is task value: the money saved, risk avoided, quality gained, decision improved, or opportunity created by reaching the result.</p>
+          <p>The practical comparison is therefore not “cheap model versus expensive model.” It is closer to:</p>
+          <div class="formula">
+            <div class="equation">Task Value − Effective Task Cost = Worth continuing?</div>
+            <div class="explain">A decision frame, not a calculator. The hard part is deciding what “value” means for this task.</div>
+          </div>
+          <p>A better model can cost more and still be the rational choice when it reduces remediation, improves the result, or reveals an opportunity worth pursuing. It can also cost more than the task deserves when it keeps generating impressive detours after the job is already complete.</p>
+
+          <h2>The operating rule</h2>
+          <p>When judging AI-assisted work, keep three questions separate:</p>
+          <ul>
+            <li><strong>What did the system charge?</strong> That is direct cost.</li>
+            <li><strong>What did it take to finish?</strong> That is effective task cost.</li>
+            <li><strong>Was the finished result worth it?</strong> That is task value.</li>
+          </ul>
+          <p>The first question belongs to the vendor. The second belongs to the workflow. The third belongs to the person or organisation doing the work.</p>
+          <p>AI is changing the economics of all three. The useful move is not to pretend the change is simple. It is to use a better unit of analysis.</p>
+
+          <div class="article-actions">
+            <a class="button button-dark" href="/frameworks/">Read the 5-minute framework</a>
+            <a class="button button-quiet" href="/notebook/">See the working notes</a>
+          </div>
+        </article>
+
+        <aside class="article-aside">
+          <div>
+            <div class="aside-title">Filed under</div>
+            <p>AI economics<br />Human-computer work<br />Responsible use</p>
+          </div>
+          <div>
+            <div class="aside-title">Article note</div>
+            <p>Part I introduces the cost model. A later piece will examine what responsible use means when attention is part of the bill.</p>
+            <a href="/about/">About the publication ↗</a>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <a href="/">Age of AI Empires</a>
+        <span>Clear thinking about AI, work, and the price of a useful result. © <span data-year>2026</span></span>
+      </div>
+    </footer>
+    <script src="/script.js" defer></script>
+  </body>
+</html>
