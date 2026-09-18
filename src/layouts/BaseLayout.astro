@@ -118,26 +118,22 @@ const socialImage = new URL(image, Astro.site);
   const btn = document.getElementById('floating-share-btn');
   if (btn) {
     btn.addEventListener('click', async () => {
-      const pageTitle = document.title || 'Age of AI Empires';
-      const pageDescription = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
       const shareUrl = window.location.href;
 
-      const formattedShareText = `${pageTitle}\n\n${pageDescription}\n\n${shareUrl}`;
-
       try {
-        await navigator.clipboard.writeText(formattedShareText);
+        await navigator.clipboard.writeText(shareUrl);
         const label = btn.querySelector('span');
         if (label) {
           const originalText = label.textContent;
           label.textContent = 'Copied!';
-          btn.style.backgroundColor = '#1e3a2b'; // subtle success tint
+          btn.style.backgroundColor = '#1e3a2b';
           setTimeout(() => {
             label.textContent = originalText;
             btn.style.backgroundColor = '#111';
           }, 2000);
         }
       } catch (e) {
-        prompt('Copy link:', formattedShareText);
+        prompt('Copy link:', shareUrl);
       }
     });
   }
