@@ -60,6 +60,7 @@ const socialImage = new URL(image, Astro.site);
     <SiteHeader current={current} />
     <main id="main-content" tabindex="-1"><slot /></main>
     <SiteFooter />
+
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
       const nav = document.querySelector<HTMLElement>('[data-site-nav]');
@@ -94,45 +95,62 @@ const socialImage = new URL(image, Astro.site);
         });
       }
     </script>
-<!-- Floating Share Button -->
-<button
-<script>
-  const btn = document.getElementById('floating-share-btn');
-  if (btn) {
-    btn.addEventListener('click', async () => {
-      const pageTitle = document.title || 'Age of AI Empires';
-      const pageDescription = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
-      const shareUrl = window.location.href;
 
-      const formattedShareText = `${pageTitle}\n\n${pageDescription}\n\n${shareUrl}`;
+    <!-- Floating Share Button -->
+    <button
+      id="floating-share-btn"
+      aria-label="Share this page"
+      style="position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; background-color: #111; color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 9999px; font-size: 0.85rem; font-family: inherit; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.15); transition: transform 0.15s ease;"
+      onmouseover="this.style.transform='scale(1.05)'"
+      onmouseout="this.style.transform='scale(1)'"
+    >
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3"></circle>
+        <circle cx="6" cy="12" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+      </svg>
+      <span>Share</span>
+    </button>
 
-      const shareData = {
-        title: pageTitle,
-        text: pageDescription,
-        url: shareUrl,
-      };
+    <script is:inline>
+      const btn = document.getElementById('floating-share-btn');
+      if (btn) {
+        btn.addEventListener('click', async () => {
+          const pageTitle = document.title || 'Age of AI Empires';
+          const pageDescription = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+          const shareUrl = window.location.href;
 
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {
-          // User closed share dialog
-        }
-      } else {
-        try {
-          await navigator.clipboard.writeText(formattedShareText);
-          const label = btn.querySelector('span');
-          if (label) {
-            const originalText = label.textContent;
-            label.textContent = 'Copied!';
-            setTimeout(() => { label.textContent = originalText; }, 2000);
+          const formattedShareText = `${pageTitle}\n\n${pageDescription}\n\n${shareUrl}`;
+
+          const shareData = {
+            title: pageTitle,
+            text: pageDescription,
+            url: shareUrl,
+          };
+
+          if (navigator.share) {
+            try {
+              await navigator.share(shareData);
+            } catch (err) {
+              // Share dismissed
+            }
+          } else {
+            try {
+              await navigator.clipboard.writeText(formattedShareText);
+              const label = btn.querySelector('span');
+              if (label) {
+                const originalText = label.textContent;
+                label.textContent = 'Copied!';
+                setTimeout(() => { label.textContent = originalText; }, 2000);
+              }
+            } catch (e) {
+              prompt('Copy link:', formattedShareText);
+            }
           }
-        } catch (e) {
-          prompt('Copy link:', formattedShareText);
-        }
+        });
       }
-    });
-  }
-</script>
+    </script>
   </body>
 </html>
