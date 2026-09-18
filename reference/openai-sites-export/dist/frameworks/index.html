@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Frameworks — Age of AI Empires</title>
+    <meta name="description" content="Short, practical frameworks for understanding AI-assisted work, task cost, task value, and completion boundaries." />
+    <link rel="canonical" href="https://ageofaimpires.com/frameworks/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav-wrap">
+        <a class="wordmark" href="/">AGE OF <span>AI</span> EMPIRES</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">
+          <a href="/articles/llm-task-cost-paradox/">Articles</a>
+          <a href="/frameworks/" aria-current="page">Frameworks</a>
+          <a href="/notebook/">Notebook</a>
+          <a href="/about/">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-intro">
+        <div class="wrap intro-row">
+          <div>
+            <div class="section-label">Frameworks</div>
+            <h1>Short models for <em>long conversations.</em></h1>
+          </div>
+          <div class="intro-aside"><p>Useful enough to remember. Honest enough to argue with.</p></div>
+        </div>
+      </section>
+
+      <section class="wrap framework-grid">
+        <article class="framework-card featured">
+          <div class="section-label">Featured / 01</div>
+          <h2>The Effective Task Cost framework</h2>
+          <p>The visible price of AI is only one line on the invoice. The completed task carries the rest.</p>
+          <div class="formula">
+            <div class="equation">ETC = Direct Cost + Remediation Leakage + Expansion Leakage</div>
+            <div class="explain">Use the model to inspect a workflow, not to fake precision.</div>
+          </div>
+          <div class="framework-steps">
+            <div class="framework-step"><b>01 / Define</b><span>What is the task supposed to finish?</span></div>
+            <div class="framework-step"><b>02 / Count</b><span>What did the system charge?</span></div>
+            <div class="framework-step"><b>03 / Repair</b><span>What did it take to correct?</span></div>
+            <div class="framework-step"><b>04 / Bound</b><span>Where does the original task end?</span></div>
+            <div class="framework-step"><b>05 / Judge</b><span>Was the outcome worth the total?</span></div>
+          </div>
+          <div class="article-actions"><a class="button button-dark" href="/articles/llm-task-cost-paradox/">Read the full argument</a></div>
+        </article>
+
+        <article class="framework-card">
+          <div class="section-label">Framework / 02</div>
+          <h3>LLMs as Cars</h3>
+          <p>Compare the whole journey, not only the engine. A cheaper model is not cheaper if it needs more wrong turns, repairs, and human steering to reach the same destination.</p>
+          <div class="pullquote">The model is the engine. The task is the journey.</div>
+        </article>
+
+        <article class="framework-card">
+          <div class="section-label">Framework / 03</div>
+          <h3>The completion boundary</h3>
+          <p>Before the boundary, corrections belong to the original task. After the boundary, attractive new directions are separate work. The line protects both budget and attention.</p>
+          <div class="boundary-diagram">
+            <div class="diagram-title">Finish the job before opening a new one</div>
+            <div class="boundary-track">
+              <div class="main-track"></div><div class="branch"></div><div class="optional"></div>
+              <span class="diagram-label start">Start</span><span class="diagram-label boundary">Boundary</span><span class="diagram-label finish">Done</span>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row"><a href="/">Age of AI Empires</a><span>Clear thinking about AI, work, and the price of a useful result. © <span data-year>2026</span></span></div>
+    </footer>
+    <script src="/script.js" defer></script>
+  </body>
+</html>

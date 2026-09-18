@@ -1,0 +1,27 @@
+---
+interface Props {
+  title?: string;
+  fullLabel?: boolean;
+  caption?: boolean;
+}
+
+const { title = 'The task route', fullLabel = true, caption = false } = Astro.props;
+---
+
+<div class="boundary-diagram" aria-label="A diagram showing the main route to completion, corrective detours before the boundary, and optional branches after it.">
+  <div class="diagram-title">{title}</div>
+  <div class="boundary-track">
+    <div class="main-track"></div>
+    <div class="branch"></div>
+    <div class="optional"></div>
+    <span class="diagram-label start">Start</span>
+    <span class="diagram-label boundary">{fullLabel ? 'Completion boundary' : 'Boundary'}</span>
+    <span class="diagram-label finish">Done</span>
+  </div>
+  {caption && (
+    <div class="diagram-caption">
+      <span>Before the line: corrections are part of finishing.</span>
+      <span>After the line: extensions are new work.</span>
+    </div>
+  )}
+</div>

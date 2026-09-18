@@ -1,0 +1,56 @@
+<section class="task-calculator" aria-labelledby="calculator-title">
+  <div class="section-label">Interactive tool</div>
+  <h2 id="calculator-title">The Effective Task Cost Calculator</h2>
+  <p class="calculator-description">Calculate the economic cost of an AI journey, separating completion cost from optional expansion.</p>
+
+  <div class="calculator-grid">
+    <label>
+      <span>Your hourly rate (€ / hr)</span>
+      <input type="number" name="hourlyRate" value="75" min="0" step="5" inputmode="decimal" />
+    </label>
+    <label>
+      <span>Model invocations (€)</span>
+      <input type="number" name="modelCost" value="0.40" min="0" step="0.05" inputmode="decimal" />
+    </label>
+    <label>
+      <span>Steering and correction (minutes)</span>
+      <input type="number" name="taskMinutes" value="20" min="0" step="1" inputmode="numeric" />
+    </label>
+    <label>
+      <span>Optional exploration (minutes)</span>
+      <input type="number" name="expansionMinutes" value="35" min="0" step="5" inputmode="numeric" />
+    </label>
+  </div>
+
+  <div class="calculator-results" aria-live="polite">
+    <div><strong data-task-total>€25.40</strong><span>Effective task cost</span></div>
+    <div><strong data-expansion-total>€43.75</strong><span>Scope expansion cost</span></div>
+  </div>
+</section>
+
+<script>
+  const calculators = document.querySelectorAll<HTMLElement>('.task-calculator');
+
+  for (const calculator of calculators) {
+    const read = (name: string) => {
+      const input = calculator.querySelector<HTMLInputElement>(`[name="${name}"]`);
+      return Number.parseFloat(input?.value ?? '') || 0;
+    };
+
+    const update = () => {
+      const hourlyRate = read('hourlyRate');
+      const directCost = read('modelCost');
+      const taskCost = directCost + (read('taskMinutes') / 60) * hourlyRate;
+      const expansionCost = (read('expansionMinutes') / 60) * hourlyRate;
+      const format = (value: number) => `€${value.toFixed(2)}`;
+
+      const taskOutput = calculator.querySelector<HTMLElement>('[data-task-total]');
+      const expansionOutput = calculator.querySelector<HTMLElement>('[data-expansion-total]');
+      if (taskOutput) taskOutput.textContent = format(taskCost);
+      if (expansionOutput) expansionOutput.textContent = format(expansionCost);
+    };
+
+    calculator.addEventListener('input', update);
+    update();
+  }
+</script>

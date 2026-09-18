@@ -1,0 +1,38 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const article = await getEntry('articles', 'llm-task-cost-paradox');
+if (!article) throw new Error('Missing article: llm-task-cost-paradox');
+const { Content } = await render(article);
+---
+
+<BaseLayout
+  title={article.data.title}
+  description={article.data.description}
+  current="articles"
+  ogType="article"
+  image="/og/llm-task-cost-paradox.png"
+  imageAlt="The LLM Task-Cost Paradox — why better AI can cost more per task"
+>
+  <section class="page-intro">
+    <div class="wrap intro-row">
+      <div><div class="article-kicker">{article.data.kicker}</div><h1>Why better AI can cost more <em>per task.</em></h1></div>
+      <div class="intro-aside"><p>{article.data.intro}</p></div>
+    </div>
+  </section>
+
+  <section class="wrap content-layout">
+    <article class="article-content">
+      <Content />
+      <div class="article-actions">
+        <a class="button button-dark" href="/frameworks/">Read the 5-minute framework</a>
+        <a class="button button-quiet" href="/notebook/">See the working notes</a>
+      </div>
+    </article>
+    <aside class="article-aside">
+      <div><h2 class="aside-title">Filed under</h2><p>AI economics<br />Human-computer work<br />Responsible use</p></div>
+      <div><h2 class="aside-title">Article note</h2><p>Part I introduces the cost model. A later piece will examine what responsible use means when attention is part of the bill.</p><a href="/about/">About the publication ↗</a></div>
+    </aside>
+  </section>
+</BaseLayout>
