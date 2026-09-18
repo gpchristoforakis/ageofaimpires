@@ -114,43 +114,33 @@ const socialImage = new URL(image, Astro.site);
       <span>Share</span>
     </button>
 
-    <script is:inline>
-      const btn = document.getElementById('floating-share-btn');
-      if (btn) {
-        btn.addEventListener('click', async () => {
-          const pageTitle = document.title || 'Age of AI Empires';
-          const pageDescription = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
-          const shareUrl = window.location.href;
+   <script is:inline>
+  const btn = document.getElementById('floating-share-btn');
+  if (btn) {
+    btn.addEventListener('click', async () => {
+      const pageTitle = document.title || 'Age of AI Empires';
+      const pageDescription = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+      const shareUrl = window.location.href;
 
-          const formattedShareText = `${pageTitle}\n\n${pageDescription}\n\n${shareUrl}`;
+      const formattedShareText = `${pageTitle}\n\n${pageDescription}\n\n${shareUrl}`;
 
-          const shareData = {
-            title: pageTitle,
-            text: pageDescription,
-            url: shareUrl,
-          };
-
-          if (navigator.share) {
-            try {
-              await navigator.share(shareData);
-            } catch (err) {
-              // Share dismissed
-            }
-          } else {
-            try {
-              await navigator.clipboard.writeText(formattedShareText);
-              const label = btn.querySelector('span');
-              if (label) {
-                const originalText = label.textContent;
-                label.textContent = 'Copied!';
-                setTimeout(() => { label.textContent = originalText; }, 2000);
-              }
-            } catch (e) {
-              prompt('Copy link:', formattedShareText);
-            }
-          }
-        });
+      try {
+        await navigator.clipboard.writeText(formattedShareText);
+        const label = btn.querySelector('span');
+        if (label) {
+          const originalText = label.textContent;
+          label.textContent = 'Copied!';
+          btn.style.backgroundColor = '#1e3a2b'; // subtle success tint
+          setTimeout(() => {
+            label.textContent = originalText;
+            btn.style.backgroundColor = '#111';
+          }, 2000);
+        }
+      } catch (e) {
+        prompt('Copy link:', formattedShareText);
       }
-    </script>
+    });
+  }
+</script>
   </body>
 </html>
