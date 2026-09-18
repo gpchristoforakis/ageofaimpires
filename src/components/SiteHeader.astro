@@ -1,0 +1,25 @@
+---
+interface Props {
+  current?: 'articles' | 'frameworks' | 'notebook' | 'about';
+}
+
+const { current } = Astro.props;
+const links = [
+  { key: 'articles', label: 'Articles', href: '/articles/llm-task-cost-paradox/' },
+  { key: 'frameworks', label: 'Frameworks', href: '/frameworks/' },
+  { key: 'notebook', label: 'Notebook', href: '/notebook/' },
+  { key: 'about', label: 'About', href: '/about/' },
+] as const;
+---
+
+<header class="site-header">
+  <div class="wrap nav-wrap">
+    <a class="wordmark" href="/">AGE OF <span>AI</span> EMPIRES</a>
+    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">
+      {links.map((link) => (
+        <a href={link.href} aria-current={current === link.key ? 'page' : undefined}>{link.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

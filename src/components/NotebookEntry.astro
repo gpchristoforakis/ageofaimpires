@@ -1,0 +1,16 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'notebook'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<article class="notebook-entry">
+  <div class="entry-no">{String(entry.data.order).padStart(2, '0')}</div>
+  <div><h2>{entry.data.title}</h2><Content /></div>
+  <div class="entry-type">{entry.data.type}</div>
+</article>

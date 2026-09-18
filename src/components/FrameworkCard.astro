@@ -1,0 +1,38 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import BoundaryDiagram from './BoundaryDiagram.astro';
+
+interface Props {
+  entry: CollectionEntry<'frameworks'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { label, title, featured, formula, formulaNote, pullquote, order } = entry.data;
+---
+
+<article class:list={['framework-card', { featured }]}>
+  <div class="section-label">{label}</div>
+  {featured ? <h2>{title}</h2> : <h3>{title}</h3>}
+  <Content />
+  {formula && (
+    <div class="formula">
+      <div class="equation">{formula}</div>
+      {formulaNote && <div class="explain">{formulaNote}</div>}
+    </div>
+  )}
+  {featured && (
+    <>
+      <div class="framework-steps">
+        <div class="framework-step"><b>01 / Define</b><span>What is the task supposed to finish?</span></div>
+        <div class="framework-step"><b>02 / Count</b><span>What did the system charge?</span></div>
+        <div class="framework-step"><b>03 / Repair</b><span>What did it take to correct?</span></div>
+        <div class="framework-step"><b>04 / Bound</b><span>Where does the original task end?</span></div>
+        <div class="framework-step"><b>05 / Judge</b><span>Was the outcome worth the total?</span></div>
+      </div>
+      <div class="article-actions"><a class="button button-dark" href="/articles/llm-task-cost-paradox/">Read the full argument</a></div>
+    </>
+  )}
+  {pullquote && <div class="pullquote">{pullquote}</div>}
+  {order === 3 && <BoundaryDiagram title="Finish the job before opening a new one" fullLabel={false} />}
+</article>
