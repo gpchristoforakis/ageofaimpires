@@ -1,0 +1,30 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import '../../../styles/cars-editorial.css';
+
+const article = await getEntry('articles', 'cars-vs-llms');
+if (!article) throw new Error('Missing article: cars-vs-llms');
+const { Content } = await render(article);
+---
+
+<BaseLayout
+  title={article.data.title}
+  description={article.data.description}
+  current="articles"
+  ogType="article"
+  image="/og/cars-vs-llms.png"
+  imageAlt="Cars vs LLMs. You wouldn’t choose a car on fuel price alone. Blue and charcoal paper vehicles beside the headline."
+>
+  <div class="cars-reading wrap">
+    <div class="reading-meta"><a href="/articles/">Articles</a><span>01 / Start here</span><span>{article.data.readTime}</span></div>
+    <article class="article-content cars-article" aria-label="Cars vs LLMs">
+      <Content />
+    </article>
+    <nav class="next-reading" aria-label="Continue reading">
+      <p class="section-label">Next / Go deeper</p>
+      <a href="/articles/llm-task-cost-paradox/">The LLM Task-Cost Paradox <span aria-hidden="true">→</span></a>
+      <p>What does it cost to turn an AI answer into completed work?</p>
+    </nav>
+  </div>
+</BaseLayout>

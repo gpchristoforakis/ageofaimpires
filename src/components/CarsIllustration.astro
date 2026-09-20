@@ -1,0 +1,23 @@
+---
+interface Props {
+  kind?: 'lead' | 'repair-time';
+  eager?: boolean;
+  sizes?: string;
+}
+const { kind = 'lead', eager = false, sizes = '(max-width: 760px) calc(100vw - 40px), 720px' } = Astro.props;
+const alt = kind === 'lead'
+  ? 'A blue speech-bubble hatchback beside a charcoal speech-bubble van, illustrating AI tools suited to different jobs.'
+  : 'A blue speech-bubble car raised on a jack with its front wheel removed, beside a stopwatch and spanner, illustrating time spent correcting an answer.';
+---
+<img
+  class="cars-illustration"
+  src={`/images/cars-vs-llms/${kind}-960.webp`}
+  srcset={[640, 960, 1440].map((width) => `/images/cars-vs-llms/${kind}-${width}.webp ${width}w`).join(', ')}
+  sizes={sizes}
+  width="1440"
+  height="810"
+  alt={alt}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : 'auto'}
+  decoding="async"
+/>
