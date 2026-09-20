@@ -37,6 +37,7 @@
 .cars-article h1 + p + p { font-size: 20px; line-height: 1.55; }
 .cars-article h2 { font-size: clamp(29px, 4vw, 38px); line-height: 1.15; scroll-margin-top: 100px; }
 .cars-article .cars-illustration { margin: 32px 0; }
+.cars-article > .cars-illustration:first-child { margin-top: 0; }
 .cars-article ul { border-left: 3px solid var(--blue); padding: 6px 20px 6px 38px; background: var(--paper); }
 .next-reading { border-top: 1px solid var(--line); margin-top: 42px; padding-top: 28px; }
 .next-reading > a { display: inline-block; margin: 12px 0; color: var(--blue); font-family: var(--serif); font-size: 29px; line-height: 1.2; text-decoration-thickness: 1px; text-underline-offset: 5px; }
@@ -73,6 +74,9 @@
 .comparison-table table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; font-size: 17px; line-height: 1.5; text-align: left; }
 .comparison-table--vehicles table { min-width: 760px; }
 .comparison-table--specifications table { min-width: 600px; }
+.comparison-table--journey table { min-width: 560px; }
+.comparison-table--journey thead th { width: 50%; }
+.comparison-table.comparison-table--journey tbody th { font-weight: 400; color: #4f4b45; }
 .comparison-table th, .comparison-table td { padding: 18px 20px; vertical-align: top; border-bottom: 1px solid var(--line); overflow-wrap: break-word; }
 .comparison-table thead th { background: var(--blue); color: var(--paper); font-weight: 700; }
 .comparison-table tbody th { color: var(--ink); font-weight: 700; }
@@ -94,6 +98,9 @@
 }
 @media (max-width: 639px) {
   .comparison-table--specifications .comparison-table-hint { display: block; }
+}
+@media (max-width: 599px) {
+  .comparison-table--journey .comparison-table-hint { display: block; }
 }
 @media (max-width: 760px) {
   .home-feature { grid-template-columns: 1fr; gap: 28px; padding: 32px 0 40px; }

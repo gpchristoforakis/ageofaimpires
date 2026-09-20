@@ -1,11 +1,11 @@
 ---
 interface Props {
-  kind: 'vehicles' | 'specifications';
+  kind: 'vehicles' | 'specifications' | 'journey';
   headers: string[];
   rows: string[][];
 }
 const { kind, headers, rows } = Astro.props;
-const label = kind === 'vehicles' ? 'Vehicle types and AI counterparts' : 'Car specifications and AI assistant qualities';
+const label = kind === 'vehicles' ? 'Vehicle types and AI counterparts' : kind === 'journey' ? 'Questions to ask when choosing a car or AI' : 'Car specifications and AI assistant qualities';
 const hintId = `${kind}-scroll-hint`;
 ---
 
