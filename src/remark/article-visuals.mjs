@@ -21,6 +21,7 @@ export default function articleVisuals() {
     if (frontmatter.translationKey !== 'cars-vs-llms') return;
     const language = frontmatter.language === 'el' ? 'el' : 'en';
     const labels = alt[language];
+    const steeringAfterParagraphs = language === 'el' ? 9 : 5;
     const output = [];
     let section = 0;
     let sectionFiveParagraphs = 0;
@@ -38,7 +39,7 @@ export default function articleVisuals() {
       output.push(node);
       if (section === 5 && node.type === 'paragraph') {
         sectionFiveParagraphs += 1;
-        if (sectionFiveParagraphs === 5 && !steeringInserted) { output.push(image('steering-wheel', labels.steering)); steeringInserted = true; }
+        if (sectionFiveParagraphs === steeringAfterParagraphs && !steeringInserted) { output.push(image('steering-wheel', labels.steering)); steeringInserted = true; }
       }
     }
     tree.children = output;

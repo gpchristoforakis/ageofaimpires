@@ -4,9 +4,9 @@ import { localizedPath } from './config';
 
 export async function articleTranslationPaths(translationKey: string): Promise<TranslationPaths> {
   const entries = await getCollection('articles', ({ data }) => data.translationKey === translationKey);
-  return Object.fromEntries(entries.map(({ data }) => [data.language, localizedPath(data.language, `articles/${data.slug}`)]));
+  return Object.fromEntries(entries.map(({ data }) => [data.language, localizedPath(data.language, `articles/${data.routeSlug}`)]));
 }
 export async function getArticle(language: Language, slug: string) {
-  const entries = await getCollection('articles', ({ data }) => data.language === language && data.slug === slug);
+  const entries = await getCollection('articles', ({ data }) => data.language === language && data.routeSlug === slug);
   return entries[0];
 }
