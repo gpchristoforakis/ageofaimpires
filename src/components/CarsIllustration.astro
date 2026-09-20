@@ -1,13 +1,18 @@
 ---
 interface Props {
-  kind?: 'lead' | 'repair-time';
+  kind?: 'lead' | 'repair-time' | 'roundabout' | 'vehicle-lineup' | 'steering-wheel';
   eager?: boolean;
   sizes?: string;
 }
-const { kind = 'lead', eager = false, sizes = '(max-width: 760px) calc(100vw - 40px), 720px' } = Astro.props;
-const alt = kind === 'lead'
-  ? 'A blue speech-bubble hatchback beside a charcoal speech-bubble van, illustrating AI tools suited to different jobs.'
-  : 'A blue speech-bubble car raised on a jack with its front wheel removed, beside a stopwatch and spanner, illustrating time spent correcting an answer.';
+const { kind = 'roundabout', eager = false, sizes = '(max-width: 760px) calc(100vw - 40px), 720px' } = Astro.props;
+const descriptions = {
+  lead: 'A blue speech-bubble hatchback beside a charcoal speech-bubble van, illustrating AI tools suited to different jobs.',
+  'repair-time': 'A blue speech-bubble car raised on a jack with its front wheel removed, beside a stopwatch and spanner, illustrating time spent correcting an answer.',
+  roundabout: 'Minimalist illustration of a car driving straight toward finished work while another is stuck in a roundabout of wrong turns.',
+  'vehicle-lineup': 'Flat vector illustration of a city car, work van, and off-roader.',
+  'steering-wheel': 'Abstract illustration of hands gripping a highly complex steering wheel covered in warning lights.',
+};
+const alt = descriptions[kind];
 ---
 <img
   class="cars-illustration"
