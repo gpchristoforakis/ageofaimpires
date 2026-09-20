@@ -1,0 +1,22 @@
+---
+interface Props {
+  kind: 'vehicles' | 'specifications';
+  headers: string[];
+  rows: string[][];
+}
+const { kind, headers, rows } = Astro.props;
+const label = kind === 'vehicles' ? 'Vehicle types and AI counterparts' : 'Car specifications and AI assistant qualities';
+const hintId = `${kind}-scroll-hint`;
+---
+
+<div class:list={['comparison-table', `comparison-table--${kind}`]}>
+  <div class="comparison-table-hint" id={hintId} data-reading-ui>Scroll sideways to read every column <span aria-hidden="true">→</span></div>
+  <div class="comparison-table-scroll" role="region" aria-label={label} aria-describedby={hintId} tabindex="0">
+    <table aria-label={label}>
+      <thead><tr>{headers.map((header) => <th scope="col">{header}</th>)}</tr></thead>
+      <tbody>
+        {rows.map((row) => <tr>{row.map((cell, index) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}
+      </tbody>
+    </table>
+  </div>
+</div>
