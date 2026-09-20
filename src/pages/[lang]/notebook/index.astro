@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import NotebookEntry from '../../../components/NotebookEntry.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { staticTranslationPaths, type Language } from '../../../i18n/config';
+export function getStaticPaths() { return [{ params: { lang: 'en' } }]; }
+const language = Astro.params.lang as Language;
+const entries = (await getCollection('notebook', ({ data }) => data.language === language)).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Notebook — Age of AI Empires" description="Working notes, test protocols, open questions, and definitions behind Age of AI Empires." language={language} translations={staticTranslationPaths.notebook} current="notebook"><section class="page-intro"><div class="wrap intro-row"><div><div class="section-label">Notebook</div><h1>The argument is allowed to be <em>unfinished.</em></h1></div><div class="intro-aside"><p>These notes show what is being tested, what is already defensible, and what still needs a sharper question.</p></div></div></section><section class="wrap notebook-list">{entries.map((entry) => <NotebookEntry entry={entry} />)}</section></BaseLayout>

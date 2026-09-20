@@ -1,30 +1,37 @@
+---
+import { getUi } from '../i18n/ui';
+import type { Language } from '../i18n/config';
+interface Props { language?: Language; }
+const { language = 'en' } = Astro.props;
+const labels = getUi(language).calculator;
+---
 <section class="task-calculator" aria-labelledby="calculator-title">
-  <div class="section-label">Interactive tool</div>
-  <h2 id="calculator-title">The Effective Task Cost Calculator</h2>
-  <p class="calculator-description">Calculate the economic cost of an AI journey, separating completion cost from optional expansion.</p>
+  <div class="section-label">{labels.label}</div>
+  <h2 id="calculator-title">{labels.title}</h2>
+  <p class="calculator-description">{labels.description}</p>
 
   <div class="calculator-grid">
     <label>
-      <span>Your hourly rate (€ / hr)</span>
+      <span>{labels.hourlyRate}</span>
       <input type="number" name="hourlyRate" value="75" min="0" step="5" inputmode="decimal" />
     </label>
     <label>
-      <span>Model invocations (€)</span>
+      <span>{labels.modelCost}</span>
       <input type="number" name="modelCost" value="0.40" min="0" step="0.05" inputmode="decimal" />
     </label>
     <label>
-      <span>Steering and correction (minutes)</span>
+      <span>{labels.correction}</span>
       <input type="number" name="taskMinutes" value="20" min="0" step="1" inputmode="numeric" />
     </label>
     <label>
-      <span>Optional exploration (minutes)</span>
+      <span>{labels.exploration}</span>
       <input type="number" name="expansionMinutes" value="35" min="0" step="5" inputmode="numeric" />
     </label>
   </div>
 
   <div class="calculator-results" aria-live="polite">
-    <div><strong data-task-total>€25.40</strong><span>Effective task cost</span></div>
-    <div><strong data-expansion-total>€43.75</strong><span>Scope expansion cost</span></div>
+    <div><strong data-task-total>€25.40</strong><span>{labels.taskTotal}</span></div>
+    <div><strong data-expansion-total>€43.75</strong><span>{labels.expansionTotal}</span></div>
   </div>
 </section>
 

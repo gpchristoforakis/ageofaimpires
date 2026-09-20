@@ -1,6 +1,8 @@
-<footer class="site-footer">
-  <div class="wrap footer-row">
-    <a href="/">Age of AI Empires</a>
-    <span>Clear thinking about AI, work, and the price of a useful result. © {new Date().getFullYear()}</span>
-  </div>
-</footer>
+---
+import { localizedPath, type Language } from '../i18n/config';
+import { getUi } from '../i18n/ui';
+interface Props { language: Language; }
+const { language } = Astro.props;
+const t = getUi(language);
+---
+<footer class="site-footer"><div class="wrap footer-row"><a href={localizedPath(language)}>Age of AI Empires</a><span>{t.footer} © {new Date().getFullYear()}</span></div></footer>

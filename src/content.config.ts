@@ -5,6 +5,9 @@ import { z } from 'astro/zod';
 const articles = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/articles' }),
   schema: z.object({
+    language: z.enum(['en', 'el']),
+    translationKey: z.string(),
+    slug: z.string(),
     title: z.string(),
     description: z.string(),
     kicker: z.string(),
@@ -17,6 +20,8 @@ const articles = defineCollection({
 const frameworks = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/frameworks' }),
   schema: z.object({
+    language: z.enum(['en', 'el']),
+    translationKey: z.string(),
     order: z.number(),
     label: z.string(),
     title: z.string(),
@@ -30,6 +35,8 @@ const frameworks = defineCollection({
 const notebook = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/notebook' }),
   schema: z.object({
+    language: z.enum(['en', 'el']),
+    translationKey: z.string(),
     order: z.number(),
     type: z.string(),
     title: z.string(),
@@ -39,6 +46,8 @@ const notebook = defineCollection({
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
   schema: z.object({
+    language: z.enum(['en', 'el']),
+    translationKey: z.string(),
     title: z.string(),
     description: z.string(),
     label: z.string(),

@@ -1,12 +1,14 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 import BoundaryDiagram from './BoundaryDiagram.astro';
+import { localizedPath, type Language } from '../i18n/config';
 
 interface Props {
   entry: CollectionEntry<'frameworks'>;
+  language: Language;
 }
 
-const { entry } = Astro.props;
+const { entry, language } = Astro.props;
 const { Content } = await render(entry);
 const { label, title, featured, formula, formulaNote, pullquote, order } = entry.data;
 ---
@@ -30,9 +32,9 @@ const { label, title, featured, formula, formulaNote, pullquote, order } = entry
         <div class="framework-step"><b>04 / Bound</b><span>Where does the original task end?</span></div>
         <div class="framework-step"><b>05 / Judge</b><span>Was the outcome worth the total?</span></div>
       </div>
-      <div class="article-actions"><a class="button button-dark" href="/articles/llm-task-cost-paradox/">Read the full argument</a></div>
+      <div class="article-actions"><a class="button button-dark" href={localizedPath(language, 'articles/llm-task-cost-paradox')}>Read the full argument</a></div>
     </>
   )}
   {pullquote && <div class="pullquote">{pullquote}</div>}
-  {order === 3 && <BoundaryDiagram title="Finish the job before opening a new one" fullLabel={false} />}
+  {order === 3 && <BoundaryDiagram title="Finish the job before opening a new one" fullLabel={false} language={language} />}
 </article>

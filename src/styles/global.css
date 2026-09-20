@@ -117,6 +117,22 @@ img { max-width: 100%; }
 .site-nav a:hover,
 .site-nav a[aria-current="page"] { color: var(--ink); }
 
+.nav-unavailable,
+.language-unavailable { color: var(--muted); opacity: .46; cursor: not-allowed; }
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-left: 1px solid var(--line);
+  padding-left: 22px;
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+.language-switcher a { min-height: 44px; }
+.language-current { color: var(--ink); font-weight: 900; }
+
 .site-nav a[aria-current="page"] { position: relative; }
 .site-nav a[aria-current="page"]::after {
   position: absolute;
@@ -142,6 +158,20 @@ img { max-width: 100%; }
 }
 
 main { overflow: hidden; }
+
+#floating-share-btn {
+  position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 50;
+  display: flex; align-items: center; gap: .5rem; padding: .6rem 1rem;
+  border: 1px solid rgba(255,255,255,.2); border-radius: 9999px;
+  background: #111; color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.15);
+  font: inherit; font-size: .85rem; cursor: pointer; transition: transform .15s ease;
+}
+#floating-share-btn:hover { transform: scale(1.05); }
+#floating-share-btn.is-copied { background: #1e3a2b; }
+
+.translation-pending { min-height: 58vh; display: grid; align-content: center; max-width: 760px; padding: 80px 0; }
+.translation-pending h1 { margin: 12px 0 18px; font-family: var(--serif); font-size: clamp(46px, 8vw, 78px); font-weight: 400; letter-spacing: -.05em; line-height: 1; }
+.translation-pending p { max-width: 620px; color: var(--muted); font-size: 18px; }
 
 .hero {
   position: relative;
@@ -619,6 +649,8 @@ main { overflow: hidden; }
   .site-nav { position: absolute; top: 72px; right: 14px; left: 14px; display: none; flex-direction: column; align-items: stretch; gap: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); padding: 8px; box-shadow: 0 18px 40px rgba(57, 44, 27, .12); }
   .site-nav.is-open { display: flex; }
   .site-nav a { min-height: 44px; padding: 12px 10px; }
+  .site-nav .nav-unavailable { min-height: 44px; padding: 12px 10px; }
+  .language-switcher { margin-top: 6px; border-top: 1px solid var(--line); border-left: 0; padding: 8px 10px 0; }
   .site-nav a[aria-current="page"]::after { right: auto; bottom: 6px; left: 10px; width: 24px; }
   .hero { padding: 66px 0 62px; }
   .hero h1, .page-intro h1 { font-size: clamp(46px, 14vw, 72px); }

@@ -1,0 +1,10 @@
+/ /en/ 301
+/articles /en/articles/ 301
+/articles/ /en/articles/ 301
+/articles/* /en/articles/:splat 301
+/frameworks /en/frameworks/ 301
+/frameworks/ /en/frameworks/ 301
+/notebook /en/notebook/ 301
+/notebook/ /en/notebook/ 301
+/about /en/about/ 301
+/about/ /en/about/ 301

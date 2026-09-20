@@ -1,0 +1,11 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { staticTranslationPaths, type Language } from '../../../i18n/config';
+export function getStaticPaths() { return [{ params: { lang: 'en' } }]; }
+const language = Astro.params.lang as Language;
+const pages = await getCollection('pages', ({ data }) => data.language === language && data.translationKey === 'about');
+const page = pages[0]; if (!page) throw new Error('Missing English about content');
+const { Content } = await render(page);
+---
+<BaseLayout title={page.data.title} description={page.data.description} language={language} translations={staticTranslationPaths.about} current="about"><section class="page-intro"><div class="wrap intro-row"><div><div class="section-label">{page.data.label}</div><h1>A small publication for a <em>large transition.</em></h1></div><div class="intro-aside"><p>{page.data.intro}</p></div></div></section><section class="wrap about-grid"><div class="about-copy"><Content /></div><div class="principles"><h2 class="section-label">Editorial rules</h2><div class="principle"><b>Plain language</b><span>If a glossary is needed to get the point, the point isn't clear enough.</span></div><div class="principle"><b>Defensible claims</b><span>No invented statistics, fake certainty, or borrowed authority.</span></div><div class="principle"><b>Useful tension</b><span>AI can be both a productivity tool and a source of more work. Keep both sides visible.</span></div><div class="principle"><b>Scope discipline</b><span>A new idea is not automatically a new obligation.</span></div></div></section></BaseLayout>

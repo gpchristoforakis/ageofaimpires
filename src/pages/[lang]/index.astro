@@ -1,0 +1,19 @@
+---
+import CarsIllustration from '../../components/CarsIllustration.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { languages, localizedPath, staticTranslationPaths, type Language } from '../../i18n/config';
+import { getUi } from '../../i18n/ui';
+import '../../styles/cars-editorial.css';
+export function getStaticPaths() { return languages.map((lang) => ({ params: { lang } })); }
+const language = Astro.params.lang as Language;
+const t = getUi(language);
+const description = language === 'en' ? 'Making sense of AI through everyday comparisons—and what happens when we put it to work.' : t.greekPending;
+---
+<BaseLayout title={language === 'en' ? 'Age of AI Empires — Making sense of AI' : 'Age of AI Empires — Ελληνική έκδοση'} description={description} language={language} translations={staticTranslationPaths.home}>
+  {language === 'en' ? <div class="home-editorial">
+    <div class="wrap home-intro"><p>{description}</p></div>
+    <section class="wrap home-feature" aria-labelledby="featured-title"><div class="home-feature-copy"><p class="section-label">The first article / 01</p><h1 id="featured-title">Cars vs LLMs</h1><p class="feature-hook">You wouldn’t choose a car on fuel price alone.</p><p class="feature-question">So why judge AI by the price of its tokens?</p><p class="feature-summary">The real comparison includes what you need to do, how reliably you get there, and how much driving you have to do yourself.</p><div class="feature-action"><a class="button button-blue" href={localizedPath(language, 'articles/cars-vs-llms')}>Read Cars vs LLMs <span aria-hidden="true">→</span></a><span>7 min read</span></div></div><CarsIllustration sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1220px) 50vw, 590px" eager /></section>
+    <section class="section home-followup"><div class="wrap followup-row"><p class="section-label">Then go deeper / 02</p><div><h2><a href={localizedPath(language, 'articles/llm-task-cost-paradox')}>The LLM Task-Cost Paradox <span aria-hidden="true">→</span></a></h2><p>Choosing an AI is one thing. What does it cost to get the work finished?</p></div><span class="meta">12 min read</span></div></section>
+    <section class="section home-library"><div class="wrap"><div class="section-head"><div><div class="section-label">Explore the publication</div><h2>A little more under the bonnet.</h2></div></div><div class="card-grid"><a class="mini-card" href={localizedPath(language, 'frameworks')}><div class="section-label">Frameworks</div><h3>Put the ideas to work.</h3><p>Short guides to the time, effort and money behind a useful result.</p><span class="arrow" aria-hidden="true">↗</span></a><a class="mini-card" href={localizedPath(language, 'notebook')}><div class="section-label">Notebook</div><h3>Questions still on the table.</h3><p>Working notes, things to test, and ideas that deserve another look.</p><span class="arrow" aria-hidden="true">↗</span></a><a class="mini-card" href={localizedPath(language, 'about')}><div class="section-label">About</div><h3>Why Age of AI Empires?</h3><p>For people who want to understand AI without pretending every prompt is a revolution.</p><span class="arrow" aria-hidden="true">↗</span></a></div></div></section>
+  </div> : <section class="wrap translation-pending"><p class="section-label">Age of AI Empires</p><h1>{t.greekPendingTitle}</h1><p>{t.greekPending}</p><a class="button button-dark" href="/en/" hreflang="en">English edition</a></section>}
+</BaseLayout>

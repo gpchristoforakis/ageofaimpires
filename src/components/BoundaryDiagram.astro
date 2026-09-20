@@ -3,25 +3,28 @@ interface Props {
   title?: string;
   fullLabel?: boolean;
   caption?: boolean;
+  language?: import('../i18n/config').Language;
 }
 
-const { title = 'The task route', fullLabel = true, caption = false } = Astro.props;
+import { getUi } from '../i18n/ui';
+const { title = 'The task route', fullLabel = true, caption = false, language = 'en' } = Astro.props;
+const labels = getUi(language).diagram;
 ---
 
-<div class="boundary-diagram" aria-label="A diagram showing the main route to completion, corrective detours before the boundary, and optional branches after it.">
+<div class="boundary-diagram" aria-label={labels.aria}>
   <div class="diagram-title">{title}</div>
   <div class="boundary-track">
     <div class="main-track"></div>
     <div class="branch"></div>
     <div class="optional"></div>
-    <span class="diagram-label start">Start</span>
-    <span class="diagram-label boundary">{fullLabel ? 'Completion boundary' : 'Boundary'}</span>
-    <span class="diagram-label finish">Done</span>
+    <span class="diagram-label start">{labels.start}</span>
+    <span class="diagram-label boundary">{fullLabel ? labels.completionBoundary : labels.boundary}</span>
+    <span class="diagram-label finish">{labels.done}</span>
   </div>
   {caption && (
     <div class="diagram-caption">
-      <span>Before the line: corrections are part of finishing.</span>
-      <span>After the line: extensions are new work.</span>
+      <span>{labels.before}</span>
+      <span>{labels.after}</span>
     </div>
   )}
 </div>

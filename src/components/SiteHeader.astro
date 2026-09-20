@@ -1,25 +1,31 @@
 ---
-interface Props {
-  current?: 'articles' | 'frameworks' | 'notebook' | 'about';
-}
-
-const { current } = Astro.props;
-const links = [
-  { key: 'articles', label: 'Articles', href: '/articles/' },
-  { key: 'frameworks', label: 'Frameworks', href: '/frameworks/' },
-  { key: 'notebook', label: 'Notebook', href: '/notebook/' },
-  { key: 'about', label: 'About', href: '/about/' },
+import { languageNames, languages, localizedPath, staticTranslationPaths, type Language, type TranslationPaths } from '../i18n/config';
+import { getUi } from '../i18n/ui';
+interface Props { language: Language; current?: 'articles' | 'frameworks' | 'notebook' | 'about'; translations: TranslationPaths; }
+const { language, current, translations } = Astro.props;
+const t = getUi(language);
+const links: Array<{ key: keyof typeof t.nav; path: string; translations: TranslationPaths }> = [
+  { key: 'articles', path: 'articles', translations: staticTranslationPaths.articles },
+  { key: 'frameworks', path: 'frameworks', translations: staticTranslationPaths.frameworks },
+  { key: 'notebook', path: 'notebook', translations: staticTranslationPaths.notebook },
+  { key: 'about', path: 'about', translations: staticTranslationPaths.about },
 ] as const;
 ---
-
 <header class="site-header">
   <div class="wrap nav-wrap">
-    <a class="wordmark" href="/">AGE OF <span>AI</span> EMPIRES</a>
-    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
-    <nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">
-      {links.map((link) => (
-        <a href={link.href} aria-current={current === link.key ? 'page' : undefined}>{link.label}</a>
-      ))}
+    <a class="wordmark" href={localizedPath(language)}>AGE OF <span>AI</span> EMPIRES</a>
+    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">{t.menu}</button>
+    <nav class="site-nav" id="site-nav" data-site-nav aria-label={t.primaryNav} data-menu-label={t.menu} data-close-label={t.close}>
+      {links.map((link) => link.translations[language]
+        ? <a href={localizedPath(language, link.path)} aria-current={current === link.key ? 'page' : undefined}>{t.nav[link.key]}</a>
+        : <span class="nav-unavailable" aria-disabled="true" title={t.unavailable}>{t.nav[link.key]}</span>)}
+      <div class="language-switcher" aria-label={t.languageSwitcher}>
+        {languages.map((item, index) => <>{index > 0 && <span aria-hidden="true">|</span>}{item === language
+          ? <span class="language-current" aria-current="page">{languageNames[item]}</span>
+          : translations[item]
+            ? <a href={translations[item]} hreflang={item} lang={item}>{languageNames[item]}</a>
+            : <span class="language-unavailable" aria-disabled="true" title={t.unavailable}>{languageNames[item]}</span>}</>)}
+      </div>
     </nav>
   </div>
 </header>

@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CarsIllustration from '../../../components/CarsIllustration.astro';
+import { languages, localizedPath, staticTranslationPaths, type Language } from '../../../i18n/config';
+import { getUi } from '../../../i18n/ui';
+import '../../../styles/cars-editorial.css';
+export function getStaticPaths() { return languages.map((lang) => ({ params: { lang } })); }
+const language = Astro.params.lang as Language;
+const t = getUi(language);
+---
+<BaseLayout title={language === 'en' ? 'Articles — Age of AI Empires' : 'Άρθρα — Age of AI Empires'} description={language === 'en' ? 'Start with Cars vs LLMs, then explore what it costs to complete real work with AI.' : t.noTranslatedArticles} language={language} translations={staticTranslationPaths.articles} current="articles">
+  {language === 'en' ? <><section class="wrap articles-intro"><p class="section-label">The reading list</p><h1>Everyday questions. A closer look at AI.</h1><p>Start with the comparison. Then follow the work.</p></section><div class="wrap reading-list"><a class="reading-card" href={localizedPath(language, 'articles/cars-vs-llms')}><CarsIllustration sizes="(max-width: 680px) calc(100vw - 80px), 320px" eager /><div><p class="section-label">01 / Start here · 7 min read</p><h2>Cars vs LLMs</h2><p>You wouldn’t choose a car on fuel price alone. So why judge AI by the price of its tokens?</p><span class="text-link">{t.readArticle} <span aria-hidden="true">→</span></span></div></a><a class="reading-card reading-card-followup" href={localizedPath(language, 'articles/llm-task-cost-paradox')}><span class="reading-number" aria-hidden="true">02</span><div><p class="section-label">Go deeper · 12 min read</p><h2>The LLM Task-Cost Paradox</h2><p>Why better AI can cost more per task—and what it takes to get something finished.</p><span class="text-link">{t.readFollowup} <span aria-hidden="true">→</span></span></div></a></div></> : <section class="wrap translation-pending"><p class="section-label">{t.articles}</p><h1>{t.greekPendingTitle}</h1><p>{t.noTranslatedArticles}</p><a class="button button-dark" href="/en/articles/" hreflang="en">English articles</a></section>}
+</BaseLayout>

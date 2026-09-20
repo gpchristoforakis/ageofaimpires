@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import FrameworkCard from '../../../components/FrameworkCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { staticTranslationPaths, type Language } from '../../../i18n/config';
+export function getStaticPaths() { return [{ params: { lang: 'en' } }]; }
+const language = Astro.params.lang as Language;
+const frameworks = (await getCollection('frameworks', ({ data }) => data.language === language)).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Frameworks — Age of AI Empires" description="Short, practical frameworks for understanding AI-assisted work, task cost, task value, and completion boundaries." language={language} translations={staticTranslationPaths.frameworks} current="frameworks"><section class="page-intro"><div class="wrap intro-row"><div><div class="section-label">Frameworks</div><h1>Short models for <em>long conversations.</em></h1></div><div class="intro-aside"><p>Useful enough to remember. Honest enough to argue with.</p></div></div></section><section class="wrap framework-grid">{frameworks.map((entry) => <FrameworkCard entry={entry} language={language} />)}</section></BaseLayout>

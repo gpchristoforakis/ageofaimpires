@@ -3,14 +3,17 @@ interface Props {
   kind: 'vehicles' | 'specifications' | 'journey';
   headers: string[];
   rows: string[][];
+  language?: import('../i18n/config').Language;
 }
-const { kind, headers, rows } = Astro.props;
-const label = kind === 'vehicles' ? 'Vehicle types and AI counterparts' : kind === 'journey' ? 'Questions to ask when choosing a car or AI' : 'Car specifications and AI assistant qualities';
+import { getUi } from '../i18n/ui';
+const { kind, headers, rows, language = 'en' } = Astro.props;
+const labels = getUi(language);
+const label = labels.tableAria[kind];
 const hintId = `${kind}-scroll-hint`;
 ---
 
 <div class:list={['comparison-table', `comparison-table--${kind}`]}>
-  <div class="comparison-table-hint" id={hintId} data-reading-ui>Scroll sideways to read every column <span aria-hidden="true">→</span></div>
+  <div class="comparison-table-hint" id={hintId} data-reading-ui>{labels.tableScroll} <span aria-hidden="true">→</span></div>
   <div class="comparison-table-scroll" role="region" aria-label={label} aria-describedby={hintId} tabindex="0">
     <table aria-label={label}>
       <thead><tr>{headers.map((header) => <th scope="col">{header}</th>)}</tr></thead>
