@@ -1,0 +1,18 @@
+---
+import TinaMarkdown from '@tinacms/astro/TinaMarkdown.astro';
+import { tinaField } from '@tinacms/astro';
+import type { TinaRichTextContent } from '@tinacms/astro/types';
+
+interface PageData extends Record<string, unknown> {
+  body: TinaRichTextContent;
+}
+
+interface Props {
+  data: PageData;
+}
+
+const { data } = Astro.props;
+---
+<div data-tina-field={tinaField(data, 'body')}>
+  <TinaMarkdown content={data.body} />
+</div>
