@@ -1,10 +1,6 @@
 / /en/ 301
 /articles /en/articles/ 301
 /articles/ /en/articles/ 301
-/articles/cars-vs-llms /en/articles/choosing-ai-like-a-car/ 301
-/articles/cars-vs-llms/ /en/articles/choosing-ai-like-a-car/ 301
-/en/articles/cars-vs-llms /en/articles/choosing-ai-like-a-car/ 301
-/en/articles/cars-vs-llms/ /en/articles/choosing-ai-like-a-car/ 301
 /articles/* /en/articles/:splat 301
 /frameworks /en/frameworks/ 301
 /frameworks/ /en/frameworks/ 301
