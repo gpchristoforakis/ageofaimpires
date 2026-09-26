@@ -30,30 +30,5 @@ const defaultPath = translations[defaultLanguage];
       const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]'); const nav = document.querySelector<HTMLElement>('[data-site-nav]');
       if (toggle && nav) { const firstLink = nav.querySelector<HTMLAnchorElement>('a'); const setMenuState = (isOpen: boolean, restoreFocus = false) => { nav.classList.toggle('is-open', isOpen); toggle.setAttribute('aria-expanded', String(isOpen)); toggle.textContent = isOpen ? nav.dataset.closeLabel ?? 'Close' : nav.dataset.menuLabel ?? 'Menu'; if (isOpen) firstLink?.focus(); else if (restoreFocus) toggle.focus(); }; toggle.addEventListener('click', () => { const isOpen = toggle.getAttribute('aria-expanded') !== 'true'; setMenuState(isOpen, !isOpen); }); nav.addEventListener('click', (event) => { if (event.target instanceof HTMLAnchorElement) setMenuState(false, true); }); document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') setMenuState(false, true); }); }
     </script>
-    <button id="floating-share-btn" aria-label={t.share} data-share-label={t.share} data-copied-label={t.copied} data-copy-prompt={t.copyLink}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span>{t.share}</span></button>
-    <script is:inline>
-      const btn = document.getElementById('floating-share-btn');
-      if (btn) btn.addEventListener('click', async () => {
-        const canonicalHref = document.querySelector('link[rel="canonical"]')?.href;
-        const shareUrl = new URL(canonicalHref || window.location.href);
-        shareUrl.search = '';
-        shareUrl.hash = '';
-
-        try {
-          await navigator.clipboard.writeText(shareUrl.href);
-          const label = btn.querySelector('span');
-          if (label) {
-            label.textContent = btn.dataset.copiedLabel;
-            btn.classList.add('is-copied');
-            setTimeout(() => {
-              label.textContent = btn.dataset.shareLabel;
-              btn.classList.remove('is-copied');
-            }, 2000);
-          }
-        } catch {
-          prompt(btn.dataset.copyPrompt, shareUrl.href);
-        }
-      });
-    </script>
   </body>
 </html>

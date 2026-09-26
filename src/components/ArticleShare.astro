@@ -1,0 +1,76 @@
+---
+import { getUi } from '../i18n/ui';
+import type { Language } from '../i18n/config';
+
+interface Props {
+  language: Language;
+  title: string;
+}
+
+const { language, title } = Astro.props;
+const t = getUi(language);
+---
+
+<div class="article-share-row">
+  <button
+    class="article-share-control"
+    type="button"
+    data-article-share
+    data-share-title={title}
+    data-share-label={t.share}
+    data-copied-label={t.copied}
+    data-copy-prompt={t.copyLink}
+  >
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="18" cy="5" r="3"></circle>
+      <circle cx="6" cy="12" r="3"></circle>
+      <circle cx="18" cy="19" r="3"></circle>
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+    </svg>
+    <span>{t.share}</span>
+  </button>
+</div>
+
+<script>
+  const shareButtons = document.querySelectorAll<HTMLButtonElement>('[data-article-share]');
+
+  const copyShareUrl = async (button: HTMLButtonElement, url: string) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      const label = button.querySelector('span');
+      if (!label) return;
+      label.textContent = button.dataset.copiedLabel ?? 'Copied!';
+      button.classList.add('is-copied');
+      window.setTimeout(() => {
+        label.textContent = button.dataset.shareLabel ?? 'Share';
+        button.classList.remove('is-copied');
+      }, 2000);
+    } catch {
+      window.prompt(button.dataset.copyPrompt ?? 'Copy link:', url);
+    }
+  };
+
+  shareButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const canonicalHref = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href;
+      const shareUrl = new URL(canonicalHref || window.location.href);
+      shareUrl.search = '';
+      shareUrl.hash = '';
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: button.dataset.shareTitle || document.title,
+            url: shareUrl.href,
+          });
+          return;
+        } catch (error) {
+          if (error instanceof DOMException && error.name === 'AbortError') return;
+        }
+      }
+
+      await copyShareUrl(button, shareUrl.href);
+    });
+  });
+</script>
