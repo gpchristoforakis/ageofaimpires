@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Who Pays When Attention Stops Paying? — AGE OF AIMPIRES</title>
+<meta content="The ad-supported web was a long-running arrangement, not a permanent one. As AI assistants handle more of the research, human attention becomes less valuable — and a new digital economy starts to take shape." name="description"/>
+<meta content="George Christoforakis" name="author"/>
+<meta content="noindex, nofollow" name="robots"/>
+<meta content="article" property="og:type"/>
+<meta content="Who Pays When Attention Stops Paying?" property="og:title"/>
+<meta content="The ad-supported web was a long-running arrangement, not a permanent one. As AI assistants handle more of the research, human attention becomes less valuable — and a new digital economy starts to take shape." property="og:description"/>
+<style>
+:root{
+  --paper:#F5F1E8;--navy:#111C2C;--deep:#0C1624;--slate:#53606D;--teal:#147D78;
+  --amber:#D58A2A;--line:#DCD5C8;--surface:#ECE6DA;--max:1440px;--reading:720px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--navy);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.shell{width:min(calc(100% - 80px),var(--max));margin:0 auto}
+.header-shell{width:min(calc(100% - 128px),var(--max));margin:0 auto}
+header{min-height:76px;display:flex;align-items:center;border-bottom:1px solid var(--line)}
+.nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.brand{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:#252c11}
+.ai-mark{color:#cd6a15;font-weight:800}
+nav{display:flex;align-items:center;gap:28px;font-size:14px}
+nav a{text-decoration:none;color:var(--slate)} nav a:hover{color:var(--navy)}
+
+.article-head{padding:76px 0 42px;border-bottom:1px solid var(--line)}
+.kicker{margin:0 0 18px;color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
+.article-head h1{margin:0;max-width:1200px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(54px,6.4vw,92px);line-height:.98;letter-spacing:-.045em;font-weight:500}
+.deck{max-width:980px;margin:28px 0 0;color:var(--slate);font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2vw,29px);line-height:1.45}
+.meta-row{margin-top:28px;display:flex;gap:18px;align-items:center;color:var(--slate);font-size:14px;flex-wrap:wrap}
+.meta-dot{width:4px;height:4px;border-radius:50%;background:var(--amber)}
+
+.article{width:min(calc(100% - 80px),var(--reading));margin:0 auto;padding:34px 0 92px}
+.section{margin-top:86px}
+.article .section:first-of-type{margin-top:42px}
+.section-number{display:block;margin-bottom:12px;font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--teal)}
+h2{margin:0 0 24px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(36px,4.3vw,54px);line-height:1.08;letter-spacing:-.025em;font-weight:500}
+.subhead{margin:42px 0 18px;font-family:Georgia,"Times New Roman",serif;font-size:28px;line-height:1.2;font-weight:600}
+p,li{font-family:Georgia,"Times New Roman",serif;font-size:20px;line-height:1.68}
+p{margin:0 0 24px} strong{font-weight:700}
+.editorial-list{margin:18px 0 30px;padding-left:1.3em}
+.editorial-list li{margin-bottom:10px}
+.editorial-list.numbered li{padding-left:4px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:34px 0}
+.compare-card{padding:24px;border:1px solid var(--line);background:rgba(236,230,218,.45)}
+.compare-card h3{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+.compare-card p{margin:0;font-size:17px;line-height:1.55}
+.endline{margin-top:56px;padding-top:34px;border-top:1px solid var(--line);font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,3.2vw,44px);line-height:1.14}
+
+.visual-panel{width:min(calc(100vw - 80px),1100px);margin:48px 50%;transform:translateX(-50%);border:1px solid var(--line);background:var(--surface);padding:30px;font-family:Arial,Helvetica,sans-serif}
+.bundle-visual{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch}
+.bundle-visual span{border:1px solid var(--line);background:var(--paper);padding:22px 12px;text-align:center;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.bundle-visual strong{grid-column:1/-1;text-align:center;padding:14px;color:var(--teal);letter-spacing:.12em}
+.path-visual{display:grid;gap:14px}
+.path-visual>div{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.path-visual b{width:180px;font-size:11px;letter-spacing:.12em;color:var(--teal)}
+.path-visual span,.bypass-visual>span,.adoption-visual span{border:1px solid var(--line);background:var(--paper);padding:12px 14px;font-weight:700}
+.path-visual i,.bypass-visual i,.adoption-visual i{font-style:normal;color:var(--amber);font-weight:800}
+.bypass-visual{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.skipped{width:100%;margin-top:16px;padding:14px;border-left:4px solid var(--amber);background:var(--paper);font-size:13px}
+.skipped b{color:var(--amber)}
+.matrix-visual{display:grid;grid-template-columns:1fr 1fr}
+.matrix-visual>div{padding:22px;border:1px solid var(--line);line-height:1.8}
+.matrix-head{font-size:11px!important;font-weight:800;letter-spacing:.12em;color:var(--teal);background:var(--paper)}
+.response-visual>strong{display:block;margin-bottom:18px;color:var(--teal);font-size:11px;letter-spacing:.12em}
+.response-visual>div{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.response-visual span{border:1px solid var(--line);background:var(--paper);padding:20px 12px;text-align:center;font-weight:700}
+.adoption-visual{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+
+.share-row{display:flex;align-items:center;gap:12px;margin:26px 0 34px}
+.share-row.share-row-end{margin:42px 0 0;padding-top:28px;border-top:1px solid var(--line)}
+.share-button,.back-to-top{border:1px solid var(--line);background:rgba(245,241,232,.96);color:var(--navy);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.share-button{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 15px}
+.share-button:hover{border-color:var(--navy)}
+.share-button.is-copied{border-color:var(--teal);color:var(--teal)}
+.share-status{color:var(--slate);font-size:12px;min-height:1em}
+
+.back-to-top{position:fixed;right:24px;top:50%;z-index:40;min-width:48px;min-height:48px;padding:0 14px;opacity:0;visibility:hidden;transform:translateY(calc(-50% + 8px));transition:opacity .18s ease,transform .18s ease,visibility .18s ease,border-color .18s ease;box-shadow:0 8px 24px rgba(12,22,36,.08)}
+.back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(-50%)}
+.back-to-top:hover{border-color:var(--navy)}
+
+.comment-box{margin-top:58px;padding-top:34px;border-top:1px solid var(--line)}
+.comment-box h2{margin-bottom:10px;font-size:clamp(30px,3vw,42px)}
+.comment-box-intro{margin-bottom:24px;color:var(--slate);font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.55}
+.comment-form{display:grid;gap:16px}
+.comment-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.comment-field{display:grid;gap:7px}
+.comment-field label{color:var(--navy);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.comment-field input,.comment-field textarea{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.32);color:var(--navy);padding:13px 14px;font:inherit;font-size:16px}
+.comment-field textarea{min-height:150px;resize:vertical}
+.comment-submit{justify-self:start;min-height:46px;padding:0 18px;border:1px solid var(--navy);background:var(--navy);color:var(--paper);font:inherit;font-size:14px;font-weight:700}
+.comment-submit:disabled{cursor:not-allowed;opacity:.55}
+.comment-preview-note{margin:0;color:var(--slate);font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5}
+
+.article-footer{border-top:1px solid var(--line);padding:48px 0 64px}
+.footer-inner{display:flex;justify-content:space-between;gap:30px;align-items:center}
+.next-disabled{color:var(--slate);opacity:.7}
+
+@media(max-width:980px){
+  .header-shell{width:min(calc(100% - 48px),var(--max))}
+  .shell{width:min(calc(100% - 48px),var(--max))}
+  nav a:not(:last-child){display:none}
+  .article{width:min(calc(100% - 48px),var(--reading))}
+  .visual-panel{width:calc(100vw - 48px)}
+  .bundle-visual{grid-template-columns:1fr 1fr}
+  .bundle-visual strong{grid-column:1/-1}
+  .response-visual>div{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  header{min-height:64px}
+  .article-head{padding:54px 0 34px}
+  .article-head h1{font-size:clamp(48px,13vw,70px)}
+  .section{margin-top:64px}
+  p,li{font-size:19px}
+  .compare{grid-template-columns:1fr}
+  .comment-form-row{grid-template-columns:1fr}
+  .back-to-top{right:18px;top:50%}
+  .matrix-visual{grid-template-columns:1fr}
+  .response-visual>div{grid-template-columns:1fr}
+  .bundle-visual{grid-template-columns:1fr}
+}
+
+
+/* Entry 02 revisions */
+.bundle-merge{
+  width:min(calc(100vw - 80px),1100px);
+  margin:42px 50%;
+  transform:translateX(-50%);
+  border:1px solid var(--line);
+  background:var(--surface);
+}
+.bundle-row{
+  display:grid;
+  grid-template-columns:minmax(150px,.34fr) minmax(0,1fr);
+  align-items:stretch;
+  border-bottom:1px solid var(--line);
+}
+.bundle-label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px 16px;
+  background:var(--paper);
+  border-right:1px solid var(--line);
+  color:var(--teal);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-align:center;
+}
+.bundle-copy{
+  display:flex;
+  align-items:center;
+  padding:18px 22px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:18px;
+  line-height:1.5;
+}
+.bundle-cap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:15px 18px;
+  background:var(--navy);
+  color:var(--paper);
+  text-align:center;
+}
+.bundle-cap strong{font-size:13px;letter-spacing:.1em}
+.bundle-cap span{font-size:11px;letter-spacing:.08em;color:#9fd0cc}
+
+.closing-flow{
+  margin-top:28px;
+  border:1px solid var(--line);
+}
+.closing-context{
+  position:relative;
+  padding:30px 32px 22px;
+  background:var(--surface);
+}
+.closing-context p:last-child{margin-bottom:0}
+.closing-question{
+  position:relative;
+  padding:30px 32px 34px;
+  background:var(--navy);
+  color:var(--paper);
+  border-top:4px solid var(--amber);
+}
+.closing-question p{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(28px,3vw,40px);
+  line-height:1.2;
+  letter-spacing:-.02em;
+}
+.closing-label{
+  display:block;
+  margin-bottom:16px;
+  color:var(--teal);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.14em;
+}
+.closing-question .closing-label{color:var(--amber)}
+
+.meta-audio-group{
+  flex-basis:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:4px;
+  flex-wrap:wrap;
+}
+.mini-player{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:36px;
+  padding:0 10px 0 6px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.28);
+}
+.mini-player-button{
+  width:26px;
+  height:26px;
+  display:inline-grid;
+  place-items:center;
+  border:0;
+  background:var(--navy);
+  color:var(--paper);
+  cursor:pointer;
+  font-size:10px;
+  line-height:1;
+}
+.mini-player-button:hover{background:var(--teal)}
+.mini-player-button:disabled{cursor:not-allowed;opacity:.42}
+.mini-player-label{
+  color:var(--navy);
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.mini-player-progress{
+  width:100px;
+  accent-color:var(--teal);
+  cursor:pointer;
+}
+.mini-player-time{
+  min-width:76px;
+  font-size:11px;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.mini-player-pending{opacity:.68}
+.mini-player-pending-text{
+  color:var(--slate);
+  font-size:11px;
+  white-space:nowrap;
+}
+
+@media(max-width:980px){
+  .bundle-merge{width:calc(100vw - 48px)}
+}
+@media(max-width:700px){
+  .bundle-row{grid-template-columns:1fr}
+  .bundle-label{justify-content:flex-start;border-right:0;border-bottom:1px solid var(--line);padding:12px 16px}
+  .bundle-copy{padding:16px}
+  .meta-audio-group{align-items:stretch;flex-direction:column}
+  .mini-player{width:100%}
+  .mini-player-progress{flex:1 1 auto}
+}
+
+
+.closing-question-lead{
+  margin:0;
+  color:var(--paper);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(24px,2.5vw,34px);
+  line-height:1.3;
+  letter-spacing:-.015em;
+}
+.closing-divider{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin:24px 0 22px;
+}
+.closing-divider span{
+  display:block;
+  height:2px;
+  background:var(--amber);
+}
+.closing-divider span:nth-child(1){width:44px}
+.closing-divider span:nth-child(2){width:12px;opacity:.72}
+.closing-divider span:nth-child(3){width:5px;opacity:.5}
+.closing-question-main{
+  margin:0;
+  color:#79C8C0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(30px,3.2vw,44px);
+  line-height:1.18;
+  letter-spacing:-.02em;
+}
+
+
+/* Entry 03 additions */
+.article-table-wrap{width:min(calc(100vw - 80px),1100px);margin:38px 50%;transform:translateX(-50%);overflow-x:auto;border:1px solid var(--line);background:rgba(236,230,218,.35)}
+.article-table{width:100%;border-collapse:collapse;min-width:760px;font-family:Arial,Helvetica,sans-serif}
+.article-table th,.article-table td{padding:16px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top;text-align:left;line-height:1.45}
+.article-table th:last-child,.article-table td:last-child{border-right:0}
+.article-table tr:last-child td{border-bottom:0}
+.article-table th{background:var(--surface);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.article-table td{font-size:15px}
+.article-table td:first-child{font-weight:800;color:var(--navy)}
+.pull-line{margin:52px 0 0;padding:28px 0 0;border-top:1px solid var(--line);font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,3.1vw,43px);line-height:1.2;color:var(--navy)}
+.entry-callout{margin:30px 0;padding:24px 26px;border:1px solid var(--line);border-left:4px solid var(--amber);background:rgba(236,230,218,.5)}
+.entry-callout p{margin-bottom:18px}
+.entry-callout p:last-child{margin-bottom:0}
+
+@media(max-width:980px){.article-table-wrap{width:calc(100vw - 48px)}}
+
+/* Locked entry hero replaces visible text title */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.entry-hero{margin-top:18px}
+.entry-hero img{display:block;width:100%;height:auto;border:1px solid var(--line);background:var(--surface)}
+@media(max-width:700px){.entry-hero{margin-top:14px}}
+
+
+.legal-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  padding-top:18px;
+  margin-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--slate);
+  font-size:12px;
+}
+.legal-links a{color:inherit;text-decoration:none}
+.legal-links a:hover{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+
+
+
+/* Mobile navigation — 29 Sep 2026 */
+.menu-toggle{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:0 13px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--navy);
+  font:inherit;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.04em;
+  cursor:pointer;
+}
+.menu-toggle:hover{border-color:var(--navy)}
+.menu-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+@media(max-width:980px){
+  header .nav{position:relative;flex-wrap:nowrap}
+  .menu-toggle{display:inline-flex;margin-left:auto}
+  nav[aria-label="Primary"]{
+    display:none;
+    position:absolute;
+    top:calc(100% + 12px);
+    right:0;
+    z-index:1000;
+    width:min(280px,calc(100vw - 36px));
+    padding:8px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    box-shadow:0 16px 36px rgba(12,22,36,.14);
+  }
+  nav[aria-label="Primary"].is-open{display:flex}
+  nav[aria-label="Primary"] a,
+  nav[aria-label="Primary"] a:not(:last-child),
+  nav[aria-label="Primary"] a:not(.active):not(:last-child){
+    display:block !important;
+    padding:12px 11px;
+    color:var(--navy);
+    border-bottom:1px solid var(--line);
+  }
+  nav[aria-label="Primary"] a:last-child{border-bottom:0}
+  nav[aria-label="Primary"] a:hover{background:rgba(236,230,218,.65)}
+}
+
+</style>
+</head>
+<body>
+<header>
+<div class="header-shell nav">
+<a class="brand" href="index.html">AGE OF <span class="ai-mark">AI</span>MPIRES</a>
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+<nav id="primary-nav" aria-label="Primary">
+<a href="articles.html">Articles</a>
+<a href="notebook.html">Notebook</a>
+<a href="frameworks.html">Frameworks</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a aria-label="Language" href="#">EN</a>
+</nav>
+</div>
+</header>
+<main>
+<section class="article-head"><div class="shell">
+<p class="kicker">Entry 03</p>
+<h1 class="sr-only">Who Pays When Attention Stops Paying?</h1>
+<div class="entry-hero"><img src="assets/entry-03-hero.png" alt="Who Pays When Attention Stops Paying hero illustration"/></div>
+<p class="deck">The ad-supported web was a long-running arrangement, not a permanent one. As AI assistants handle more of the research, human attention becomes less valuable — and a new digital economy starts to take shape.</p>
+<div class="meta-row"><span>Reads In: 8 Mins</span><span class="meta-dot"></span><span>AGE OF AIMPIRES</span></div>
+</div></section>
+<article class="article">
+<div aria-label="Entry sharing" class="share-row"><button class="share-button" data-share-button="" type="button"><span aria-hidden="true">↗</span><span data-share-label="">Share this</span></button><span aria-live="polite" class="share-status" data-share-status=""></span></div>
+<section class="section" id="section-1">
+<span class="section-number">01</span>
+<h2>Attention Was a Subsidy</h2>
+<p>For three decades, much of the consumer internet operated under a familiar arrangement: users paid little or nothing directly, while advertising funded a large share of the service. Major search and social platforms turned user attention into advertising revenue, often using behavioural signals to target and measure ads.</p>
+<p>Advertisers did not pay for digital content out of generosity; they paid for access to human visual focus. The pageview, the banner ad, and the sponsored link worked as business models because a person was looking at a screen, seeing promotions, and leaving behavioural footprints.</p>
+<div class="entry-callout">
+<p><strong>Today:</strong> Someone searching for a hotel may visit Google, open several hotel websites, compare prices, see advertisements, and eventually book. Each visit generates pageviews, potential ad impressions, and data about what the user looked at and clicked.</p>
+<p><strong>In an AI-mediated future:</strong> The same person may simply tell an assistant: “Find me the best four-star hotel in Athens for three nights under €600 and book it.” The assistant may perform the comparison and transaction without the user visiting most of those websites.</p>
+</div>
+<p>When AI assistants step between users and websites, that cross-subsidy can weaken. An automated tool reading product details or summarising news does not view banner ads, click on sponsored links, or generate mouse-hover trails. As software handles more routine tasks, direct human page visits may become less frequent, and the ad engine funding free infrastructure could lose efficiency.</p>
+<p>It helps to distinguish between four levels of AI assistance:</p>
+<ul class="editorial-list"><li><strong>Answering:</strong> The assistant replies from its training data without visiting websites.</li><li><strong>Retrieving:</strong> It fetches live information from webpages or APIs.</li><li><strong>Comparing:</strong> It gathers options from multiple sources and ranks them.</li><li><strong>Acting:</strong> It completes transactions on behalf of the user.</li></ul>
+<p>The economic impact grows as assistants move from answering questions to taking actions. Not every AI interaction removes a website from the process: assistants will still depend on authoritative sources, structured APIs, product feeds, booking systems, and payment infrastructure. But the trend toward delegation is what matters.</p>
+</section>
+<section class="section" id="section-2">
+<span class="section-number">02</span>
+<h2>Paying For Fresh Information</h2>
+<p>If advertising generates less revenue from each user interaction, publishers and service providers may look for ways to charge the systems that still depend on their information. One possible response is to establish digital tollbooths: charging AI developers when automated tools request their data.</p>
+<p>But static information is difficult to keep charging for. If an AI reads a page of historic dates or basic product dimensions, that information can be stored and reused without continually checking back.</p>
+<ul class="editorial-list"><li><strong>Information that stays static:</strong> Basic product measurements, historical records, or standard documentation.</li><li><strong>Information that goes stale quickly:</strong> Live seat availability, dynamic prices, traffic conditions, or current stock levels.</li></ul>
+<p>The faster information goes stale, the more valuable reliable access to the current source becomes. A cached flight price is not enough; the assistant must know whether the fare is still available, under what conditions, and whether the booking can actually be completed.</p>
+<p>In practice, this may look less like charging for every webpage request and more like licensing structured data, selling API access, sharing revenue, or taking a commission when an assistant generates a transaction.</p>
+<p>Websites may monetise <em>transaction access</em> more than <em>content access</em>.</p>
+</section>
+<section class="section" id="section-3">
+<span class="section-number">03</span>
+<h2>Paying For Finished Results</h2>
+<p>As AI tools move from retrieving information to executing tasks, pricing may shift from access and raw computing usage toward finished results. A user may not want to pay an agent for ten minutes of processing; they may prefer to pay only if it successfully books the trip, finds a qualified lead, or resolves the support issue.</p>
+<p>If a system needs repeated attempts or gets stuck in a loop, the buyer pays for processing without necessarily receiving usable work. A result-based model shifts attention to whether the task clears a defined completion test and stays within a spending limit.</p>
+<p>Examples could include:</p>
+<ul class="editorial-list"><li>A qualified sales lead that meets predefined criteria.</li><li>A booked trip that satisfies specified constraints.</li><li>A customer-support issue resolved to the user’s satisfaction.</li></ul>
+<p>Outcome-based pricing works best when success can be measured clearly. It becomes harder when the user is buying judgment, creativity, exploration, or advice.</p>
+</section>
+<section class="section" id="section-4">
+<span class="section-number">04</span>
+<h2>Sponsoring Consideration, Not Attention</h2>
+<p>Commercial influence is unlikely to disappear if visual page visits decline, but its mechanics are shifting. When users rely on an AI assistant as an advisor, inserting hidden advertising directly into its recommendations risks eroding user trust.</p>
+<p>Instead of paying to catch a human eye, advertising may shift from buying attention to buying consideration.</p>
+<p>In this setup, the recommendation process separates into two distinct steps:</p>
+<ul class="editorial-list"><li><strong>The primary recommendation:</strong> The AI searches available sources to identify relevant options based on user preferences such as price, specifications, or quality.</li><li><strong>The commercial offer:</strong> Separately, the system checks whether a relevant brand offers a verified option—such as a discounted upgrade or matching promotion—and presents it clearly as sponsored.</li></ul>
+<p>For example, an assistant could first identify hotels that meet a user’s budget, location, and quality requirements, then separately show a sponsored room upgrade or promotion from one of those suitable hotels.</p>
+<p>“Sponsored consideration” means a company may pay to have a qualifying offer considered when the assistant compares options. The commercial relationship would still need to be clear, and users would need to understand whether sponsorship affected inclusion, ranking, price, promotion, or the final recommendation.</p>
+<p>Sponsorship should influence which relevant offers are shown, not secretly override what is best for the user. Commercial sponsorship could remain viable, but move from capturing visual attention to presenting relevant options at the decision moment. Trust depends on clear disclosure and a genuine match between the offer and the user’s needs.</p>
+</section>
+<section class="section" id="section-5">
+<span class="section-number">05</span>
+<h2>Who Controls The Last Mile</h2>
+<p>As AI capabilities expand, leverage may shift toward entities that manage the final step between the user and the real world: the device, user identity, payment permissions, and the primary customer relationship.</p>
+<p>Here, “last mile” does not mean physical delivery. It means the step between deciding what to do and actually doing it: authenticating the user, confirming permission, making payment, placing the order, and handling the result.</p>
+<ul class="editorial-list"><li><strong>Identity:</strong> Verifying who the user is.</li><li><strong>Permissions:</strong> Determining which tools can access data or execute actions.</li><li><strong>Payment:</strong> Handling secure financial approvals.</li><li><strong>Relationship:</strong> Operating as the primary interface the user interacts with daily.</li></ul>
+<p>An assistant may find the best flight, but the company controlling the user’s identity, wallet, device, and approval flow may control the booking—and potentially the economics around it. That company may also determine which assistants can act, what data they can access, which payment method they use, and how easily users can switch to competing services.</p>
+<p>Control also brings accountability. Once an assistant moves from advice to action, users need to know who is responsible when something goes wrong, who handles refunds or disputes, who protects payment details, and whether an action can be explained, cancelled, or reversed. Responsibility may be divided among the assistant provider, the data source, the merchant, the payment provider, and the platform controlling the transaction. The entities that can credibly manage that risk and redress may capture part of the value too.</p>
+<p>Control of the last mile is not automatically a winning position. Hardware costs, consumer preferences, and open web standards may continue to limit how much power device makers or operating-system providers can exercise. But controlling the user’s primary interface remains a strategically powerful position.</p>
+</section>
+<section class="section" id="section-6">
+<span class="section-number">06</span>
+<h2>What Becomes Valuable</h2>
+<p>A decline in attention-funded digital services would not mean internet business models disappear. It would mean they adapt. Some routine browsing and simple comparisons may move into assistants, while authoritative sources, live services, trustworthy recommendations, and transaction-ready platforms become more valuable.</p>
+<p>The emerging models differ in what they monetise, who pays, and who bears the risk.</p>
+<div class="article-table-wrap" role="region" aria-label="Business approaches and emerging scarcity" tabindex="0"><table class="article-table">
+<thead>
+<tr>
+<th>Business approach</th>
+<th>What is scarce</th>
+<th>Who pays</th>
+<th>Primary risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pay for fresh access</td>
+<td>Live, fast-changing data</td>
+<td>AI developers</td>
+<td>Data caching and scraping bypass</td>
+</tr>
+<tr>
+<td>Pay for results</td>
+<td>Verified, usable work</td>
+<td>Businesses and end users</td>
+<td>Unclear completion rules and failed retries</td>
+</tr>
+<tr>
+<td>Sponsored consideration</td>
+<td>User trust and decision moments</td>
+<td>Brands and merchants</td>
+<td>Recommendation bias that degrades trust</td>
+</tr>
+<tr>
+<td>Last-mile control</td>
+<td>Device access, identity, and payment</td>
+<td>Varies by ecosystem</td>
+<td>Hardware cost and platform competition</td>
+</tr>
+</tbody>
+</table></div>
+<p>As AI tools decouple user goals from visual page visits, value capture may move away from simply hosting visual screens.</p>
+<p class="pull-line">Economic value does not disappear. It moves toward whatever remains scarce, trusted, and difficult to bypass.</p>
+</section>
+<div aria-label="Entry sharing" class="share-row share-row-end"><button class="share-button" data-share-button="" type="button"><span aria-hidden="true">↗</span><span data-share-label="">Share this</span></button><span aria-live="polite" class="share-status" data-share-status=""></span></div>
+<section aria-labelledby="comment-heading" class="comment-box"><h2 id="comment-heading">Leave A Comment</h2><p class="comment-box-intro">A place for reactions, disagreements, corrections and useful additions to this entry.</p><form class="comment-form" data-comment-form=""><div class="comment-form-row"><div class="comment-field"><label for="comment-name">Name</label><input autocomplete="name" id="comment-name" name="name" type="text"/></div><div class="comment-field"><label for="comment-email">Email</label><input autocomplete="email" id="comment-email" name="email" type="email"/></div></div><div class="comment-field"><label for="comment-text">Comment</label><textarea id="comment-text" name="comment" required=""></textarea></div><button class="comment-submit" disabled="" type="submit">Post Comment</button><p class="comment-preview-note">Preview only: the form is ready visually, but it needs a submission endpoint before comments can be posted publicly.</p></form></section>
+</article>
+</main>
+<button aria-label="Back to top" class="back-to-top" data-back-to-top="" type="button">↑ Back To The Top</button>
+<footer class="article-footer"><div class="shell footer-inner"><a class="brand" href="index.html">AGE OF <span class="ai-mark">AI</span>MPIRES</a><a href="articles.html">Back To All Articles →</a></div><div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
+</footer>
+<script>
+(() => {
+  document.querySelectorAll('[data-share-button]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const status = button.parentElement?.querySelector('[data-share-status]');
+      const label = button.querySelector('[data-share-label]');
+      const shareData = { title: document.title, text: document.querySelector('meta[name="description"]')?.content || '', url: window.location.href.split('#')[0] };
+      if (navigator.share) { try { await navigator.share(shareData); if (status) status.textContent = 'Shared.'; return; } catch (error) { if (error && error.name === 'AbortError') return; } }
+      try { await navigator.clipboard.writeText(shareData.url); if (label) label.textContent = 'Link copied'; button.classList.add('is-copied'); setTimeout(() => { if (label) label.textContent = 'Share this'; button.classList.remove('is-copied'); }, 1800); } catch (_) { window.prompt('Copy this link:', shareData.url); }
+    });
+  });
+  const backToTop = document.querySelector('[data-back-to-top]');
+  if (backToTop) { const sync = () => backToTop.classList.toggle('is-visible', window.scrollY > 520); sync(); window.addEventListener('scroll', sync, { passive:true }); backToTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'})); }
+  const commentForm = document.querySelector('[data-comment-form]');
+  if (commentForm) commentForm.addEventListener('submit', (event) => event.preventDefault());
+})();
+</script>
+
+<script>
+(() => {
+  const button = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('nav[aria-label="Primary"]');
+  if (!button || !menu) return;
+
+  const closeMenu = () => {
+    menu.classList.remove('is-open');
+    button.setAttribute('aria-expanded', 'false');
+  };
+
+  button.addEventListener('click', () => {
+    const opening = !menu.classList.contains('is-open');
+    menu.classList.toggle('is-open', opening);
+    button.setAttribute('aria-expanded', String(opening));
+  });
+
+  menu.addEventListener('click', (event) => {
+    if (event.target.closest('a')) closeMenu();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!menu.classList.contains('is-open')) return;
+    if (menu.contains(event.target) || button.contains(event.target)) return;
+    closeMenu();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+      button.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) closeMenu();
+  });
+})();
+</script>
+
+</body>
+</html>

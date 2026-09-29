@@ -5,3 +5,5 @@ dist/
 *.log
 tina/__generated__/
 public/admin/
+
+.wrangler/
