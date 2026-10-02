@@ -1,74 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
-    <loc>https://www.ageofaimpires.com/</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/articles</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/age-of-aimpires-entry-01</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/age-of-aimpires-entry-02</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/age-of-aimpires-entry-03</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/frameworks</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/framework-effective-task-cost</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/framework-effective-task-cost-operators-deep-dive</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/notebook</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/about</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/contact</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/privacy-policy</loc>
-  </url>
-
-  <url>
-    <loc>https://www.ageofaimpires.com/terms</loc>
+    <loc>https://ageofaimpires.com/</loc>
   </url>
   <url>
-    <loc>https://www.ageofaimpires.com/how-to</loc>
+    <loc>https://ageofaimpires.com/articles</loc>
   </url>
-
   <url>
-    <loc>https://www.ageofaimpires.com/how-to-check-whether-you-have-this-feature</loc>
+    <loc>https://ageofaimpires.com/age-of-aimpires-entry-01</loc>
   </url>
-
   <url>
-    <loc>https://www.ageofaimpires.com/tell-your-ai-how-you-like-to-work</loc>
+    <loc>https://ageofaimpires.com/age-of-aimpires-entry-02</loc>
   </url>
-
   <url>
-    <loc>https://www.ageofaimpires.com/give-the-job-its-own-rules</loc>
+    <loc>https://ageofaimpires.com/age-of-aimpires-entry-03</loc>
   </url>
-
   <url>
-    <loc>https://www.ageofaimpires.com/connect-the-source-not-your-entire-digital-life</loc>
+    <loc>https://ageofaimpires.com/frameworks</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/framework-effective-task-cost</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/framework-effective-task-cost-operators-deep-dive</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/notebook</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/about</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/contact</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/privacy-policy</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/terms</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/how-to</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/how-to-check-whether-you-have-this-feature</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/tell-your-ai-how-you-like-to-work</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/give-the-job-its-own-rules</loc>
+  </url>
+  <url>
+    <loc>https://ageofaimpires.com/connect-the-source-not-your-entire-digital-life</loc>
   </url>
 </urlset>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ageofaimpires.com/sitemap.xml
+Sitemap: https://ageofaimpires.com/sitemap.xml
