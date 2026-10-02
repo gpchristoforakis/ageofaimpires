@@ -14,7 +14,23 @@
   .site-nav a { min-height: 44px; padding: 12px 10px; }
   .site-nav a[aria-current="page"]::after { right: auto; bottom: 6px; left: 10px; width: 24px; }
 }
+/* Match homepage header spacing */
+.site-header .nav-wrap {
+  width: min(calc(100% - 128px), 1440px);
+  margin: 0 auto;
+}
 
+@media (max-width: 980px) {
+  .site-header .nav-wrap {
+    width: min(calc(100% - 48px), 1440px);
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header .nav-wrap {
+    width: min(calc(100% - 36px), 1440px);
+  }
+}
 </style>
 </head><body><a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header"><div class="wrap nav-wrap">
 <a class="wordmark" href="index.html">AGE OF <span>AI</span>MPIRES</a>
