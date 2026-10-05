@@ -505,13 +505,80 @@ li{margin-bottom:10px}
   nav[aria-label="Primary"] a:hover{background:rgba(236,230,218,.65)}
 }
 
+/* Effective Task Cost marginalia: the reading column stays in place. */
+.etc-marginalia{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:12px;
+  margin:0 0 28px;
+}
+.etc-marginalia > p{min-width:0;margin:0}
+.etc-marginalia-note{
+  min-width:0;
+  align-self:start;
+  border-inline-start:2px solid var(--teal);
+  padding-inline-start:16px;
+  color:var(--slate);
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:14px;
+  line-height:1.65;
+  overflow-wrap:anywhere;
+}
+.etc-marginalia-label{
+  display:block;
+  margin-bottom:10px;
+  color:var(--teal);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  line-height:1.5;
+  text-transform:uppercase;
+}
+.etc-marginalia-formula{font:inherit}
+/* The centred 720px column needs room for a 240px note and a 32px gap.
+   The left margin stays clear of the existing right-side back-to-top button.
+   Keeping both in one grid row prevents collisions with later content. */
+@media screen and (min-width:84rem){
+  .etc-marginalia{
+    width:calc(100% + 17rem);
+    margin-inline-start:-17rem;
+    grid-template-columns:15rem minmax(0,1fr);
+    column-gap:2rem;
+    align-items:start;
+  }
+  .etc-marginalia > p{grid-column:2;grid-row:1}
+  .etc-marginalia-note{grid-column:1;grid-row:1}
+}
+@media print{
+  .etc-marginalia{display:block}
+  .etc-marginalia > p{break-after:avoid}
+  .etc-marginalia-note{margin-top:12px;break-inside:avoid}
+}
 </style>
-</head>
+<style id="aoai-consistency">
+/* Shared brand treatments: header/footer wordmark and reversed section wordmark. */
+:root{--brand-ink:var(--ink,#2b2b2b);--brand-gold:var(--gold-deep,#8a642e);--brand-white:#fff}
+.aoai-brand{--brand-base:var(--brand-ink);--brand-ai:var(--brand-gold);color:var(--brand-base)}
+.aoai-brand.aoai-brand--section{--brand-base:var(--brand-gold);--brand-ai:var(--brand-ink)}
+.aoai-brand .aoai-brand-ai{color:var(--brand-ai)}
+.dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
+.dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
+
+/* Match the main site's header gutters without changing the article column. */
+body > header > .nav{width:min(calc(100% - 128px),var(--max));margin-inline:auto}
+@media(max-width:980px){body > header > .nav{width:min(calc(100% - 48px),var(--max))}}
+@media(max-width:640px){body > header > .nav{width:min(calc(100% - 36px),var(--max))}}
+</style>
+<style id="release-consistency">
+/* Latest approved Guide 1 header/footer palette. */
+body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-footer .aoai-brand{--brand-base:#252c11;--brand-ai:#cd6a15;color:#252c11}
+body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
+</style></head>
 <body>
 
 <header>
   <div class="shell nav">
-    <a class="brand" href="index.html">AGE OF <span class="ai-mark">AI</span>MPIRES</a>
+    <a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
 <nav id="primary-nav" aria-label="Primary">
       <a href="articles.html">Articles</a>
@@ -630,10 +697,12 @@ li{margin-bottom:10px}
       <span class="section-number">PART 02</span>
       <h2>The Cost You Actually Pay</h2>
       <p>To see the true price of an automated job, it helps to use a practical mental framework: Effective Task Cost.</p>
-      <p>Effective Task Cost tracks every expense required to move a job from an initial request to an acceptable finish line. It breaks the real cost down into four parts:</p>
-      <div class="callout">
-        <span class="label">Effective Task Cost</span>
-        <div class="formula">direct AI cost<br>+ retries and corrections<br>+ unnecessary extra work<br>+ human intervention</div>
+      <div class="etc-marginalia">
+        <p>Effective Task Cost tracks every expense required to move a job from an initial request to an acceptable finish line. It breaks the real cost down into four parts:</p>
+        <aside class="etc-marginalia-note" role="note" aria-labelledby="etc-note-label">
+          <span class="etc-marginalia-label" id="etc-note-label">Effective Task Cost</span>
+          <div class="etc-marginalia-formula">direct AI cost<br>+ retries and corrections<br>+ unnecessary extra work<br>+ human intervention</div>
+        </aside>
       </div>
       <ul>
         <li><strong>Direct AI cost:</strong> The baseline fee charged for the initial attempt. This is the visible sticker price based on input and output usage.</li>
@@ -779,7 +848,7 @@ li{margin-bottom:10px}
 <button aria-label="Back to the top" class="back-to-top" data-back-to-top type="button">↑ Back To The Top</button>
 <footer class="article-footer">
   <div class="shell footer-inner">
-    <div class="brand">AGE OF <span class="ai-mark">AI</span>MPIRES</div>
+    <div class="brand aoai-brand">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</div>
     <span class="next-link next-disabled">Next Essay →</span>
   </div>
 <div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>

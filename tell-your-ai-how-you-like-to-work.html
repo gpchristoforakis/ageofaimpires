@@ -31,27 +31,401 @@
     width: min(calc(100% - 36px), 1440px);
   }
 }
+
+    .editorial-diagram {
+      --ed-paper: #F5F1E8;
+      --ed-navy: #111C2C;
+      --ed-slate: #53606D;
+      --ed-teal: #147D78;
+      --ed-amber: #D58A2A;
+      --ed-line: #DCD5C8;
+      --ed-surface: #ECE6DA;
+      --ed-font-copy: Georgia, "Times New Roman", serif;
+      --ed-font-meta: Arial, Helvetica, sans-serif;
+      --ed-spacing: 24px;
+    }
+    
+    /* Base Figure Styles */
+    .editorial-diagram {
+      margin: 0;
+      padding: 0;
+      font-family: var(--ed-font-copy);
+      color: var(--ed-navy);
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .ed-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .ed-caption {
+      margin-bottom: var(--ed-spacing);
+      padding-bottom: var(--ed-spacing);
+      border-bottom: 1px solid var(--ed-line);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ed-family {
+      font-family: var(--ed-font-meta);
+      color: var(--ed-teal);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .ed-title {
+      font-size: 26px;
+      line-height: 1.2;
+      font-weight: 500;
+      color: var(--ed-navy);
+    }
+
+    .ed-summary {
+      font-size: 16px;
+      color: var(--ed-slate);
+      line-height: 1.5;
+    }
+
+    /* Comparison / Lanes Layout */
+    .ed-lanes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-bottom: var(--ed-spacing);
+    }
+
+    @media (max-width: 640px) {
+        .ed-lanes {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+    }
+
+    .ed-lane {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ed-lane-heading {
+      font-family: var(--ed-font-meta);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ed-navy);
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--ed-navy);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ed-lane-index {
+      color: var(--ed-amber);
+    }
+
+    /* Node sequence styles */
+    .ed-sequence {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .ed-stop {
+      position: relative;
+    }
+    
+    /* Vertical connecting lines */
+    .ed-sequence > .ed-stop:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 11px; /* Align with center of 24px icon */
+      top: 24px;
+      bottom: -32px;
+      width: 2px;
+      background-color: var(--ed-teal);
+      z-index: 0;
+    }
+
+    .ed-node {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      z-index: 1;
+      background-color: var(--ed-paper);
+    }
+
+    .ed-mark {
+      color: var(--ed-teal);
+      flex-shrink: 0;
+      background-color: var(--ed-paper);
+    }
+
+    .ed-node-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .ed-label {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .ed-detail {
+      font-family: var(--ed-font-meta);
+      font-size: 14px;
+      color: var(--ed-slate);
+      line-height: 1.4;
+    }
+
+    .ed-lane-note {
+      margin: 32px 0 0 0;
+      font-family: var(--ed-font-meta);
+      font-size: 13px;
+      color: var(--ed-slate);
+      line-height: 1.5;
+      padding: 16px;
+      background: var(--ed-surface);
+      border: 1px solid var(--ed-line);
+      border-radius: 4px;
+    }
+
+    /* Legend */
+    .ed-legend {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--ed-line);
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-family: var(--ed-font-meta);
+      font-size: 12px;
+      color: var(--ed-slate);
+    }
+
+    .ed-legend span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ed-key {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+    }
+
+    .ed-key-flow { background: var(--ed-teal); }
+    .ed-key-human { border-left: 3px solid var(--ed-teal); border-right: 3px solid var(--ed-teal); height: 12px; width: 6px; background: transparent; }
+  
+.share-row{display:flex;align-items:center;gap:12px;margin:26px 0 34px}
+.share-row.share-row-end{margin:42px 0 0;padding-top:28px;border-top:1px solid var(--line)}
+.share-button{border:1px solid var(--line);background:rgba(245,241,232,.96);color:var(--how-to-navy);font:inherit;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 15px}
+.share-button:hover{border-color:var(--how-to-navy)}
+.share-button.is-copied{border-color:var(--teal);color:var(--teal)}
+.share-button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.share-status{color:var(--muted);font-size:12px;min-height:1em}
+
+
+/* Guide 1 approved updates */
+.site-header .aoai-brand,.site-footer .aoai-brand{color:#252c11;--brand-base:#252c11;--brand-ai:#cd6a15}
+.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
+.how-to-achievement{border-radius:16px;padding:26px}
+.how-to-body ul.achievement-checks{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.achievement-checks li{display:flex;align-items:flex-start;gap:12px}
+.achievement-checks svg{flex-shrink:0;color:var(--teal);margin-top:3px}
+.how-to-example{border:0;background:transparent;padding:0}
+.how-to-prompt.instruction-card{padding:0;overflow:hidden;border-radius:16px}
+.instruction-card-header{display:flex;justify-content:space-between;align-items:center;gap:16px;background:#ece6da;padding:18px 22px;border-bottom:1px solid var(--line)}
+.instruction-card-title{font-family:var(--sans);font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--how-to-navy)}
+.instruction-card .how-to-prompt-actions{margin:0;position:relative}
+.instruction-card .how-to-copy-status{position:absolute;top:100%;right:0;white-space:nowrap;font-size:11px}
+.instruction-card button{border:2px solid var(--how-to-navy);color:var(--how-to-navy);font-weight:700}
+.instruction-card pre[data-prompt-text]{padding:24px;margin:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff}
+.instruction-card-footer{padding:18px 24px;background:#ece6da;border-top:1px solid var(--line);color:var(--muted)}
+.instruction-card-footer p{margin:0;font-size:16px;line-height:1.6}
+.how-to-next{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:16px}
+.how-to-next>a.how-to-back{grid-template-columns:30px minmax(0,1fr)}
+.how-to-body .editorial-diagram{margin:32px 0}
+.how-to-body .ed-sequence{list-style:none;padding:0;margin:0}
+.how-to-body .ed-lane-note{margin:32px 0 0;font-size:13px;line-height:1.5}
+@media(max-width:640px){.how-to-next{grid-template-columns:1fr}.instruction-card-header{padding:16px;gap:10px}.instruction-card pre[data-prompt-text]{padding:18px;font-size:14px}.instruction-card-title{font-size:12px}.how-to-achievement{padding:20px}.instruction-card-footer{padding:18px}}
+
+/* Compact test and diagram notation */
+.ed-legend{gap:14px 24px}
+.ed-legend svg{color:var(--ed-teal);flex-shrink:0}
+.ed-legend span{line-height:1.4}
+.how-to-body .quick-test-prompt{display:flex;align-items:center;gap:16px;padding:12px 16px}
+.quick-test-prompt [data-prompt-text]{order:0;flex:1;min-width:0;font-size:15px;line-height:1.5}
+.quick-test-prompt .how-to-prompt-actions{order:1;margin:0;flex-shrink:0;position:relative}
+.quick-test-prompt .how-to-copy-status{position:absolute;top:100%;right:0}
+@media(max-width:480px){.how-to-body .quick-test-prompt{gap:10px;padding:10px 12px}.quick-test-prompt button{min-width:70px;padding:8px}.quick-test-prompt [data-prompt-text]{font-size:14px}}
+</style>
+<style id="aoai-consistency">
+/* Shared brand treatments: header/footer wordmark and reversed section wordmark. */
+:root{--brand-ink:var(--ink,#2b2b2b);--brand-gold:var(--gold-deep,#8a642e);--brand-white:#fff}
+.aoai-brand{--brand-base:var(--brand-ink);--brand-ai:var(--brand-gold);color:var(--brand-base)}
+.aoai-brand.aoai-brand--section{--brand-base:var(--brand-gold);--brand-ai:var(--brand-ink)}
+.aoai-brand .aoai-brand-ai{color:var(--brand-ai)}
+.dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
+.dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
 </style>
 </head><body><a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header"><div class="wrap nav-wrap">
-<a class="wordmark" href="index.html">AGE OF <span>AI</span>MPIRES</a>
+<a class="wordmark aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
 <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
 <nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">
 <a href="articles.html">Articles</a><a href="how-to.html" aria-current="page">HOW-TO</a>
 <a href="notebook.html">Notebook</a><a href="frameworks.html">Frameworks</a>
 <a href="about.html">About</a><a href="contact.html">Contact</a>
-</nav></div></header><main id="main-content" tabindex="-1"><article class="wrap how-to-reading how-to-reading--guide"><header class="how-to-header"><p class="section-label">HOW-TO / 01</p><h1>Tell Your AI How You Like To Work</h1><p class="how-to-intro">An AI assistant can answer useful questions without setup. A few stable preferences can save you from repeating yourself across conversations.</p></header><div class="how-to-body"><section class="how-to-achievement"><h2>What You’ll Achieve</h2><p>Set a few general preferences for how your AI assistant works with you.</p><p>These are defaults, not a biography. Add information that improves answers across many conversations. Keep temporary tasks, private details and sensitive information out.</p></section>
+</nav></div></header><main id="main-content" tabindex="-1"><article class="wrap how-to-reading how-to-reading--guide"><header class="how-to-header"><p class="section-label">HOW-TO / GUIDE ONE</p><h1>Tell Your AI How You Like To Work</h1><p class="how-to-intro">Stop repeating yourself in every prompt. By setting up custom instructions, you can train your AI assistant to always respond in your preferred format, tone, and level of detail automatically.</p></header><div class="how-to-body"><div aria-label="Guide sharing" class="share-row"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div><section class="how-to-achievement"><h2>What You’ll Achieve</h2><p>Add default information that improves answers across many conversations.</p><ul class="achievement-checks"><li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Eliminate the need to type &quot;don&#x27;t use jargon&quot; or &quot;give me a table&quot; repeatedly.</span></li><li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Establish a consistent, predictable baseline for all your AI interactions.</span></li><li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Save minutes per query, adding up to hours saved every week.</span></li></ul></section>
 <h2 id="set-your-preferences">Set Your Preferences</h2>
-<ol class="guide-steps"><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">1</span><div class="how-to-step-content"><h3>Find the preference settings.</h3><p>Different assistants use different names for this kind of setting. Look in your assistant’s settings for preferences or instructions that apply across conversations. If you need to check whether this kind of setting is available on your assistant, plan, device or region, see <a href="how-to-check-whether-you-have-this-feature.html">How To Check Whether You Have This Feature</a>.</p></div></li><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">2</span><div class="how-to-step-content"><h3>Add stable context.</h3><p>Include information that could change an answer in many conversations, such as:</p><ul>
-<li>what you use the assistant for</li>
-<li>your country or measurement system</li>
-<li>recurring constraints</li>
-<li>your level of knowledge in subjects you ask about often</li>
-</ul><aside class="how-to-callout how-to-callout--warning"><p>Do not add passwords, financial details, medical records or other sensitive information simply because the field exists.</p></aside></div></li><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">3</span><div class="how-to-step-content"><h3>Specify how the assistant should respond.</h3><p>Be clear about preferences you repeat often: length, structure, tone, level of explanation, units or recurring constraints.</p></div></li><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">4</span><div class="how-to-step-content"><h3>Keep temporary instructions out.</h3><p>“Use metric units” belongs in your general preferences.</p><p>“Help me plan Sarah’s birthday party” belongs in the conversation. If the work continues over several chats, give it its own instructions instead of changing your general preferences.</p></div></li></ol>
-<section class="how-to-product"><h2>Example: ChatGPT</h2><p>In ChatGPT, this feature is called Custom Instructions. On desktop web, open Settings → Personalization, make sure Enable customization is on, then enter your instructions in the Custom Instructions field.</p></section>
+<ol class="guide-steps"><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">1</span><div class="how-to-step-content"><h3>Locate Settings</h3><p>Find the &quot;Custom Instructions&quot; or &quot;System Prompts&quot; menu in your AI platform (e.g., ChatGPT settings).</p></div></li><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">2</span><div class="how-to-step-content"><h3>Define Your Context</h3><p>Explain who you are and what you do. This context anchors the AI&#x27;s assumptions about your knowledge level.</p><aside class="how-to-callout how-to-callout--warning"><p>Do not add passwords, financial details, medical records or other sensitive information simply because the field exists.</p></aside></div></li><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">3</span><div class="how-to-step-content"><h3>Define the Role</h3><p>Anchor the AI&#x27;s identity. Telling it to act as an &quot;expert analyst&quot; instantly upgrades the depth and professional focus of its answers.</p></div></li><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">4</span><div class="how-to-step-content"><h3>Establish Tone &amp; Style</h3><p>Ban conversational filler and demand direct, concise answers. Prioritize accuracy over politeness to cut through the fluff.</p></div></li><li class="how-to-step"><span class="how-to-step-number" aria-hidden="true">5</span><div class="how-to-step-content"><h3>Set Formatting Rules</h3><p>Outline strict visual and structural rules, such as defaulting to bulleted lists, bolding key terms, and explaining the &#x27;why&#x27; in code comments.</p></div></li></ol>
+<section class="how-to-product how-to-example"><h2>Example: ChatGPT</h2><p>Paste the following snippet directly into your Custom Instructions to set a highly analytical, zero-fluff baseline.</p><div class="how-to-prompt instruction-card" data-prompt-box><div class="instruction-card-header"><span class="instruction-card-title">Custom Instructions Set</span><div class="how-to-prompt-actions"><button type="button" data-copy-prompt aria-label="Copy custom instructions"><span data-copy-label>Copy</span></button><span class="how-to-copy-status" data-copy-status role="status" aria-live="polite"></span></div></div><pre data-prompt-text>Role: You are an expert analyst.
+
+Tone &amp; Style:
+- Direct, concise, zero fluff.
+- No conversational filler (&quot;Here is the answer...&quot;, &quot;Sure!&quot;).
+- Prioritize accuracy over politeness.
+
+Formatting Rules:
+- Default to bulleted lists for multi-part answers.
+- Use bold text for key terms.
+- If writing code, include comments explaining &#x27;why&#x27; not &#x27;what&#x27;.</pre><div class="instruction-card-footer"><p><em><strong>Why this works:</strong> This snippet aggressively cuts down on the AI's tendency to write long introductions and conclusions, getting you straight to the valuable information.</em></p></div></div></section>
 <h2 id="try-this">Try This</h2>
 <div class="how-to-prompt" data-prompt-box><div class="how-to-prompt-actions"><button type="button" data-copy-prompt aria-label="Copy this text"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="6" y="6" width="10" height="12" rx="1.5" stroke="currentColor"></rect><path d="M12 6V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2" stroke="currentColor"></path></svg><span data-copy-label>Copy</span></button><span class="how-to-copy-status" data-copy-status role="status" aria-live="polite"></span></div><p data-prompt-text>I use my AI assistant for everyday planning, writing and learning. Use metric units unless I ask otherwise. Keep answers concise and use bullet points for lists. Explain unfamiliar terms in plain English. Give me practical next steps rather than long introductions.</p></div>
-<p class="how-to-supporting-note"><strong>Instructions and memory are different.</strong> Instructions are rules you set deliberately. Memory is a separate capability that may use relevant information from previous conversations or other available sources.</p>
+<figure class="editorial-diagram ed-route">
+<figcaption class="ed-caption">
+<span class="ed-title">Instructions vs. Memory</span>
+<span class="ed-summary">Instructions and memory are different. Instructions are rules you set deliberately. Memory is a separate capability that may use relevant information from previous conversations or other available sources.</span>
+</figcaption>
+<div class="ed-body">
+<div class="ed-lanes ed-comparison">
+
+<div class="ed-lane">
+<div class="ed-lane-heading">
+<span class="ed-lane-index" aria-hidden="true">01</span>
+<span>Custom Instructions</span>
+</div>
+<ol class="ed-sequence ed-vertical ed-detours" aria-label="Custom Instructions" role="list" style="--ed-count: 2">
+<li class="ed-stop ed-interruption">
+<div class="ed-node ed-node-human">
+<svg class="ed-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+<path d="M8 3V21M16 3V21" stroke="currentColor" stroke-width="3"></path>
+</svg>
+<div class="ed-node-copy">
+<span class="ed-sr-only">Human intervention: </span>
+<span class="ed-label">Set deliberately</span>
+<span class="ed-detail">You write the exact rules.</span>
+</div>
+</div>
+</li>
+<li class="ed-stop">
+<div class="ed-node ed-node-step">
+<svg class="ed-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+<rect x="7" y="7" width="10" height="10" fill="var(--ed-paper)" stroke="currentColor" stroke-width="2"></rect>
+</svg>
+<div class="ed-node-copy">
+<span class="ed-sr-only">Step: </span>
+<span class="ed-label">Applied as rules</span>
+<span class="ed-detail">The AI follows them strictly.</span>
+</div>
+</div>
+</li>
+</ol>
+<p class="ed-lane-note">Fixed boundaries you control. They do not change unless you edit them.</p>
+</div>
+
+<div class="ed-lane">
+<div class="ed-lane-heading">
+<span class="ed-lane-index" aria-hidden="true">02</span>
+<span>AI Memory</span>
+</div>
+<ol class="ed-sequence ed-vertical ed-detours" aria-label="AI Memory" role="list" style="--ed-count: 2">
+<li class="ed-stop">
+<div class="ed-node ed-node-start">
+<svg class="ed-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+<circle cx="12" cy="12" r="5" fill="currentColor"></circle>
+</svg>
+<div class="ed-node-copy">
+<span class="ed-sr-only">Start: </span>
+<span class="ed-label">Previous conversations</span>
+<span class="ed-detail">Or other available sources.</span>
+</div>
+</div>
+</li>
+<li class="ed-stop">
+<div class="ed-node ed-node-step">
+<svg class="ed-mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+<rect x="7" y="7" width="10" height="10" fill="var(--ed-paper)" stroke="currentColor" stroke-width="2"></rect>
+</svg>
+<div class="ed-node-copy">
+<span class="ed-sr-only">Step: </span>
+<span class="ed-label">Separate capability</span>
+<span class="ed-detail">May use relevant information.</span>
+</div>
+</div>
+</li>
+</ol>
+<p class="ed-lane-note">Dynamic context managed by the AI. It decides when to recall facts.</p>
+</div>
+
+</div>
+</div>
+<div class="ed-legend" aria-label="Diagram notation"><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="currentColor"/></svg>Source information</span><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="7" y="7" width="10" height="10" stroke="currentColor" stroke-width="2"/></svg>Processing step</span><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3V21M16 3V21" stroke="currentColor" stroke-width="3"/></svg>Human intervention: rules you write</span><span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3V21" stroke="currentColor" stroke-width="2"/></svg>Progress between steps</span></div>
+</figure>
 <h2 id="quick-test">Quick Test</h2>
 <p>Start a new conversation and ask:</p>
-<div class="how-to-prompt" data-prompt-box><div class="how-to-prompt-actions"><button type="button" data-copy-prompt aria-label="Copy this text"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="6" y="6" width="10" height="12" rx="1.5" stroke="currentColor"></rect><path d="M12 6V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2" stroke="currentColor"></path></svg><span data-copy-label>Copy</span></button><span class="how-to-copy-status" data-copy-status role="status" aria-live="polite"></span></div><p data-prompt-text>Give me three ways to plan my meals for next week.</p></div>
-<p>Check whether the answer follows your preferences. If it does not, make the instruction more specific.</p></div><div class="how-to-read-end" data-guide-read-end="guide-1" aria-hidden="true"></div><nav class="how-to-next" aria-label="Next guide"><a href="give-the-job-its-own-rules.html"><div><p class="section-label">Next</p><h2>Give The Job Its Own Rules</h2><p class="how-to-next-description">for work that needs its own instructions.</p></div><span class="how-to-next-arrow" aria-hidden="true">→</span></a></nav></article><script type="module">var e={},t=!0;function n(){if(!t)return e;try{let t=JSON.parse(window.localStorage.getItem(`ageofaimpires:how-to-progress:v1`)??`{}`);if(!t||typeof t!=`object`||Array.isArray(t))return e;let n={};for(let[e,r]of Object.entries(t)){if(!/^(feature-check|guide-\d+)$/.test(e)||!r||typeof r!=`object`)continue;let t=r;typeof t.read==`boolean`&&(n[e]={read:t.read,manual:t.manual===!0})}e=n}catch{t=!1}return e}function r(r,i,a=!1){let o=n();if(!a&&o[r]?.manual)return!1;if(e={...o,[r]:{read:i,manual:a}},t)try{window.localStorage.setItem(`ageofaimpires:how-to-progress:v1`,JSON.stringify(e))}catch{t=!1}return!0}function i(e,t){return e.find(e=>!t[e]?.read)}function a(){let e=document.querySelector(`[data-milestone-tracker]`);if(e){let t=[...e.querySelectorAll(`[data-guide-id]`)],a=t.filter(e=>e.dataset.guideAvailable===`true`),o=()=>{let e=n(),r=i(a.map(e=>e.dataset.guideId),e);t.forEach(t=>{let n=t.dataset.guideId,i=t.dataset.guideAvailable===`true`&&e[n]?.read===!0,a=n===r;t.classList.toggle(`is-read`,i),t.classList.toggle(`is-next`,a),t.classList.toggle(`is-upcoming`,!i&&!a);let o=t.querySelector(`[data-guide-read]`);o&&(o.checked=i,o.setAttribute(`aria-label`,`${i?`Mark as unread`:`Mark as read`}: ${t.querySelector(`.how-to-tracker-title`)?.textContent}`));let s=t.querySelector(`a`);a?s?.setAttribute(`aria-current`,`step`):s?.removeAttribute(`aria-current`)})};t.forEach(e=>{e.querySelector(`[data-guide-read]`)?.addEventListener(`change`,t=>{let n=t.currentTarget;n.disabled||(r(e.dataset.guideId,n.checked,!0),o())})}),o(),window.addEventListener(`pageshow`,o),window.addEventListener(`storage`,e=>{(e.key===`ageofaimpires:how-to-progress:v1`||e.key===null)&&o()})}let t=document.querySelector(`[data-guide-read-end]`);if(t&&`IntersectionObserver`in window){let e=!1,n=!1,i=()=>{e&&n&&document.visibilityState===`visible`&&(r(t.dataset.guideReadEnd,!0),o.disconnect(),window.removeEventListener(`scroll`,a),document.removeEventListener(`visibilitychange`,i))},a=()=>{window.scrollY>0&&(e=!0),i()},o=new IntersectionObserver(([e])=>{n=e.isIntersecting,i()},{threshold:1,rootMargin:`-100px 0px 0px 0px`});o.observe(t),window.addEventListener(`scroll`,a,{passive:!0}),document.addEventListener(`visibilitychange`,i)}}a(),document.querySelectorAll(`[data-prompt-box]`).forEach(e=>{let t=e.querySelector(`[data-copy-prompt]`),n=e.querySelector(`[data-copy-label]`),r=e.querySelector(`[data-copy-status]`),i=e.querySelector(`[data-prompt-text]`);if(!t||!n||!r||!i)return;let a;t.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(i.textContent??``),n.textContent=`Copied`,r.textContent=`Text copied.`,clearTimeout(a),a=setTimeout(()=>{n.textContent=`Copy`,r.textContent=``},2500)}catch{r.textContent=`Select the text to copy it.`}})});</script></main><footer class="site-footer"><div class="wrap footer-row"><a class="wordmark" href="index.html">AGE OF <span>AI</span>MPIRES</a><div class="how-to-legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div></footer><script type="module">var e=document.querySelector(`[data-menu-toggle]`),t=document.querySelector(`[data-site-nav]`);if(e&&t){let n=t.querySelector(`a`),r=(r,i=!1)=>{t.classList.toggle(`is-open`,r),e.setAttribute(`aria-expanded`,String(r)),e.textContent=r?`Close`:`Menu`,r?n?.focus():i&&e.focus()};e.addEventListener(`click`,()=>{let t=e.getAttribute(`aria-expanded`)!==`true`;r(t,!t)}),t.addEventListener(`click`,e=>{e.target instanceof HTMLAnchorElement&&r(!1,!0)}),document.addEventListener(`keydown`,t=>{t.key===`Escape`&&e.getAttribute(`aria-expanded`)===`true`&&r(!1,!0)})}</script></body></html>
+<div class="how-to-prompt quick-test-prompt" data-prompt-box><div class="how-to-prompt-actions"><button type="button" data-copy-prompt aria-label="Copy this text"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="6" y="6" width="10" height="12" rx="1.5" stroke="currentColor"></rect><path d="M12 6V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2" stroke="currentColor"></path></svg><span data-copy-label>Copy</span></button><span class="how-to-copy-status" data-copy-status role="status" aria-live="polite"></span></div><p data-prompt-text>Give me three ways to plan my meals for next week.</p></div>
+<p>Check whether the answer follows your preferences. If it does not, make the instruction more specific.</p><div aria-label="Guide sharing" class="share-row share-row-end"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div><div class="how-to-read-end" data-guide-read-end="guide-1" aria-hidden="true"></div><nav class="how-to-next" aria-label="Guide navigation"><a class="how-to-back" href="how-to.html"><span class="how-to-next-arrow" aria-hidden="true">←</span><span class="section-label">Back To The Guides</span></a><a href="give-the-job-its-own-rules.html"><div><p class="section-label">Next</p><h2>Give The Job Its Own Rules</h2><p class="how-to-next-description">for work that needs its own instructions.</p></div><span class="how-to-next-arrow" aria-hidden="true">→</span></a></nav></article><script type="module">var e={},t=!0;function n(){if(!t)return e;try{let t=JSON.parse(window.localStorage.getItem(`ageofaimpires:how-to-progress:v1`)??`{}`);if(!t||typeof t!=`object`||Array.isArray(t))return e;let n={};for(let[e,r]of Object.entries(t)){if(!/^(feature-check|guide-\d+)$/.test(e)||!r||typeof r!=`object`)continue;let t=r;typeof t.read==`boolean`&&(n[e]={read:t.read,manual:t.manual===!0})}e=n}catch{t=!1}return e}function r(r,i,a=!1){let o=n();if(!a&&o[r]?.manual)return!1;if(e={...o,[r]:{read:i,manual:a}},t)try{window.localStorage.setItem(`ageofaimpires:how-to-progress:v1`,JSON.stringify(e))}catch{t=!1}return!0}function i(e,t){return e.find(e=>!t[e]?.read)}function a(){let e=document.querySelector(`[data-milestone-tracker]`);if(e){let t=[...e.querySelectorAll(`[data-guide-id]`)],a=t.filter(e=>e.dataset.guideAvailable===`true`),o=()=>{let e=n(),r=i(a.map(e=>e.dataset.guideId),e);t.forEach(t=>{let n=t.dataset.guideId,i=t.dataset.guideAvailable===`true`&&e[n]?.read===!0,a=n===r;t.classList.toggle(`is-read`,i),t.classList.toggle(`is-next`,a),t.classList.toggle(`is-upcoming`,!i&&!a);let o=t.querySelector(`[data-guide-read]`);o&&(o.checked=i,o.setAttribute(`aria-label`,`${i?`Mark as unread`:`Mark as read`}: ${t.querySelector(`.how-to-tracker-title`)?.textContent}`));let s=t.querySelector(`a`);a?s?.setAttribute(`aria-current`,`step`):s?.removeAttribute(`aria-current`)})};t.forEach(e=>{e.querySelector(`[data-guide-read]`)?.addEventListener(`change`,t=>{let n=t.currentTarget;n.disabled||(r(e.dataset.guideId,n.checked,!0),o())})}),o(),window.addEventListener(`pageshow`,o),window.addEventListener(`storage`,e=>{(e.key===`ageofaimpires:how-to-progress:v1`||e.key===null)&&o()})}let t=document.querySelector(`[data-guide-read-end]`);if(t&&`IntersectionObserver`in window){let e=!1,n=!1,i=()=>{e&&n&&document.visibilityState===`visible`&&(r(t.dataset.guideReadEnd,!0),o.disconnect(),window.removeEventListener(`scroll`,a),document.removeEventListener(`visibilitychange`,i))},a=()=>{window.scrollY>0&&(e=!0),i()},o=new IntersectionObserver(([e])=>{n=e.isIntersecting,i()},{threshold:1,rootMargin:`-100px 0px 0px 0px`});o.observe(t),window.addEventListener(`scroll`,a,{passive:!0}),document.addEventListener(`visibilitychange`,i)}}a(),document.querySelectorAll(`[data-prompt-box]`).forEach(e=>{let t=e.querySelector(`[data-copy-prompt]`),n=e.querySelector(`[data-copy-label]`),r=e.querySelector(`[data-copy-status]`),i=e.querySelector(`[data-prompt-text]`);if(!t||!n||!r||!i)return;let a;t.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(i.textContent??``),n.textContent=`Copied`,r.textContent=`Text copied.`,clearTimeout(a),a=setTimeout(()=>{n.textContent=`Copy`,r.textContent=``},2500)}catch{r.textContent=`Select the text to copy it.`}})});</script></main><footer class="site-footer"><div class="wrap footer-row"><a class="wordmark aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a><div class="how-to-legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div></footer><script type="module">var e=document.querySelector(`[data-menu-toggle]`),t=document.querySelector(`[data-site-nav]`);if(e&&t){let n=t.querySelector(`a`),r=(r,i=!1)=>{t.classList.toggle(`is-open`,r),e.setAttribute(`aria-expanded`,String(r)),e.textContent=r?`Close`:`Menu`,r?n?.focus():i&&e.focus()};e.addEventListener(`click`,()=>{let t=e.getAttribute(`aria-expanded`)!==`true`;r(t,!t)}),t.addEventListener(`click`,e=>{e.target instanceof HTMLAnchorElement&&r(!1,!0)}),document.addEventListener(`keydown`,t=>{t.key===`Escape`&&e.getAttribute(`aria-expanded`)===`true`&&r(!1,!0)})}</script><script>
+(() => {
+  document.querySelectorAll('[data-share-button]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const status = button.parentElement?.querySelector('[data-share-status]');
+      const label = button.querySelector('[data-share-label]');
+      const shareData = {
+        title: document.title,
+        text: document.querySelector('meta[name="description"]')?.content || '',
+        url: window.location.href.split('#')[0]
+      };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          if (status) status.textContent = 'Shared.';
+          return;
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        if (label) label.textContent = 'Link copied';
+        button.classList.add('is-copied');
+        setTimeout(() => {
+          if (label) label.textContent = 'Share this';
+          button.classList.remove('is-copied');
+        }, 1800);
+      } catch (_) {
+        window.prompt('Copy this link:', shareData.url);
+      }
+    });
+  });
+})();
+</script></body></html>

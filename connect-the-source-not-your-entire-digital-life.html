@@ -32,14 +32,42 @@
   }
 }
 </style>
-</head><body><a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header"><div class="wrap nav-wrap">
-<a class="wordmark" href="index.html">AGE OF <span>AI</span>MPIRES</a>
+<style id="aoai-consistency">
+/* Shared brand treatments: header/footer wordmark and reversed section wordmark. */
+:root{--brand-ink:var(--ink,#2b2b2b);--brand-gold:var(--gold-deep,#8a642e);--brand-white:#fff}
+.aoai-brand{--brand-base:var(--brand-ink);--brand-ai:var(--brand-gold);color:var(--brand-base)}
+.aoai-brand.aoai-brand--section{--brand-base:var(--brand-gold);--brand-ai:var(--brand-ink)}
+.aoai-brand .aoai-brand-ai{color:var(--brand-ai)}
+.dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
+.dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
+</style>
+<style id="release-consistency">
+/* Latest approved Guide 1 header/footer palette. */
+body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-footer .aoai-brand{--brand-base:#252c11;--brand-ai:#cd6a15;color:#252c11}
+body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
+
+.share-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:26px 0 34px}
+.share-row.share-row-end{margin:42px 0 0;padding-top:28px;border-top:1px solid var(--line,#d9d0c2)}
+.share-button{border:1px solid var(--line,#d9d0c2);background:#f5f1e8;color:var(--ink,#111c2c);font:inherit;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 15px}
+.share-button:hover{border-color:var(--ink,#111c2c)}
+.share-button:focus-visible{outline:2px solid var(--gold,#c9a46a);outline-offset:2px}
+.share-button.is-copied{border-color:var(--teal,#147d78);color:var(--teal,#147d78)}
+.share-status{color:var(--muted,#6f6a62);font-size:12px;min-height:1em}
+.release-share-wrap{width:min(calc(100% - 128px),1440px);margin-inline:auto;padding-block:1px 24px}
+@media(max-width:980px){.release-share-wrap{width:calc(100% - 48px)}}
+@media(max-width:640px){.release-share-wrap{width:calc(100% - 36px)}}
+
+.how-to-next{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:16px}
+.how-to-next>a.how-to-back{grid-template-columns:30px minmax(0,1fr)}
+@media(max-width:640px){.how-to-next{grid-template-columns:1fr}}
+</style></head><body><a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header"><div class="wrap nav-wrap">
+<a class="wordmark aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
 <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">Menu</button>
 <nav class="site-nav" id="site-nav" data-site-nav aria-label="Primary navigation">
 <a href="articles.html">Articles</a><a href="how-to.html" aria-current="page">HOW-TO</a>
 <a href="notebook.html">Notebook</a><a href="frameworks.html">Frameworks</a>
 <a href="about.html">About</a><a href="contact.html">Contact</a>
-</nav></div></header><main id="main-content" tabindex="-1"><article class="wrap how-to-reading how-to-reading--guide"><header class="how-to-header"><p class="section-label">HOW-TO / 03</p><h1>Connect The Source, Not Your Entire Digital Life</h1><p class="how-to-intro">Connecting another service makes sense when the assistant needs information that already lives there — not because connecting everything sounds useful.</p></header><div class="how-to-body"><section class="how-to-achievement"><h2>What You&#39;ll Achieve</h2><p>You&#39;ll connect only the source a task needs and confirm what that connection can read or do.</p></section>
+</nav></div></header><main id="main-content" tabindex="-1"><article class="wrap how-to-reading how-to-reading--guide"><header class="how-to-header"><p class="section-label">HOW-TO / 03</p><h1>Connect The Source, Not Your Entire Digital Life</h1><p class="how-to-intro">Connecting another service makes sense when the assistant needs information that already lives there — not because connecting everything sounds useful.</p></header><div class="how-to-body"><div aria-label="Page sharing" class="share-row"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div><section class="how-to-achievement"><h2>What You&#39;ll Achieve</h2><p>You&#39;ll connect only the source a task needs and confirm what that connection can read or do.</p></section>
 <h2 id="when-it-helps">When It Helps</h2>
 <p>Use a connection when the information lives in another service and needs to stay accessible there. Upload a file when one fixed copy is enough.</p>
 <h2 id="connect-only-what-the-job-needs">Connect Only What The Job Needs</h2>
@@ -49,4 +77,38 @@
 <div class="how-to-prompt" data-prompt-box><div class="how-to-prompt-actions"><button type="button" data-copy-prompt aria-label="Copy this text"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="6" y="6" width="10" height="12" rx="1.5" stroke="currentColor"></rect><path d="M12 6V3a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h2" stroke="currentColor"></path></svg><span data-copy-label>Copy</span></button><span class="how-to-copy-status" data-copy-status role="status" aria-live="polite"></span></div><p data-prompt-text>Find the document called &quot;Holiday Ideas&quot; in my Google Drive. Tell me its title and the first three destinations listed. Do not edit anything.</p></div>
 <p>Start with something harmless whose contents you already know. You are testing the connection, not the assistant&#39;s general knowledge.</p>
 <h2 id="quick-test">Quick Test</h2>
-<p>Ask for one specific fact from a known file, then open the original file yourself and compare the answer. If they match, you have confirmed that the assistant can reach the intended source — and nothing more.</p></div><div class="how-to-read-end" data-guide-read-end="guide-3" aria-hidden="true"></div><nav class="how-to-next" aria-label="Next guide"><a href="how-to.html#guide-4"><div><p class="section-label">Next</p><h2>Keep Private Details Out Of Your Chat</h2><p class="how-to-next-description">for keeping sensitive information out of conversations.</p></div><span class="how-to-next-arrow" aria-hidden="true">→</span></a></nav></article><script type="module">var e={},t=!0;function n(){if(!t)return e;try{let t=JSON.parse(window.localStorage.getItem(`ageofaimpires:how-to-progress:v1`)??`{}`);if(!t||typeof t!=`object`||Array.isArray(t))return e;let n={};for(let[e,r]of Object.entries(t)){if(!/^(feature-check|guide-\d+)$/.test(e)||!r||typeof r!=`object`)continue;let t=r;typeof t.read==`boolean`&&(n[e]={read:t.read,manual:t.manual===!0})}e=n}catch{t=!1}return e}function r(r,i,a=!1){let o=n();if(!a&&o[r]?.manual)return!1;if(e={...o,[r]:{read:i,manual:a}},t)try{window.localStorage.setItem(`ageofaimpires:how-to-progress:v1`,JSON.stringify(e))}catch{t=!1}return!0}function i(e,t){return e.find(e=>!t[e]?.read)}function a(){let e=document.querySelector(`[data-milestone-tracker]`);if(e){let t=[...e.querySelectorAll(`[data-guide-id]`)],a=t.filter(e=>e.dataset.guideAvailable===`true`),o=()=>{let e=n(),r=i(a.map(e=>e.dataset.guideId),e);t.forEach(t=>{let n=t.dataset.guideId,i=t.dataset.guideAvailable===`true`&&e[n]?.read===!0,a=n===r;t.classList.toggle(`is-read`,i),t.classList.toggle(`is-next`,a),t.classList.toggle(`is-upcoming`,!i&&!a);let o=t.querySelector(`[data-guide-read]`);o&&(o.checked=i,o.setAttribute(`aria-label`,`${i?`Mark as unread`:`Mark as read`}: ${t.querySelector(`.how-to-tracker-title`)?.textContent}`));let s=t.querySelector(`a`);a?s?.setAttribute(`aria-current`,`step`):s?.removeAttribute(`aria-current`)})};t.forEach(e=>{e.querySelector(`[data-guide-read]`)?.addEventListener(`change`,t=>{let n=t.currentTarget;n.disabled||(r(e.dataset.guideId,n.checked,!0),o())})}),o(),window.addEventListener(`pageshow`,o),window.addEventListener(`storage`,e=>{(e.key===`ageofaimpires:how-to-progress:v1`||e.key===null)&&o()})}let t=document.querySelector(`[data-guide-read-end]`);if(t&&`IntersectionObserver`in window){let e=!1,n=!1,i=()=>{e&&n&&document.visibilityState===`visible`&&(r(t.dataset.guideReadEnd,!0),o.disconnect(),window.removeEventListener(`scroll`,a),document.removeEventListener(`visibilitychange`,i))},a=()=>{window.scrollY>0&&(e=!0),i()},o=new IntersectionObserver(([e])=>{n=e.isIntersecting,i()},{threshold:1,rootMargin:`-100px 0px 0px 0px`});o.observe(t),window.addEventListener(`scroll`,a,{passive:!0}),document.addEventListener(`visibilitychange`,i)}}a(),document.querySelectorAll(`[data-prompt-box]`).forEach(e=>{let t=e.querySelector(`[data-copy-prompt]`),n=e.querySelector(`[data-copy-label]`),r=e.querySelector(`[data-copy-status]`),i=e.querySelector(`[data-prompt-text]`);if(!t||!n||!r||!i)return;let a;t.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(i.textContent??``),n.textContent=`Copied`,r.textContent=`Text copied.`,clearTimeout(a),a=setTimeout(()=>{n.textContent=`Copy`,r.textContent=``},2500)}catch{r.textContent=`Select the text to copy it.`}})});</script></main><footer class="site-footer"><div class="wrap footer-row"><a class="wordmark" href="index.html">AGE OF <span>AI</span>MPIRES</a><div class="how-to-legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div></footer><script type="module">var e=document.querySelector(`[data-menu-toggle]`),t=document.querySelector(`[data-site-nav]`);if(e&&t){let n=t.querySelector(`a`),r=(r,i=!1)=>{t.classList.toggle(`is-open`,r),e.setAttribute(`aria-expanded`,String(r)),e.textContent=r?`Close`:`Menu`,r?n?.focus():i&&e.focus()};e.addEventListener(`click`,()=>{let t=e.getAttribute(`aria-expanded`)!==`true`;r(t,!t)}),t.addEventListener(`click`,e=>{e.target instanceof HTMLAnchorElement&&r(!1,!0)}),document.addEventListener(`keydown`,t=>{t.key===`Escape`&&e.getAttribute(`aria-expanded`)===`true`&&r(!1,!0)})}</script></body></html>
+<p>Ask for one specific fact from a known file, then open the original file yourself and compare the answer. If they match, you have confirmed that the assistant can reach the intended source — and nothing more.</p><div aria-label="Page sharing" class="share-row share-row-end"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div><div class="how-to-read-end" data-guide-read-end="guide-3" aria-hidden="true"></div><nav class="how-to-next" aria-label="Next guide"><a class="how-to-back" href="how-to.html"><span class="how-to-next-arrow" aria-hidden="true">←</span><span class="section-label">Back To The Guides</span></a><a href="how-to.html#guide-4"><div><p class="section-label">Next</p><h2>Keep Private Details Out Of Your Chat</h2><p class="how-to-next-description">for keeping sensitive information out of conversations.</p></div><span class="how-to-next-arrow" aria-hidden="true">→</span></a></nav></article><script type="module">var e={},t=!0;function n(){if(!t)return e;try{let t=JSON.parse(window.localStorage.getItem(`ageofaimpires:how-to-progress:v1`)??`{}`);if(!t||typeof t!=`object`||Array.isArray(t))return e;let n={};for(let[e,r]of Object.entries(t)){if(!/^(feature-check|guide-\d+)$/.test(e)||!r||typeof r!=`object`)continue;let t=r;typeof t.read==`boolean`&&(n[e]={read:t.read,manual:t.manual===!0})}e=n}catch{t=!1}return e}function r(r,i,a=!1){let o=n();if(!a&&o[r]?.manual)return!1;if(e={...o,[r]:{read:i,manual:a}},t)try{window.localStorage.setItem(`ageofaimpires:how-to-progress:v1`,JSON.stringify(e))}catch{t=!1}return!0}function i(e,t){return e.find(e=>!t[e]?.read)}function a(){let e=document.querySelector(`[data-milestone-tracker]`);if(e){let t=[...e.querySelectorAll(`[data-guide-id]`)],a=t.filter(e=>e.dataset.guideAvailable===`true`),o=()=>{let e=n(),r=i(a.map(e=>e.dataset.guideId),e);t.forEach(t=>{let n=t.dataset.guideId,i=t.dataset.guideAvailable===`true`&&e[n]?.read===!0,a=n===r;t.classList.toggle(`is-read`,i),t.classList.toggle(`is-next`,a),t.classList.toggle(`is-upcoming`,!i&&!a);let o=t.querySelector(`[data-guide-read]`);o&&(o.checked=i,o.setAttribute(`aria-label`,`${i?`Mark as unread`:`Mark as read`}: ${t.querySelector(`.how-to-tracker-title`)?.textContent}`));let s=t.querySelector(`a`);a?s?.setAttribute(`aria-current`,`step`):s?.removeAttribute(`aria-current`)})};t.forEach(e=>{e.querySelector(`[data-guide-read]`)?.addEventListener(`change`,t=>{let n=t.currentTarget;n.disabled||(r(e.dataset.guideId,n.checked,!0),o())})}),o(),window.addEventListener(`pageshow`,o),window.addEventListener(`storage`,e=>{(e.key===`ageofaimpires:how-to-progress:v1`||e.key===null)&&o()})}let t=document.querySelector(`[data-guide-read-end]`);if(t&&`IntersectionObserver`in window){let e=!1,n=!1,i=()=>{e&&n&&document.visibilityState===`visible`&&(r(t.dataset.guideReadEnd,!0),o.disconnect(),window.removeEventListener(`scroll`,a),document.removeEventListener(`visibilitychange`,i))},a=()=>{window.scrollY>0&&(e=!0),i()},o=new IntersectionObserver(([e])=>{n=e.isIntersecting,i()},{threshold:1,rootMargin:`-100px 0px 0px 0px`});o.observe(t),window.addEventListener(`scroll`,a,{passive:!0}),document.addEventListener(`visibilitychange`,i)}}a(),document.querySelectorAll(`[data-prompt-box]`).forEach(e=>{let t=e.querySelector(`[data-copy-prompt]`),n=e.querySelector(`[data-copy-label]`),r=e.querySelector(`[data-copy-status]`),i=e.querySelector(`[data-prompt-text]`);if(!t||!n||!r||!i)return;let a;t.addEventListener(`click`,async()=>{try{await navigator.clipboard.writeText(i.textContent??``),n.textContent=`Copied`,r.textContent=`Text copied.`,clearTimeout(a),a=setTimeout(()=>{n.textContent=`Copy`,r.textContent=``},2500)}catch{r.textContent=`Select the text to copy it.`}})});</script></main><footer class="site-footer"><div class="wrap footer-row"><a class="wordmark aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a><div class="how-to-legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div></div></footer><script type="module">var e=document.querySelector(`[data-menu-toggle]`),t=document.querySelector(`[data-site-nav]`);if(e&&t){let n=t.querySelector(`a`),r=(r,i=!1)=>{t.classList.toggle(`is-open`,r),e.setAttribute(`aria-expanded`,String(r)),e.textContent=r?`Close`:`Menu`,r?n?.focus():i&&e.focus()};e.addEventListener(`click`,()=>{let t=e.getAttribute(`aria-expanded`)!==`true`;r(t,!t)}),t.addEventListener(`click`,e=>{e.target instanceof HTMLAnchorElement&&r(!1,!0)}),document.addEventListener(`keydown`,t=>{t.key===`Escape`&&e.getAttribute(`aria-expanded`)===`true`&&r(!1,!0)})}</script><script>
+(() => {
+  document.querySelectorAll('[data-share-button]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const status = button.parentElement?.querySelector('[data-share-status]');
+      const label = button.querySelector('[data-share-label]');
+      const shareData = {
+        title: document.title,
+        text: document.querySelector('meta[name="description"]')?.content || '',
+        url: window.location.href.split('#')[0]
+      };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          if (status) status.textContent = 'Shared.';
+          return;
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        if (label) label.textContent = 'Link copied';
+        button.classList.add('is-copied');
+        setTimeout(() => {
+          if (label) label.textContent = 'Share this';
+          button.classList.remove('is-copied');
+        }, 1800);
+      } catch (_) {
+        window.prompt('Copy this link:', shareData.url);
+      }
+    });
+  });
+})();
+</script></body></html>

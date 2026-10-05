@@ -864,11 +864,35 @@ footer{
 .contact-submit[disabled]{opacity:.65;cursor:wait;}
 
 </style>
-</head>
+<style id="aoai-consistency">
+/* Shared brand treatments: header/footer wordmark and reversed section wordmark. */
+:root{--brand-ink:var(--ink,#2b2b2b);--brand-gold:var(--gold-deep,#8a642e);--brand-white:#fff}
+.aoai-brand{--brand-base:var(--brand-ink);--brand-ai:var(--brand-gold);color:var(--brand-base)}
+.aoai-brand.aoai-brand--section{--brand-base:var(--brand-gold);--brand-ai:var(--brand-ink)}
+.aoai-brand .aoai-brand-ai{color:var(--brand-ai)}
+.dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
+.dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
+</style>
+<style id="release-consistency">
+/* Latest approved Guide 1 header/footer palette. */
+body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-footer .aoai-brand{--brand-base:#252c11;--brand-ai:#cd6a15;color:#252c11}
+body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
+
+.share-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:26px 0 34px}
+.share-row.share-row-end{margin:42px 0 0;padding-top:28px;border-top:1px solid var(--line,#d9d0c2)}
+.share-button{border:1px solid var(--line,#d9d0c2);background:#f5f1e8;color:var(--ink,#111c2c);font:inherit;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 15px}
+.share-button:hover{border-color:var(--ink,#111c2c)}
+.share-button:focus-visible{outline:2px solid var(--gold,#c9a46a);outline-offset:2px}
+.share-button.is-copied{border-color:var(--teal,#147d78);color:var(--teal,#147d78)}
+.share-status{color:var(--muted,#6f6a62);font-size:12px;min-height:1em}
+.release-share-wrap{width:min(calc(100% - 128px),1440px);margin-inline:auto;padding-block:1px 24px}
+@media(max-width:980px){.release-share-wrap{width:calc(100% - 48px)}}
+@media(max-width:640px){.release-share-wrap{width:calc(100% - 36px)}}
+</style></head>
 <body>
 <header>
 <div class="shell nav">
-<a class="brand" href="index.html">AGE OF <span class="ai-mark">AI</span>MPIRES</a>
+<a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
 <nav id="primary-nav" aria-label="Primary">
 <a href="articles.html">Articles</a>
@@ -881,7 +905,7 @@ footer{
 </nav>
 </div>
 </header>
-<main>
+<main><div class="release-share-wrap"><div aria-label="Page sharing" class="share-row"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div>
 <section class="section connect-section">
 <div class="shell">
 <div class="contact-layout">
@@ -922,10 +946,10 @@ footer{
 </div>
 </div>
 </section>
-</main>
+<div class="release-share-wrap"><div aria-label="Page sharing" class="share-row share-row-end"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div></main>
 <footer>
 <div class="shell footer">
-<div class="brand">AGE OF <span class="ai-mark">AI</span>MPIRES</div>
+<div class="brand aoai-brand">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</div>
 <div>George Paris Christoforakis · Nicosia</div>
 </div>
 <div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
@@ -1047,5 +1071,39 @@ footer{
 })();
 </script>
 
-</body>
+<script>
+(() => {
+  document.querySelectorAll('[data-share-button]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const status = button.parentElement?.querySelector('[data-share-status]');
+      const label = button.querySelector('[data-share-label]');
+      const shareData = {
+        title: document.title,
+        text: document.querySelector('meta[name="description"]')?.content || '',
+        url: window.location.href.split('#')[0]
+      };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          if (status) status.textContent = 'Shared.';
+          return;
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        if (label) label.textContent = 'Link copied';
+        button.classList.add('is-copied');
+        setTimeout(() => {
+          if (label) label.textContent = 'Share this';
+          button.classList.remove('is-copied');
+        }, 1800);
+      } catch (_) {
+        window.prompt('Copy this link:', shareData.url);
+      }
+    });
+  });
+})();
+</script></body>
 </html>

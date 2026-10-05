@@ -381,11 +381,31 @@ p{margin:0 0 24px} strong{font-weight:700}
 }
 
 </style>
-</head>
+<style id="aoai-consistency">
+/* Shared brand treatments: header/footer wordmark and reversed section wordmark. */
+:root{--brand-ink:var(--ink,#2b2b2b);--brand-gold:var(--gold-deep,#8a642e);--brand-white:#fff}
+.aoai-brand{--brand-base:var(--brand-ink);--brand-ai:var(--brand-gold);color:var(--brand-base)}
+.aoai-brand.aoai-brand--section{--brand-base:var(--brand-gold);--brand-ai:var(--brand-ink)}
+.aoai-brand .aoai-brand-ai{color:var(--brand-ai)}
+.dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
+.dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
+
+/* Match the main site's header gutters without changing the article column. */
+body > header > .nav{width:min(calc(100% - 128px),var(--max));margin-inline:auto}
+@media(max-width:980px){body > header > .nav{width:min(calc(100% - 48px),var(--max))}}
+@media(max-width:640px){body > header > .nav{width:min(calc(100% - 36px),var(--max))}}
+</style>
+<style id="release-consistency">
+/* Latest approved Guide 1 header/footer palette. */
+body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-footer .aoai-brand{--brand-base:#252c11;--brand-ai:#cd6a15;color:#252c11}
+body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
+</style><style id="audio-mobile-fit">
+@media(max-width:480px){.meta-audio-group{min-width:0;width:100%;max-width:100%}.mini-player{min-width:0;max-width:100%;flex-wrap:wrap}.mini-player-progress{min-width:0;flex:1 1 70px}.mini-player-time{margin-left:auto}}
+</style></head>
 <body>
 <header>
 <div class="header-shell nav">
-<a class="brand" href="index.html">AGE OF <span class="ai-mark">AI</span>MPIRES</a>
+<a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
 <nav id="primary-nav" aria-label="Primary">
 <a href="articles.html">Articles</a>
@@ -550,7 +570,7 @@ p{margin:0 0 24px} strong{font-weight:700}
 <button aria-label="Back to top" class="back-to-top" data-back-to-top="" type="button">↑ Back To The Top</button>
 <footer class="article-footer">
 <div class="shell footer-inner">
-<a class="brand" href="index.html">AGE OF <span class="ai-mark">AI</span>MPIRES</a>
+<a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
 <a href="age-of-aimpires-entry-03.html">Read Entry 03 →</a>
 </div>
 <div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
