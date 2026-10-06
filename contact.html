@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en-GB">
 <head>
   <link rel="icon" type="image/svg+xml" href="/media/favicon.svg">
 <meta charset="utf-8"/>
@@ -659,7 +659,15 @@ footer{
   align-items:start;
 }
 .contact-heading{grid-area:heading;align-self:start}
-.contact-heading h2{margin:0}
+.contact-heading h1{
+  margin:0;
+  max-width:none;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(42px,4.8vw,66px);
+  line-height:1.04;
+  letter-spacing:-.03em;
+  font-weight:500;
+}
 .contact-intro{
   margin:14px 0 0;
   max-width:650px;
@@ -787,7 +795,7 @@ footer{
     gap:28px;
   }
   .connect-media{width:min(100%,420px);max-width:none}
-  .contact-heading h2{font-size:clamp(42px,12vw,58px)}
+  .contact-heading h1{font-size:clamp(42px,12vw,58px)}
   .contact-intro{font-size:19px}
 }
 @media(max-width:520px){
@@ -888,14 +896,16 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 .release-share-wrap{width:min(calc(100% - 128px),1440px);margin-inline:auto;padding-block:1px 24px}
 @media(max-width:980px){.release-share-wrap{width:calc(100% - 48px)}}
 @media(max-width:640px){.release-share-wrap{width:calc(100% - 36px)}}
-</style></head>
-<body>
+</style><link rel="stylesheet" href="assets/editorial-studio.css">
+<link rel="stylesheet" href="assets/editorial-spacing.css">
+</head>
+<body class="page-contact">
 <header>
 <div class="shell nav">
 <a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
 <nav id="primary-nav" aria-label="Primary">
-<a href="articles.html">Articles</a>
+<a href="entries.html">Entries</a>
 <a href="how-to.html">How-To Guides</a>
 <a href="notebook.html">Notebook</a>
 <a href="frameworks.html">Frameworks</a>
@@ -910,7 +920,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div class="shell">
 <div class="contact-layout">
 <div class="contact-heading">
-<h2>Connect With Me</h2>
+<h1>Connect With Me</h1>
 <p class="contact-intro">Questions, ideas, disagreements — send them over.</p>
 </div>
 <div class="connect-media">
@@ -953,6 +963,12 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div>George Paris Christoforakis · Nicosia</div>
 </div>
 <div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
+<div class="shell">
+  <aside class="aoai-studio-footer" aria-labelledby="studio-footer-heading">
+    <h2 id="studio-footer-heading">From Ideas To Implementation</h2>
+    <p>Done with theory? Good. Let's stack up some practice. <a class="aoai-studio-link" href="https://thestudiocy.framer.website/">Visit THE STUDIO</a></p>
+  </aside>
+</div>
 </footer>
 <script>
 (() => {

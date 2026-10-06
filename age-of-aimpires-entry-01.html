@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <link rel="icon" type="image/svg+xml" href="/media/favicon.svg">
 <meta charset="utf-8">
@@ -8,7 +8,7 @@
 <meta name="description" content="Cheap AI can become expensive once retries, unnecessary work and human correction are counted. A practical framework for measuring the real cost of completed work.">
 <meta name="author" content="George Christoforakis">
 <meta name="robots" content="index, follow">
-<meta property="og:type" content="article">
+<meta property="og:type" content="entry">
 <meta property="og:title" content="Fast AI. Expensive Lesson.">
 <meta property="og:description" content="Cheap AI can become expensive once retries, unnecessary work and human correction are counted. Measure the cost of completed work, not just the cost of running the AI.">
 <meta name="twitter:card" content="summary_large_image">
@@ -64,7 +64,7 @@ nav{display:flex;align-items:center;gap:28px;font-size:14px}
 nav a{text-decoration:none;color:var(--slate)}
 nav a:hover{color:var(--navy)}
 
-.article-head{
+.entry-head{
   padding:76px 0 42px;
   border-bottom:1px solid var(--line);
 }
@@ -76,7 +76,7 @@ nav a:hover{color:var(--navy)}
   letter-spacing:.17em;
   text-transform:uppercase;
 }
-.article-head h1{
+.entry-head h1{
   margin:0;
   max-width:1100px;
   font-family:Georgia,"Times New Roman",serif;
@@ -118,7 +118,7 @@ nav a:hover{color:var(--navy)}
   background:var(--surface);
 }
 
-.article{
+.entry{
   width:min(calc(100% - 64px),var(--reading));
   margin:0 auto;
   padding-bottom:92px;
@@ -126,7 +126,7 @@ nav a:hover{color:var(--navy)}
 .section{
   margin-top:86px;
 }
-.article .section:first-child{
+.entry .section:first-child{
   margin-top:36px;
 }
 .section-number{
@@ -287,7 +287,7 @@ li{margin-bottom:10px}
   text-decoration-thickness:1px;
   text-underline-offset:3px;
 }
-.article-footer{
+.entry-footer{
   border-top:1px solid var(--line);
   padding:48px 0 64px;
 }
@@ -309,13 +309,13 @@ li{margin-bottom:10px}
 @media(max-width:980px){
   .shell{width:min(calc(100% - 36px),var(--max))}
   nav a:not(:last-child){display:none}
-  .article{width:min(calc(100% - 36px),var(--reading))}
+  .entry{width:min(calc(100% - 36px),var(--reading))}
   .breakout{width:calc(100vw - 36px)}
 }
 @media(max-width:700px){
   header{min-height:64px}
-  .article-head{padding:54px 0 34px}
-  .article-head h1{font-size:clamp(52px,14vw,76px)}
+  .entry-head{padding:54px 0 34px}
+  .entry-head h1{font-size:clamp(52px,14vw,76px)}
   .hero-wrap{padding:28px 0 54px}
   .section{margin-top:64px}
   p,li{font-size:19px}
@@ -564,7 +564,7 @@ li{margin-bottom:10px}
 .dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
 .dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
 
-/* Match the main site's header gutters without changing the article column. */
+/* Match the main site's header gutters without changing the entry column. */
 body > header > .nav{width:min(calc(100% - 128px),var(--max));margin-inline:auto}
 @media(max-width:980px){body > header > .nav{width:min(calc(100% - 48px),var(--max))}}
 @media(max-width:640px){body > header > .nav{width:min(calc(100% - 36px),var(--max))}}
@@ -573,15 +573,17 @@ body > header > .nav{width:min(calc(100% - 128px),var(--max));margin-inline:auto
 /* Latest approved Guide 1 header/footer palette. */
 body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-footer .aoai-brand{--brand-base:#252c11;--brand-ai:#cd6a15;color:#252c11}
 body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
-</style></head>
-<body>
+</style><link rel="stylesheet" href="assets/editorial-studio.css">
+<link rel="stylesheet" href="assets/editorial-spacing.css">
+</head>
+<body class="page-entry">
 
 <header>
   <div class="shell nav">
     <a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
 <nav id="primary-nav" aria-label="Primary">
-      <a href="articles.html">Articles</a>
+      <a href="entries.html">Entries</a>
       <a href="how-to.html">How-To Guides</a>
       <a href="notebook.html">Notebook</a>
       <a href="frameworks.html">Frameworks</a>
@@ -593,9 +595,8 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 </header>
 
 <main>
-  <section class="article-head">
+  <section class="entry-head">
     <div class="shell">
-      <p class="kicker">Entry 01</p>
       <h1 class="sr-only">Fast AI. Expensive Lesson.</h1>
       <div class="entry-hero"><img src="assets/entry-01-hero.png" alt="Fast AI. Expensive Lesson hero illustration"/></div>
       <p class="deck">You wouldn’t choose a car by petrol price alone.<br/>Cheap fuel means nothing if the car keeps taking you the wrong way.</p>
@@ -620,11 +621,11 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <details class="audio-transcript">
         <summary>Transcript</summary>
         <div class="audio-transcript-body">
-          <p>Welcome to the debate. um... imagine buying a fraction of a cent&#x27;s worth of computing power only to realize that, you know, that tiny transaction just cost you $30 in human payroll to clean up its mess. Yeah it&#x27;s wild. It is. So today we are dissecting a core premise emerging from the latest industry analysis, which is this counterintuitive reality that the uh... the cheap AI, is actually often the most expensive option a business can choose. We are going to deconstruct the, like, persistent optical illusion of vendor rate cards and the hidden, staggering costs of machine agency.</p>
-          <p>Right, and I think the central tension we really have to navigate here is why these massive corporate automated deployments are... well why they&#x27;re consistently failing to deliver on their cost saving promises. Like are these budget drains simply the result of deceptive, penny per token pricing models that completely ignore human friction? Which they do. Right? Or is it a deeper structural failure on the part of operators who just don&#x27;t understand how under the hood model behaviors... specifically uh probabilistic generation, fundamentally clash with deterministic business needs?</p>
-          <p>Well I look at this strictly through the lens of the P&amp;L statement, and I just see a massive financial trap. I mean, evaluating AI by token rates is incredibly dangerous because cheap, raw computation inevitably creates very expensive human labor the second an employee is forced to uh... babysit, troubleshoot, and fix the machine&#x27;s outputs. See I hear you on the payroll hit, but that&#x27;s just... it&#x27;s just a symptom. If we actually want to fix the bleed, we have to look at the structural economic realities of the model architectures. These costs come from fundamental mechanics like remediation leakage and expansion drift which, you know, naturally occur when probabilistic models operate without strict boundaries.</p>
+          <p>Welcome to the debate. um... imagine buying a fraction of a cent&#x27;s worth of computing power only to realise that, you know, that tiny transaction just cost you $30 in human payroll to clean up its mess. Yeah it&#x27;s wild. It is. So today we are dissecting a core premise emerging from the latest industry analysis, which is this counterintuitive reality that the uh... the cheap AI, is actually often the most expensive option a business can choose. We are going to deconstruct the, like, persistent optical illusion of vendor rate cards and the hidden, staggering costs of machine agency.</p>
+          <p>Right, and I think the central tension we really have to navigate here is why these massive corporate automated deployments are... well why they&#x27;re consistently failing to deliver on their cost saving promises. Like are these budget drains simply the result of deceptive, penny per token pricing models that completely ignore human friction? Which they do. Right? Or is it a deeper structural failure on the part of operators who just don&#x27;t understand how under the hood model behaviours... specifically uh probabilistic generation, fundamentally clash with deterministic business needs?</p>
+          <p>Well I look at this strictly through the lens of the P&amp;L statement, and I just see a massive financial trap. I mean, evaluating AI by token rates is incredibly dangerous because cheap, raw computation inevitably creates very expensive human labour the second an employee is forced to uh... babysit, troubleshoot, and fix the machine&#x27;s outputs. See I hear you on the payroll hit, but that&#x27;s just... it&#x27;s just a symptom. If we actually want to fix the bleed, we have to look at the structural economic realities of the model architectures. These costs come from fundamental mechanics like remediation leakage and expansion drift which, you know, naturally occur when probabilistic models operate without strict boundaries.</p>
           <p>Okay well I want to start by looking at why buyers fall for this trap in the first place. I call it the rate card illusion. The rate card illusion, I like that. Thanks. So, when an executive or like a CTO decides they want to automate a process, the easiest, most visible number to find is the token rate, right?</p>
-          <p>Providers publish these very clean, highly optimized usage tables, usually pricing compute power per million tokens, and this pricing setup encourages buyers to evaluate AI exactly the way they purchase uh bulk electricity or office paper. Right, yeah. A system charging fractions of a cent per attempt looks vastly more economical on a spreadsheet than one charging five or even ten times that rate. Yeah it triggers that legacy SaaS buying mindset. You look at the subscription tier, you find the lowest unit cost for the volume you need, and you just sign the contract.</p>
+          <p>Providers publish these very clean, highly optimised usage tables, usually pricing compute power per million tokens, and this pricing setup encourages buyers to evaluate AI exactly the way they purchase uh bulk electricity or office paper. Right, yeah. A system charging fractions of a cent per attempt looks vastly more economical on a spreadsheet than one charging five or even ten times that rate. Yeah it triggers that legacy SaaS buying mindset. You look at the subscription tier, you find the lowest unit cost for the volume you need, and you just sign the contract.</p>
           <p>It feels like a known commodity. Exactly. It looks brilliant in a board meeting. You get to stand up and say, &#x27;we automated 10,000 tasks for $12.&#x27; But the flaw in this logic is devastating to a business. Because raw computation is not a finished product.</p>
           <p>No it&#x27;s not. You are not buying computer activity. You are buying a verified result. You are buying a customer support query that is actually resolved, right? Or a complex invoice perfectly extracted into a database.</p>
           <p>The advertised rate card tells you absolutely nothing about how many times that engine is going to stall out, or you know, how often a human worker is going to have to step in and drive the task across the finish line. I mean the token rate isn&#x27;t an illusion though, it&#x27;s just... it&#x27;s an incomplete metric. It measures the fundamental unit of compute, but it doesn&#x27;t measure the architectural friction. But that friction is the entire cost! Like, to see the true price of automation, businesses have to stop looking at the sticker price and start tracking the effective task cost.</p>
@@ -642,41 +643,41 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
           <p>Let&#x27;s stick with a 4-step process. Let&#x27;s assume your model is actually quite capable, and each independent step has a 90% chance of succeeding cleanly on its first try. Okay. In a vacuum, 90% accuracy sounds fantastic. Oh any operations manager would gladly take a 90% first-pass success rate on a complex task.</p>
           <p>Right. But you have to calculate the probability of that entire four-step chain completing cleanly on the first pass. You multiply those probabilities, .90 to the fourth power. The overall success rate drops to roughly 65.6%. Wait, hold on.</p>
           <p>Like, so even with a model that gets it right nine times out of ten, simply chaining just four steps together guarantees a catastrophic failure a third of the time. That is the mathematical reality of probabilistic chains. Roughly 34% of the time, the process breaks. And it gets worse because early errors get passed forward. Oh man.</p>
-          <p>A minor formatting flaw in step 1, like that conversational fluff you just mentioned, forces step 2 to run automatic retry passes trying to understand it. If the retry output gets carried into later steps, the system is now spending additional time, cloud compute, and API calls, just dealing with its own earlier mistakes. Multi-step automation turns small compute inefficiencies into massive labor bottlenecks because, you know, probabilistic models do not naturally self-correct unless they are explicitly architected to do so. That completely obliterates the idea of zero-touch automation. If one out of every three jobs fails in a simple four-step chain, your pipeline isn&#x27;t a pipeline, it&#x27;s a traffic jam.</p>
+          <p>A minor formatting flaw in step 1, like that conversational fluff you just mentioned, forces step 2 to run automatic retry passes trying to understand it. If the retry output gets carried into later steps, the system is now spending additional time, cloud compute, and API calls, just dealing with its own earlier mistakes. Multi-step automation turns small compute inefficiencies into massive labour bottlenecks because, you know, probabilistic models do not naturally self-correct unless they are explicitly architected to do so. That completely obliterates the idea of zero-touch automation. If one out of every three jobs fails in a simple four-step chain, your pipeline isn&#x27;t a pipeline, it&#x27;s a traffic jam.</p>
           <p>Exactly. But, okay, everything we&#x27;ve talked about so far assumes the AI is making a mistake, right? It&#x27;s dropping the ball, forgetting the rules, or failing the math. I want to pivot to the exact opposite problem. Let&#x27;s talk about the paradox of capable AI doing entirely too much.</p>
           <p>Ah, you&#x27;re referring to the models at the very top of the rate card. The expensive ones. Right. The models that supposedly have a big enough spotlight to remember all the rules. I see this constantly on the office floor.</p>
           <p>You take a highly capable, expensive model, you feed it a transcript of a one-hour team meeting, and you ask for three simple action items. That&#x27;s all the prompt says. Three bullet points. And what happens? Instead, the AI generates an introductory summary of the meeting, a sentiment analysis of the team&#x27;s mood, an outline of potential project risks, and drafts individual follow-up emails for every single participant.</p>
           <p>I mean, technically speaking it&#x27;s performing exceptionally well. It&#x27;s demonstrating deep comprehension of the text. But from a business perspective, it&#x27;s an unmitigated disaster. Pricing for these models is based on output volume. You know, the number of tokens generated.</p>
-          <p>The business is literally paying for a five-page essay that nobody asked for, nobody needed, and nobody will ever read. The machine is overthinking, and I am paying a premium for its unprompted thoughts. How do you justify that structurally? Well, I don&#x27;t justify it, I define it as the economic drain of unconstrained generation. Or, to use the structural term, expansion drift.</p>
+          <p>The business is literally paying for a five-page entry that nobody asked for, nobody needed, and nobody will ever read. The machine is overthinking, and I am paying a premium for its unprompted thoughts. How do you justify that structurally? Well, I don&#x27;t justify it, I define it as the economic drain of unconstrained generation. Or, to use the structural term, expansion drift.</p>
           <p>You have to remember what a large language model actually is. It is a probabilistic text engine designed to predict the next most likely token. When you use a highly capable model, it has what we call a vast latent space. Okay, explain latent space in a way that makes sense to a buyer. Think of latent space as a massive, multi-dimensional web of concepts.</p>
           <p>Because the model is so intelligent, it deeply understands the statistical connection between a meeting transcript, a project risk, and a follow-up email. Without explicit system boundaries, its probabilistic nature compels it to travel down that web. It just... wanders off. Right, it finishes extracting your three bullet points, but it doesn&#x27;t inherently know the job is over. High capability without clear, deterministic boundaries is just expensive drift.</p>
           <p>The machine doesn&#x27;t know what a business requires, it has no concept of a P&amp;L statement. It just generates plausible continuations until it hits a token limit, a time limit, or a natural language stopping point. I&#x27;m not convinced by that framing, because it sounds like an academic excuse for bad software design. If I hire an employee to sweep the warehouse floor, and they decide to also repaint the walls and then bill me for the paint, I fire them. I don&#x27;t blame their probabilistic nature, I blame their inability to follow a basic instruction.</p>
-          <p>I&#x27;m sorry, but I just don&#x27;t buy that comparison. Let me tell you why. You are anthropomorphizing the machine. You&#x27;re treating it like an employee who understands the unwritten social contracts of a workplace, like, you know, &#x27;don&#x27;t do extra work that costs the boss money.&#x27; It should know that. But the machine does not have a social contract.</p>
+          <p>I&#x27;m sorry, but I just don&#x27;t buy that comparison. Let me tell you why. You are anthropomorphising the machine. You&#x27;re treating it like an employee who understands the unwritten social contracts of a workplace, like, you know, &#x27;don&#x27;t do extra work that costs the boss money.&#x27; It should know that. But the machine does not have a social contract.</p>
           <p>It&#x27;s not an employee repainting a wall, it&#x27;s an improv actor. An LLM&#x27;s only fundamental rule is &#x27;yes, and.&#x27; If it finishes the primary task, it just keeps improvising dialogue, generating summaries and emails, unless you explicitly block the path. This brings us precisely to the conceptual difference between a technical stop and a finished job. Go on. Software stops because it reaches a usage limit or a technical parameter, that is a technical stop.</p>
           <p>A system can hit a technical stop while leaving the job completely unfinished, halting halfway through a data file simply because it ran out of output tokens. Right. Conversely, it might satisfy the business requirement in its first three lines, but keep generating for another 10 paragraphs because no one set a boundary to tell it to stop. The model doesn&#x27;t know what &#x27;done&#x27; looks like. And that is exactly why the human definition of &#x27;job finished&#x27; is the only metric that matters.</p>
           <p>A job is finished when the real-world operational requirements are met. All the required fields are accurately filled. The output passes a database validation check. The calculated total perfectly matches the purchase order. Let me ground this in a very practical, hypothetical comparison from the source material.</p>
-          <p>We have Setup A and Setup B for processing customer intake records. Ah, the classic cost-optimization dilemma. Right. Setup A has the absolute lowest unit price on the rate card. You look at it and think you&#x27;re saving a fortune.</p>
+          <p>We have Setup A and Setup B for processing customer intake records. Ah, the classic cost-optimisation dilemma. Right. Setup A has the absolute lowest unit price on the rate card. You look at it and think you&#x27;re saving a fortune.</p>
           <p>But it has high formatting errors, that remediation leakage you talked about. A noticeable portion of the records fail the initial check. So you have automatic retries burning compute, and then a human employee has to manually inspect, triage, and fix the rest. Yeah, the repair trap. Then you have Setup B.</p>
-          <p>It charges a much higher upfront unit price. It looks terrible on the rate card. But it perfectly follows formatting rules, completing nearly all records correctly on the first pass, resolving its own edge cases with a single automated retry, and zero records require human handling. Setup B is the only logical choice for a business. The human labor cost dropped to zero, which delivers a radically lower total cost per completed job.</p>
+          <p>It charges a much higher upfront unit price. It looks terrible on the rate card. But it perfectly follows formatting rules, completing nearly all records correctly on the first pass, resolving its own edge cases with a single automated retry, and zero records require human handling. Setup B is the only logical choice for a business. The human labour cost dropped to zero, which delivers a radically lower total cost per completed job.</p>
           <p>I agree that Setup B is the optimal choice. But you have to understand how you arrive at Setup B. You don&#x27;t just buy a more expensive token and magically get better compliance. You don&#x27;t? No.</p>
-          <p>If you just buy the expensive model without constraints, you get that expansion drift we just talked about, the five-page essay. To get to Setup B, you have to architect the guardrails. Both of us agree that optimizing software spend based strictly on provider rate cards is a mistake. But the solution isn&#x27;t just &#x27;buy the expensive one&#x27;. The architectural solution is moving away from open-ended generation entirely.</p>
+          <p>If you just buy the expensive model without constraints, you get that expansion drift we just talked about, the five-page entry. To get to Setup B, you have to architect the guardrails. Both of us agree that optimising software spend based strictly on provider rate cards is a mistake. But the solution isn&#x27;t just &#x27;buy the expensive one&#x27;. The architectural solution is moving away from open-ended generation entirely.</p>
           <p>You have to wrap the AI&#x27;s probabilistic outputs in automatic, deterministic validation checks. You mean building a fence around the improv actor. Exactly. Like a strict database format test before the output goes anywhere. Yes, exactly.</p>
           <p>The AI generates the output, and before it is ever accepted by the CRM or passed to a human exception queue, a rigid, deterministic script checks if it meets the schema. Does it have exactly three bullet points? Does it contain valid JSON? If it fails, the script automatically kicks it back to the AI with an error message. But crucially, you must establish task-specific retry ceilings.</p>
           <p>Because otherwise it just loops forever and burns your budget anyway. Right. If a model fails formatting, you don&#x27;t want it running up cloud charges in an endless loop of blind retries. You set a firm limit, say, exactly two retries before it halts. You force the system to stop and route it for review, rather than burning budget in the dark.</p>
           <p>You are imposing strict, deterministic boundaries on a probabilistic engine. That is how you control the cost. Okay, that makes sense structurally, and I appreciate the mechanics of how you build that fence. But I still demand practical measurement on the business side to prove the fence is working. You can build all the automated validation scripts and retry ceilings you want, but a business leader needs to track three specific operational indicators to know if the AI is actually saving money.</p>
           <p>Okay, what are they? First, the first-time success rate. What percentage of jobs satisfy all the rules on the very first try, without any automated retries or human fixes? Second, the frequency of human involvement. How often does an employee actually have to step in and look at the screen?</p>
-          <p>And third, ultimately, the cost per completed job. You take the total money spent—the software fees, the cloud compute for retries, and the employee labor time—and you divide it by the number of verified, usable results. That is the only math that matters. And why do you think so few businesses actually track those three metrics? Because it&#x27;s hard.</p>
+          <p>And third, ultimately, the cost per completed job. You take the total money spent—the software fees, the cloud compute for retries, and the employee labour time—and you divide it by the number of verified, usable results. That is the only math that matters. And why do you think so few businesses actually track those three metrics? Because it&#x27;s hard.</p>
           <p>Tracking a monthly Amazon Web Services bill is easy; it&#x27;s a single line item. Tracking the five minutes an operations clerk spends fixing a broken CSV file every morning is incredibly difficult. It&#x27;s invisible friction. It just gets absorbed into the baseline payroll, so executives never see the true cost of their cheap AI. Look, we are definitely converging on the solution here, but I think our framing remains distinct.</p>
           <p>You view this strictly as a business management imperative, like a failure to track the P&amp;L of human friction. I view it as a structural AI deployment reality. You simply cannot manage the business metrics without deeply understanding the mechanics of machine agency. My stance remains that the finish line for any automated task must be defined by business payroll and verified, usable results, not starting engine costs. The illusion of cheap compute is incredibly dangerous because it masks the severe compounding costs of human repair work and unnecessary generation.</p>
-          <p>You have to aggressively measure the cost of completed work, not the cost of attempting the work. And my perspective is that understanding the underlying economics of model architecture is the only way to avoid those hidden costs in the first place. You have to enforce deterministic boundaries, establish clear completion criteria, and utilize validation checks, because highly capable, probabilistic models will naturally suffer from expansion drift, and underpowered models will inevitably suffer from remediation leakage. Well, we both clearly agree that cheap compute is an illusion when it creates expensive human attention. But the way we solve it—whether by rigorously tracking the P&amp;L of employee hours to expose the bleed, or by hard-coding retry ceilings into the software architecture to prevent it—I mean, that remains a fundamental point of divergence in how we operate these systems.</p>
-          <p>It&#x27;s the difference between measuring the symptom and engineering the cure. But either way, looking strictly at the unit price per million tokens on a vendor&#x27;s bill is a guaranteed way to lose money. Which brings us right back to where we started. Buying AI is not like buying bulk electricity or printer paper. A ream of paper doesn&#x27;t write a five-page essay when you only needed a Post-it note.</p>
+          <p>You have to aggressively measure the cost of completed work, not the cost of attempting the work. And my perspective is that understanding the underlying economics of model architecture is the only way to avoid those hidden costs in the first place. You have to enforce deterministic boundaries, establish clear completion criteria, and utilise validation checks, because highly capable, probabilistic models will naturally suffer from expansion drift, and underpowered models will inevitably suffer from remediation leakage. Well, we both clearly agree that cheap compute is an illusion when it creates expensive human attention. But the way we solve it—whether by rigorously tracking the P&amp;L of employee hours to expose the bleed, or by hard-coding retry ceilings into the software architecture to prevent it—I mean, that remains a fundamental point of divergence in how we operate these systems.</p>
+          <p>It&#x27;s the difference between measuring the symptom and engineering the cure. But either way, looking strictly at the unit price per million tokens on a vendor&#x27;s bill is a guaranteed way to lose money. Which brings us right back to where we started. Buying AI is not like buying bulk electricity or printer paper. A ream of paper doesn&#x27;t write a five-page entry when you only needed a Post-it note.</p>
           <p>And electricity doesn&#x27;t force your employees to work overtime fixing its formatting mistakes. No, it doesn&#x27;t. Evaluating these tools requires a much deeper look into the actual operational friction they create, and the structural limits of the technology itself. We&#x27;ll leave it to you, the listener, to decide which lens—the practical realities of payroll, or the architectural mechanics of the models—is more crucial for your successful deployment. There&#x27;s certainly a lot more to explore in the material regarding how these models are actually trained to follow those boundaries in the first place, too.</p>
           <p>Absolutely. So, the next time you see a provider advertising fractions of a cent for a million tokens, stop and ask yourself: what is it actually going to cost me to finish the job? Thank you for joining us. We&#x27;ll see you next time on the debate.</p>
         </div>
       </details>
     </div>
   </section>
-<article class="article">
+<section class="entry">
 
     <div aria-label="Entry sharing" class="share-row">
       <button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button>
@@ -690,7 +691,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <p>This pricing setup creates a persistent optical illusion. It encourages buyers to evaluate technology options the same way they purchase bulk electricity or office paper—<strong>by looking strictly at the unit price on the bill.</strong> Under this view, a system charging pennies per attempt can look more economical than one charging higher rates for the same run.</p>
       <p class="standout-line">The flaw in this logic is simple: raw computation is not a finished product.</p>
       <p>You are not buying raw computer activity. You are buying a finished, verified result—a customer support query answered correctly, an invoice processed into a database, or a messy document converted into a clean table.</p>
-      <p>The advertised rate card tells you only what it costs to start the engine. It tells you nothing about how many times that engine might stall, how much extra road it may cover without asking, or how often a human worker will have to step in and drive. When a system fails a basic formatting rule repeatedly, or when it wanders off into an unasked-for essay, the advertised unit price loses its meaning. The real cost is determined by what happens after the prompt is sent.</p>
+      <p>The advertised rate card tells you only what it costs to start the engine. It tells you nothing about how many times that engine might stall, how much extra road it may cover without asking, or how often a human worker will have to step in and drive. When a system fails a basic formatting rule repeatedly, or when it wanders off into an unasked-for entry, the advertised unit price loses its meaning. The real cost is determined by what happens after the prompt is sent.</p>
     </section>
 
     <section class="section">
@@ -725,7 +726,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <p>When a setup does not enforce structured output — or when a structurally valid answer still fails the business rules — the surrounding system may be unable to use the result.</p>
       <p>For example, without enforced structured output, a model might add conversational text like “Here is the data you requested!” above a structured entry, causing a pipeline expecting clean data to break.</p>
       <p>When a failure occurs, the workflow has to decide what happens next. It may run an automatic retry, sending the prompt again with instructions to fix the problem. That adds compute cost. If retries still fail, the task may land on an employee's desk.</p>
-      <p>This is where the economics break down. Cheap computation can create expensive human attention. Saving a fraction of a cent on the initial request is counterproductive if it causes human labor expense while an employee opens the file, spots the missing field, corrects the text, and submits the record manually.</p>
+      <p>This is where the economics break down. Cheap computation can create expensive human attention. Saving a fraction of a cent on the initial request is counterproductive if it causes human labour expense while an employee opens the file, spots the missing field, corrects the text, and submits the record manually.</p>
     </section>
 
     <section class="section">
@@ -734,7 +735,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <p>Some AI setups fail in the opposite direction: the model does more than the task requires.</p>
       <div class="quote">More Intelligence Does Not Automatically Mean More Discipline.</div>
       <p>Consider a simple daily task: taking a transcript of a team meeting and pulling out a short list of assigned action items.</p>
-      <p>A capable system given an open-ended prompt may not stop at three bullet points. Depending on its system instructions and setup, it may write an introductory summary, analyze team sentiment, outline potential project risks, and draft follow-up emails for every participant.</p>
+      <p>A capable system given an open-ended prompt may not stop at three bullet points. Depending on its system instructions and setup, it may write an introductory summary, analyse team sentiment, outline potential project risks, and draft follow-up emails for every participant.</p>
       <p>Where providers charge based on output volume, this unprompted extra work directly inflates the bill. The system generates extra text that nobody asked for, nobody needed, and nobody will read.</p>
       <p>When a system spends time and money solving problems you never gave it, its capability becomes a source of financial leakage. High capability without clear boundaries is just expensive drift.</p>
 
@@ -748,7 +749,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <span class="section-number">PART 05</span>
       <h2>Why Multi-Step AI Compounds Waste</h2>
       <p>The gap between advertised prices and real costs widens when systems handle multi-step workflows.</p>
-      <p>In a single-step task—like summarizing an article—an error or an extra paragraph is an isolated nuisance. But multi-step systems often operate as chains: Step 1 extracts key details from a document, Step 2 calculates a financial total, and Step 3 drafts a confirmation note.</p>
+      <p>In a single-step task—like summarising an entry—an error or an extra paragraph is an isolated nuisance. But multi-step systems often operate as chains: Step 1 extracts key details from a document, Step 2 calculates a financial total, and Step 3 drafts a confirmation note.</p>
       <p>In a chain, inefficiencies compound.</p>
       <div class="callout">
         <span class="label">Hypothetical Example</span>
@@ -775,7 +776,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
         <li>All required fields in the record are accurately filled.</li>
         <li>The output passes a database validation check.</li>
         <li>The calculated total matches the purchase order.</li>
-        <li>The finalized file is saved in the right place.</li>
+        <li>The finalised file is saved in the right place.</li>
       </ul>
       <p>A system can hit a technical stop while leaving the job completely unfinished—halting halfway through a data file and leaving it broken. Conversely, a system might satisfy the business requirement in its first three lines, but keep processing for another ten paragraphs because no one set a boundary.</p>
       <p>Without explicit criteria to match the user's definition of “done,” a system can alternate between stopping too early and working too long.</p>
@@ -795,8 +796,8 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
           <p>Charges more per initial attempt, but follows formatting rules reliably. Nearly all records complete on the first pass and remaining edge cases resolve automatically.</p>
         </div>
       </div>
-      <p>Under Setup A, the direct software bill is low, but fixing the broken records requires hours of employee labor, adding significant human payroll expense.</p>
-      <p>Under Setup B, the software bill is higher upfront, but human labor costs are zero.</p>
+      <p>Under Setup A, the direct software bill is low, but fixing the broken records requires hours of employee labour, adding significant human payroll expense.</p>
+      <p>Under Setup B, the software bill is higher upfront, but human labour costs are zero.</p>
       <p>In this simplified example, even though Setup A looked far cheaper on the rate card, Setup B delivers a lower total cost per completed job. The apparent savings of Setup A disappear once employees have to step in.</p>
     </section>
 
@@ -808,7 +809,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <ol>
         <li><strong>First-time success rate:</strong> The percentage of jobs that satisfy all rules on the very first try, without needing retries or error fixes.</li>
         <li><strong>Human involvement:</strong> How often an employee has to step in, inspect, or correct an output before it can be used.</li>
-        <li><strong>Cost per completed job:</strong> Total money spent—including direct software fees, automated retries, and employee labor time—divided by the number of verified, usable results.</li>
+        <li><strong>Cost per completed job:</strong> Total money spent—including direct software fees, automated retries, and employee labour time—divided by the number of verified, usable results.</li>
       </ol>
       <p>Before deploying an automated process, put two practical guardrails in place:</p>
       <ul>
@@ -819,10 +820,10 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 
     <section class="section">
       <span class="section-number">PART 09</span>
-      <h2>Conclusion: Define The Finish Line Before Optimizing The Price</h2>
+      <h2>Conclusion: Define The Finish Line Before Optimising The Price</h2>
       <p>The central mistake in evaluating artificial intelligence is confusing the price of computation with the cost of work.</p>
       <p>Unit rates and token tables provide a clean, easily comparable metric, but they measure engine activity rather than finished business results. A cheap system that frequently fails leaves behind a trail of retries and employee repair work. A capable system left without strict boundaries can burn budget doing work no one requested.</p>
-      <p>Before comparing provider rate cards or attempting to optimize software spend, establish a clear finish line. Define what an acceptable result looks like, put automated checks in place to verify it, and set appropriate ceilings on how many attempts the system can make.</p>
+      <p>Before comparing provider rate cards or attempting to optimise software spend, establish a clear finish line. Define what an acceptable result looks like, put automated checks in place to verify it, and set appropriate ceilings on how many attempts the system can make.</p>
       <div class="endline">Measure The Cost Of Completed Work, Not Just The Cost Of Running The AI.</div>
     </section>
 
@@ -842,16 +843,22 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button>
       <span aria-live="polite" class="share-status" data-share-status></span>
     </div>
-  </article>
+  </section>
 </main>
 
 <button aria-label="Back to the top" class="back-to-top" data-back-to-top type="button">↑ Back To The Top</button>
-<footer class="article-footer">
+<footer class="entry-footer">
   <div class="shell footer-inner">
     <div class="brand aoai-brand">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</div>
-    <span class="next-link next-disabled">Next Essay →</span>
+    <span class="next-link next-disabled">Next Entry →</span>
   </div>
 <div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
+<div class="shell">
+  <aside class="aoai-studio-footer" aria-labelledby="studio-footer-heading">
+    <h2 id="studio-footer-heading">From Ideas To Implementation</h2>
+    <p>Done with theory? Good. Let's stack up some practice. <a class="aoai-studio-link" href="https://thestudiocy.framer.website/">Visit THE STUDIO</a></p>
+  </aside>
+</div>
 </footer>
 
 

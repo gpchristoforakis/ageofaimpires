@@ -1,0 +1,44 @@
+/* Avoid adding share-control margins to full section and page paddings. */
+.release-share-wrap { padding-block: 0; }
+.release-share-wrap .share-row { margin-block: 20px; }
+.release-share-wrap .share-row.share-row-end { margin-block: 20px; padding-block-start: 16px; }
+
+.page-about main > .section,
+.page-contact main > .section { padding-block: 40px 44px; }
+.page-about main > .hero { min-block-size: 0; padding-block: 40px; }
+.page-about main > .cta-section { padding-block: 40px; }
+.page-about main > .release-share-wrap + .section { padding-block-start: 32px; }
+
+.page-directory .intro { padding-block: 52px 40px; }
+.page-directory .entries,
+.page-directory .notebook,
+.page-directory .frameworks { padding-block-end: 24px; }
+.page-directory .entry-card { padding-block: 36px 40px; }
+.page-directory .note { padding-block: 32px; }
+.page-directory .featured { padding-block: 40px; }
+.page-directory .group { padding-block-start: 36px; }
+.page-directory .framework-card { padding-block: 32px; }
+
+.page-framework main > .hero { padding-block: 52px 36px; }
+.page-framework .body { padding-block-end: 24px; }
+.page-framework .body > .section { padding-block: 36px 40px; }
+.page-entry .entry { padding-block-end: 32px; }
+.page-entry .entry .section:not(:first-child) { margin-block-start: 52px; }
+.page-entry .source-note { margin-block-start: 44px; }
+.page-entry .entry-footer { padding-block: 32px 40px; }
+
+.page-legal .legal-head { padding-block: 52px 32px; }
+.page-legal .legal { padding-block: 28px 24px; }
+.page-legal .legal section:not(:first-child) { margin-block-start: 44px; }
+
+@media (max-width: 640px) {
+  .page-about main > .section,
+  .page-contact main > .section { padding-block: 32px 36px; }
+  .page-about main > .hero,
+  .page-about main > .cta-section { padding-block: 32px; }
+  .page-directory .intro { padding-block: 36px 32px; }
+  .page-framework main > .hero { padding-block: 36px 32px; }
+  .page-framework .body > .section { padding-block: 32px; }
+  .page-entry .entry .section:not(:first-child) { margin-block-start: 40px; }
+  .page-legal .legal-head { padding-block: 36px 28px; }
+}

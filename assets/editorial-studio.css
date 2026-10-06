@@ -1,0 +1,88 @@
+/* Author/project references, using the publication's existing editorial tokens. */
+.aoai-studio-footer {
+  max-inline-size: 46rem;
+  margin-block-start: 20px;
+  border-block-start: 1px solid var(--line);
+  padding-block-start: 16px;
+  color: var(--slate, var(--muted));
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.aoai-studio-footer h2 {
+  margin: 0 0 6px;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: inherit;
+  text-transform: none;
+}
+
+.aoai-studio-footer p { margin: 0; }
+
+.aoai-studio-footer .aoai-studio-link {
+  display: inline;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.aoai-studio-footer .aoai-studio-link:hover { color: var(--navy, var(--ink)); }
+
+.aoai-studio-bio a,
+.aoai-studio-note a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.aoai-studio-footer a:focus-visible,
+.aoai-studio-bio a:focus-visible,
+.aoai-studio-note a:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+}
+
+/* Optional in-flow note: the same fine rule and small type as entry marginalia. */
+.aoai-studio-note {
+  max-inline-size: 52ch;
+  margin-block: 28px;
+  border-inline-start: 2px solid var(--navy, var(--ink));
+  padding-inline-start: 16px;
+  color: var(--slate, var(--muted));
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.aoai-studio-note .aoai-studio-note-label {
+  display: block;
+  margin: 0 0 10px;
+  color: var(--teal);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.aoai-studio-note p {
+  margin: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+@media print {
+  .aoai-studio-note { break-inside: avoid; }
+}

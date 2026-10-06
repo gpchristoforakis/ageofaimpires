@@ -128,6 +128,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Preserve existing bookmarks after the directory is renamed to Entries.
+    if (["/articles", "/articles/", "/articles.html"].includes(url.pathname)) {
+      url.pathname = "/entries";
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (url.pathname === CONTACT_PATH) {
       try {
         return await handleContact(request, env);

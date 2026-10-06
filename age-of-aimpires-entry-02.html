@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en-GB">
 <head>
   <link rel="icon" type="image/svg+xml" href="/media/favicon.svg">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>What Happens When Nobody Visits the Website? — AGE OF AIMPIRES</title>
+<title>Assistants Browse. Websites Wait. — AGE OF AIMPIRES</title>
 <meta content="For three decades, the web bundled discovery, attention, advertising, data collection, and sales into a single page visit. When AI acts as a personal proxy between users and services, that bundle begins to separate—altering platform economics without causing the web to disappear." name="description"/>
 <meta content="George Christoforakis" name="author"/>
-<meta content="noindex, nofollow" name="robots"/>
-<meta content="article" property="og:type"/>
-<meta content="What Happens When Nobody Visits the Website?" property="og:title"/>
+<meta content="index, follow" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="Assistants Browse. Websites Wait." property="og:title"/>
 <meta content="For three decades, the web bundled discovery, attention, advertising, data collection, and sales into a single page visit. When AI acts as a personal proxy between users and services, that bundle begins to separate—altering platform economics without causing the web to disappear." property="og:description"/>
 <style>
 :root{
@@ -30,16 +30,16 @@ header{min-height:76px;display:flex;align-items:center;border-bottom:1px solid v
 nav{display:flex;align-items:center;gap:28px;font-size:14px}
 nav a{text-decoration:none;color:var(--slate)} nav a:hover{color:var(--navy)}
 
-.article-head{padding:76px 0 42px;border-bottom:1px solid var(--line)}
+.entry-head{padding:76px 0 42px;border-bottom:1px solid var(--line)}
 .kicker{margin:0 0 18px;color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
-.article-head h1{margin:0;max-width:1200px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(54px,6.4vw,92px);line-height:.98;letter-spacing:-.045em;font-weight:500}
+.entry-head h1{margin:0;max-width:1200px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(54px,6.4vw,92px);line-height:.98;letter-spacing:-.045em;font-weight:500}
 .deck{max-width:980px;margin:28px 0 0;color:var(--slate);font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2vw,29px);line-height:1.45}
 .meta-row{margin-top:28px;display:flex;gap:18px;align-items:center;color:var(--slate);font-size:14px;flex-wrap:wrap}
 .meta-dot{width:4px;height:4px;border-radius:50%;background:var(--amber)}
 
-.article{width:min(calc(100% - 80px),var(--reading));margin:0 auto;padding:34px 0 92px}
+.entry{width:min(calc(100% - 80px),var(--reading));margin:0 auto;padding:34px 0 92px}
 .section{margin-top:86px}
-.article .section:first-of-type{margin-top:42px}
+.entry .section:first-of-type{margin-top:42px}
 .section-number{display:block;margin-bottom:12px;font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--teal)}
 h2{margin:0 0 24px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(36px,4.3vw,54px);line-height:1.08;letter-spacing:-.025em;font-weight:500}
 .subhead{margin:42px 0 18px;font-family:Georgia,"Times New Roman",serif;font-size:28px;line-height:1.2;font-weight:600}
@@ -99,7 +99,7 @@ p{margin:0 0 24px} strong{font-weight:700}
 .comment-submit:disabled{cursor:not-allowed;opacity:.55}
 .comment-preview-note{margin:0;color:var(--slate);font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5}
 
-.article-footer{border-top:1px solid var(--line);padding:48px 0 64px}
+.entry-footer{border-top:1px solid var(--line);padding:48px 0 64px}
 .footer-inner{display:flex;justify-content:space-between;gap:30px;align-items:center}
 .next-disabled{color:var(--slate);opacity:.7}
 
@@ -107,7 +107,7 @@ p{margin:0 0 24px} strong{font-weight:700}
   .header-shell{width:min(calc(100% - 48px),var(--max))}
   .shell{width:min(calc(100% - 48px),var(--max))}
   nav a:not(:last-child){display:none}
-  .article{width:min(calc(100% - 48px),var(--reading))}
+  .entry{width:min(calc(100% - 48px),var(--reading))}
   .visual-panel{width:calc(100vw - 48px)}
   .bundle-visual{grid-template-columns:1fr 1fr}
   .bundle-visual strong{grid-column:1/-1}
@@ -115,8 +115,8 @@ p{margin:0 0 24px} strong{font-weight:700}
 }
 @media(max-width:700px){
   header{min-height:64px}
-  .article-head{padding:54px 0 34px}
-  .article-head h1{font-size:clamp(48px,13vw,70px)}
+  .entry-head{padding:54px 0 34px}
+  .entry-head h1{font-size:clamp(48px,13vw,70px)}
   .section{margin-top:64px}
   p,li{font-size:19px}
   .compare{grid-template-columns:1fr}
@@ -390,7 +390,7 @@ p{margin:0 0 24px} strong{font-weight:700}
 .dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
 .dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
 
-/* Match the main site's header gutters without changing the article column. */
+/* Match the main site's header gutters without changing the entry column. */
 body > header > .nav{width:min(calc(100% - 128px),var(--max));margin-inline:auto}
 @media(max-width:980px){body > header > .nav{width:min(calc(100% - 48px),var(--max))}}
 @media(max-width:640px){body > header > .nav{width:min(calc(100% - 36px),var(--max))}}
@@ -401,14 +401,16 @@ body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-f
 body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
 </style><style id="audio-mobile-fit">
 @media(max-width:480px){.meta-audio-group{min-width:0;width:100%;max-width:100%}.mini-player{min-width:0;max-width:100%;flex-wrap:wrap}.mini-player-progress{min-width:0;flex:1 1 70px}.mini-player-time{margin-left:auto}}
-</style></head>
-<body>
+</style><link rel="stylesheet" href="assets/editorial-studio.css">
+<link rel="stylesheet" href="assets/editorial-spacing.css">
+</head>
+<body class="page-entry">
 <header>
 <div class="header-shell nav">
 <a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
 <nav id="primary-nav" aria-label="Primary">
-<a href="articles.html">Articles</a>
+<a href="entries.html">Entries</a>
 <a href="how-to.html">How-To Guides</a>
 <a href="notebook.html">Notebook</a>
 <a href="frameworks.html">Frameworks</a>
@@ -419,11 +421,10 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 </div>
 </header>
 <main>
-<section class="article-head">
+<section class="entry-head">
 <div class="shell">
-<p class="kicker">Entry 02</p>
-<h1 class="sr-only">What Happens When Nobody Visits The Website?</h1>
-<div class="entry-hero"><img src="assets/entry-02-hero.png" alt="What Happens When Nobody Visits The Website hero illustration"/></div>
+<h1 class="sr-only">Assistants Browse. Websites Wait.</h1>
+<div class="entry-hero"><img src="assets/entry-02-hero.png" alt="Assistants Browse. Websites Wait. hero illustration"/></div>
 <p class="deck">For decades, getting something done online meant scrolling through a page. When your AI assistant handles the searching, comparing, and clicking for you, the old economics of the internet start to change.</p>
 <div class="meta-row">
 <span>Reads In: 10 Mins</span>
@@ -432,7 +433,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div class="meta-audio-group"><div class="mini-player" data-audio-player="overview"><button aria-label="Play audio overview" class="mini-player-button" type="button"><span aria-hidden="true" class="mini-player-icon">▶</span></button><span class="mini-player-label">Audio Overview</span><input aria-label="Audio overview progress" class="mini-player-progress" max="100" min="0" step="0.1" type="range" value="0"/><span class="mini-player-time"><span class="mini-player-current">0:00</span> / <span class="mini-player-duration">19:49</span></span><audio preload="metadata"><source src="audio/entry-02-audio-overview.m4a" type="audio/mp4"/></audio></div><div aria-label="Full entry audio coming soon" class="mini-player mini-player-pending"><button aria-label="Full entry audio coming soon" class="mini-player-button" disabled="" type="button"><span aria-hidden="true" class="mini-player-icon">▶</span></button><span class="mini-player-label">Full Entry Audio</span><span class="mini-player-pending-text">Coming Soon</span></div></div></div>
 </div>
 </section>
-<article class="article">
+<section class="entry">
 <div aria-label="Entry sharing" class="share-row">
 <button class="share-button" data-share-button="" type="button"><span aria-hidden="true">↗</span><span data-share-label="">Share this</span></button>
 <span aria-live="polite" class="share-status" data-share-status=""></span>
@@ -443,9 +444,9 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <p>A central building block of the commercial internet is not the link, the database, or the app. It is the destination visit.</p>
 <p>For thirty years, digital business models have relied on a simple physical setup: a human being looking at a visual screen. Whether searching for a flight, reading news, comparing shoes, or checking a restaurant menu, the user experience followed a familiar path. A person opened a web browser, navigated to a specific address, scrolled through a visual layout, and interacted directly with what appeared on the display.</p>
 <p>To a user, a website visit feels like a single action. To the business operating that site, a visit has traditionally been a bundle of five distinct events occurring at once:</p>
-<div aria-label="Five elements bundled inside one page visit" class="bundle-merge"><div class="bundle-row"><div class="bundle-label">DISCOVERY</div><div class="bundle-copy">Presenting products, articles, or options in a visual layout.</div></div><div class="bundle-row"><div class="bundle-label">ATTENTION</div><div class="bundle-copy">Holding the user’s gaze on the screen for a measurable period.</div></div><div class="bundle-row"><div class="bundle-label">ADVERTISING</div><div class="bundle-copy">Rendering sponsored banners, promoted search listings, and targeted messages within the user’s field of view.</div></div><div class="bundle-row"><div class="bundle-label">DATA COLLECTION</div><div class="bundle-copy">Logging client-side behavior—where the user paused, how far they scrolled, and what they clicked.</div></div><div class="bundle-row"><div class="bundle-label">CONVERSION</div><div class="bundle-copy">Encouraging the user to purchase a product, register an account, or submit a request.</div></div><div class="bundle-cap"><strong>ONE PAGE VISIT</strong><span>BUNDLES ALL FIVE</span></div></div>
+<div aria-label="Five elements bundled inside one page visit" class="bundle-merge"><div class="bundle-row"><div class="bundle-label">DISCOVERY</div><div class="bundle-copy">Presenting products, entries, or options in a visual layout.</div></div><div class="bundle-row"><div class="bundle-label">ATTENTION</div><div class="bundle-copy">Holding the user’s gaze on the screen for a measurable period.</div></div><div class="bundle-row"><div class="bundle-label">ADVERTISING</div><div class="bundle-copy">Rendering sponsored banners, promoted search listings, and targeted messages within the user’s field of view.</div></div><div class="bundle-row"><div class="bundle-label">DATA COLLECTION</div><div class="bundle-copy">Logging client-side behaviour—where the user paused, how far they scrolled, and what they clicked.</div></div><div class="bundle-row"><div class="bundle-label">CONVERSION</div><div class="bundle-copy">Encouraging the user to purchase a product, register an account, or submit a request.</div></div><div class="bundle-cap"><strong>ONE PAGE VISIT</strong><span>BUNDLES ALL FIVE</span></div></div>
 <p>This bundling enabled the growth of major digital platforms. In platform economics, market strength often stems from hosting consumer attention at the interface layer. Search engines, social networks, and e-commerce marketplaces built significant value by placing themselves directly between user intent and underlying suppliers.</p>
-<p>Because millions of people are using these visual interfaces as their main entryway to the internet, platforms gather substantial user attention. They monetize that attention by charging merchants and advertisers for access to it. So long as the visual interface remains a primary path for getting things done online, hosting the page visit provides a reliable way to generate revenue.</p>
+<p>Because millions of people are using these visual interfaces as their main entryway to the internet, platforms gather substantial user attention. They monetise that attention by charging merchants and advertisers for access to it. So long as the visual interface remains a primary path for getting things done online, hosting the page visit provides a reliable way to generate revenue.</p>
 </section>
 <section class="section" id="section-2">
 <span class="section-number">02</span>
@@ -453,7 +454,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <p>The path of navigating through a visual interface to complete a task changes when an artificial intelligence assistant acts as an intermediary proxy between the user and the web.</p>
 <p>Consider a user planning a travel itinerary or checking for a replacement appliance part. In a conventional setup, that user visits several websites, opens multiple browser tabs, clicks past promotional banners, compares specifications manually, and moves through a visual checkout process.</p>
 <p>When an assistant is involved, the interaction path can shift:</p>
-<div class="compare"><div class="compare-card"><h3>Traditional Path</h3><p>User → Platform Interface → Display Ads &amp; Tracking → Supplier Page</p></div><div class="compare-card"><h3>Assistant-mediated Path</h3><p>User → AI Proxy → Data Query or Page Search → Summarized Result</p></div></div>
+<div class="compare"><div class="compare-card"><h3>Traditional Path</h3><p>User → Platform Interface → Display Ads &amp; Tracking → Supplier Page</p></div><div class="compare-card"><h3>Assistant-mediated Path</h3><p>User → AI Proxy → Data Query or Page Search → Summarised Result</p></div></div>
 <p>The user describes their goal to an AI proxy—focusing on criteria like budget, dimensions, availability, or delivery timing. The assistant can query available data feeds, search relevant web pages, parse details across multiple sources, and present a direct recommendation or execute a request.</p>
 <p>The core mechanism is interface abstraction. An AI assistant can separate user intent from the physical page visit. The user receives the outcome of a search, but direct human visits to the underlying websites may become less frequent or occur only at the final point of confirmation.</p>
 <p>When software proxies assist with routine lookups, research, and transactions, the traditional bundle begins to separate. The user obtains the needed information, while the platform hosting the underlying content may receive fewer direct visual visits.</p>
@@ -465,7 +466,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <section class="section" id="section-3">
 <span class="section-number">03</span>
 <h2>Which Parts Of The Old Model Become Weaker</h2>
-<p>If software proxies reduce direct human page visits, the economic machinery built around those visits faces potential strain in two main areas: display ad impressions and behavioral signal collection.</p>
+<p>If software proxies reduce direct human page visits, the economic machinery built around those visits faces potential strain in two main areas: display ad impressions and behavioural signal collection.</p>
 <h3 class="subhead">The Potential Decline In Display Ad Impressions</h3>
 <p>Digital advertising relies heavily on pageviews and ad impressions. When a person visits a web page, the hosting site renders display banners, sponsored listings, or video ads alongside the main content.</p>
 <p>When an automated assistant retrieves text or product information on behalf of a user, it does not view display banners, pause for visual layout hooks, or click on promotional pop-ups. It evaluates information based on parameters such as price, availability, specifications, and user preferences.</p>
@@ -474,9 +475,9 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <span>User Intent</span><i>→</i><span>AI Proxy</span><i>→</i><span>Product Data</span>
 <div class="skipped">Display Ads <b>SKIPPED</b> · Page Auction <b>SKIPPED</b></div>
 </div>
-<h3 class="subhead">Reduced Client-side Behavioral Signals</h3>
-<p>A secondary financial driver for many digital platforms is behavioral tracking. Platforms log micro-interactions—how long a user hovers over an image, how quickly they scroll past an item, or what categories they browse—to build predictive user profiles. These profiles help support targeted advertising.</p>
-<p>When interactions are mediated by an assistant, fewer client-side signals may be generated. The platform may receive only a clean request for information, without hover states, scroll speeds, or mouse movements. With fewer behavioral signals available, targeting algorithms may become less precise over time.</p>
+<h3 class="subhead">Reduced Client-side Behavioural Signals</h3>
+<p>A secondary financial driver for many digital platforms is behavioural tracking. Platforms log micro-interactions—how long a user hovers over an image, how quickly they scroll past an item, or what categories they browse—to build predictive user profiles. These profiles help support targeted advertising.</p>
+<p>When interactions are mediated by an assistant, fewer client-side signals may be generated. The platform may receive only a clean request for information, without hover states, scroll speeds, or mouse movements. With fewer behavioural signals available, targeting algorithms may become less precise over time.</p>
 <h3 class="subhead">Retail Advertising As A Stress Test</h3>
 <p>This dynamic is observable in modern retail commerce.</p>
 <p>Core merchandise sales often operate on relatively narrow operating margins after accounting for inventory, warehousing, logistics, and shipping.</p>
@@ -512,29 +513,29 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div><span>Data licensing</span><span>Native assistants</span><span>Access controls</span><span>OS + hardware</span></div>
 </div>
 <h3 class="subhead">Establishing Data Licensing And Access Fees</h3>
-<p>If platforms see fewer visual visits from human users, they may seek to monetize automated access directly.</p>
+<p>If platforms see fewer visual visits from human users, they may seek to monetise automated access directly.</p>
 <p>Where third-party AI assistants rely on site content, forum discussions, or real-time inventory to answer user queries, platforms can restrict unauthenticated scraping and introduce paid access agreements. Some major online communities and media publishers have explored this direction or introduced related access restrictions.</p>
 <h3 class="subhead">Building Native First-party Assistants</h3>
 <p>To keep users within their existing environments, platforms are embedding their own AI tools directly into their products.</p>
 <p>Search engines include AI summaries at the top of results pages, social networks integrate conversational tools into messaging applications, and e-commerce platforms deploy shopping assistants within their storefronts. By offering native AI capabilities, platforms aim to retain user interaction within their own ecosystems and maintain opportunities for sponsored recommendations.</p>
 <h3 class="subhead">Technical Access Controls And Terms Of Service</h3>
-<p>Site operators are also adjusting technical boundaries and legal terms. Platforms use edge security rules to identify and limit automated tools from gathering content without authorization, while publishers update terms of service to specify how their materials may be accessed by AI systems.</p>
+<p>Site operators are also adjusting technical boundaries and legal terms. Platforms use edge security rules to identify and limit automated tools from gathering content without authorisation, while publishers update terms of service to specify how their materials may be accessed by AI systems.</p>
 <h3 class="subhead">Operating System And Hardware Positioning</h3>
 <p>Companies that control mobile operating systems, browsers, and device hardware hold a distinct position. By integrating AI tools directly into device software, platform owners can position their own assistants as a primary entry point for user requests.</p>
 </section>
 <section class="section" id="section-6">
 <span class="section-number">06</span>
 <h2>Who Gains Or Loses Leverage</h2>
-<p>As interactions shift from direct visual visits toward assistant-mediated requests, economic leverage across the digital landscape may adjust.</p>
+<p>As interactions shift from direct visual visits towards assistant-mediated requests, economic leverage across the digital landscape may adjust.</p>
 <div class="compare"><div class="compare-card"><h3>Legacy Focus</h3><p>Capturing visual attention through top-of-page ad slots and visual layout positioning.</p></div><div class="compare-card"><h3>Emergent Focus</h3><p>Earning user preference through clear information, competitive parameters, and reliable execution.</p></div></div>
-<h3 class="subhead">Leverage Shifts Toward The Primary Interface</h3>
+<h3 class="subhead">Leverage Shifts Towards The Primary Interface</h3>
 <p>In the traditional web model, value often accrued to the visual aggregator—the platform that brought millions of eyes to a screen and controlled what appeared at the top of the page.</p>
-<p>In an assistant-mediated setup, leverage can shift toward whichever assistant or interface the user trusts as their primary entry point. If a user relies on a specific assistant to evaluate choices, that assistant becomes a central guide. Underlying sites, databases, and merchants then compete to satisfy the criteria evaluated by that assistant.</p>
+<p>In an assistant-mediated setup, leverage can shift towards whichever assistant or interface the user trusts as their primary entry point. If a user relies on a specific assistant to evaluate choices, that assistant becomes a central guide. Underlying sites, databases, and merchants then compete to satisfy the criteria evaluated by that assistant.</p>
 <h3 class="subhead">A Focus On Clear Specifications</h3>
 <p>On a visual web page, a search engine or online store can present dozens of items across multiple pages, accompanied by sidebars and sponsored banners.</p>
 <p>An AI assistant responding to a prompt often presents a shorter, focused set of options along with a concise explanation. This reduces the reliance on visual placement alone.</p>
 <p>For merchants and brands, the emphasis shifts:</p>
-<div class="compare"><div class="compare-card"><h3>Conventional Approach</h3><p>Optimize for visual search placement through keyword targeting, display ad bidding, and visual presentation.</p></div><div class="compare-card"><h3>Emergent Approach</h3><p>Ensure product details, inventory status, pricing, and specs are clear, accurate, and easily read by automated tools.</p></div></div>
+<div class="compare"><div class="compare-card"><h3>Conventional Approach</h3><p>Optimise for visual search placement through keyword targeting, display ad bidding, and visual presentation.</p></div><div class="compare-card"><h3>Emergent Approach</h3><p>Ensure product details, inventory status, pricing, and specs are clear, accurate, and easily read by automated tools.</p></div></div>
 <p>Businesses that rely heavily on impulse buying or visual ad placement may face adjusting demands, while those offering clear pricing, reliable product data, and dependable fulfillment may be easier for automated systems to compare.</p>
 </section>
 <section class="section" id="section-7">
@@ -545,8 +546,8 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <span>Lookups</span><i>→</i><span>Comparison</span><i>→</i><span>Structured tasks</span><i>→</i><span>Multi-step requests</span>
 </div>
 <h3 class="subhead">Factors Slowing The Pace Of Change</h3>
-<ol class="editorial-list numbered"><li><strong>Technical accuracy and integration:</strong> Automated proxies must reliably handle complex constraints—such as inventory updates, localized taxes, and shipping rules—without generating errors.</li><li><strong>User habits and trust:</strong> Consumers may delegate simple, low-stakes tasks (like checking schedule availability or finding a specification) long before delegating significant financial or personal decisions.</li><li><strong>Commercial negotiations:</strong> The legal and business frameworks governing how AI tools access, credit, and compensate content sources remain under active negotiation.</li></ol>
-<h3 class="subhead">The Underlying Economic Question</h3><div class="closing-flow"><div class="closing-context"><span class="closing-label">THE SHIFT</span><p>The web is not vanishing, but the implicit arrangement that funded much of its free infrastructure for thirty years is evolving.</p><p>For decades, the arrangement for a large portion of the consumer web was straightforward: users received free search, content, and digital tools in exchange for their visual attention and behavioral data, which were monetized through advertising.</p><p>If users increasingly rely on software proxies that bypass visual ads and generate fewer behavioral signals, that funding mechanism becomes less reliable.</p></div><div class="closing-question"><span class="closing-label">THE QUESTION</span><p class="closing-question-lead">This raises an essential economic question for the next era of digital business:</p><div aria-hidden="true" class="closing-divider"><span></span><span></span><span></span></div><p class="closing-question-main">If direct visual attention and page visits become less reliable ways to fund digital platforms, what business models will emerge to support the web when clicks and pageviews no longer carry the load?</p></div></div>
+<ol class="editorial-list numbered"><li><strong>Technical accuracy and integration:</strong> Automated proxies must reliably handle complex constraints—such as inventory updates, localised taxes, and shipping rules—without generating errors.</li><li><strong>User habits and trust:</strong> Consumers may delegate simple, low-stakes tasks (like checking schedule availability or finding a specification) long before delegating significant financial or personal decisions.</li><li><strong>Commercial negotiations:</strong> The legal and business frameworks governing how AI tools access, credit, and compensate content sources remain under active negotiation.</li></ol>
+<h3 class="subhead">The Underlying Economic Question</h3><div class="closing-flow"><div class="closing-context"><span class="closing-label">THE SHIFT</span><p>The web is not vanishing, but the implicit arrangement that funded much of its free infrastructure for thirty years is evolving.</p><p>For decades, the arrangement for a large portion of the consumer web was straightforward: users received free search, content, and digital tools in exchange for their visual attention and behavioural data, which were monetised through advertising.</p><p>If users increasingly rely on software proxies that bypass visual ads and generate fewer behavioural signals, that funding mechanism becomes less reliable.</p></div><div class="closing-question"><span class="closing-label">THE QUESTION</span><p class="closing-question-lead">This raises an essential economic question for the next era of digital business:</p><div aria-hidden="true" class="closing-divider"><span></span><span></span><span></span></div><p class="closing-question-main">If direct visual attention and page visits become less reliable ways to fund digital platforms, what business models will emerge to support the web when clicks and pageviews no longer carry the load?</p></div></div>
 </section>
 <div aria-label="Entry sharing" class="share-row share-row-end">
 <button class="share-button" data-share-button="" type="button"><span aria-hidden="true">↗</span><span data-share-label="">Share this</span></button>
@@ -565,15 +566,21 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <p class="comment-preview-note">Preview only: the form is ready visually, but it needs a submission endpoint before comments can be posted publicly.</p>
 </form>
 </section>
-</article>
+</section>
 </main>
 <button aria-label="Back to top" class="back-to-top" data-back-to-top="" type="button">↑ Back To The Top</button>
-<footer class="article-footer">
+<footer class="entry-footer">
 <div class="shell footer-inner">
 <a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a>
 <a href="age-of-aimpires-entry-03.html">Read Entry 03 →</a>
 </div>
 <div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
+<div class="shell">
+  <aside class="aoai-studio-footer" aria-labelledby="studio-footer-heading">
+    <h2 id="studio-footer-heading">From Ideas To Implementation</h2>
+    <p>Done with theory? Good. Let's stack up some practice. <a class="aoai-studio-link" href="https://thestudiocy.framer.website/">Visit THE STUDIO</a></p>
+  </aside>
+</div>
 </footer>
 <script>
 (() => {

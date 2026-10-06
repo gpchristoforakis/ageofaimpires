@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en-GB">
 <head>
   <link rel="icon" type="image/svg+xml" href="/media/favicon.svg">
 <meta charset="utf-8"/>
@@ -210,10 +210,12 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 .release-share-wrap{width:min(calc(100% - 128px),1440px);margin-inline:auto;padding-block:1px 24px}
 @media(max-width:980px){.release-share-wrap{width:calc(100% - 48px)}}
 @media(max-width:640px){.release-share-wrap{width:calc(100% - 36px)}}
-</style></head>
-<body class="deep-dive">
+</style><link rel="stylesheet" href="assets/editorial-studio.css">
+<link rel="stylesheet" href="assets/editorial-spacing.css">
+</head>
+<body class="deep-dive page-framework">
 <header><div class="header-shell nav"><a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
-<nav id="primary-nav" aria-label="Primary"><a href="articles.html">Articles</a><a href="how-to.html">How-To Guides</a><a href="notebook.html">Notebook</a><a aria-current="page" href="frameworks.html">Frameworks</a><a href="about.html">About</a>
+<nav id="primary-nav" aria-label="Primary"><a href="entries.html">Entries</a><a href="how-to.html">How-To Guides</a><a href="notebook.html">Notebook</a><a aria-current="page" href="frameworks.html">Frameworks</a><a href="about.html">About</a>
 <a href="contact.html">Contact</a><a aria-label="Language" href="#">EN</a></nav></div></header>
 <main><section class="hero"><div class="shell"><a class="back-link" href="framework-effective-task-cost.html">← Main Framework</a><p class="kicker">Framework 01 · Task Economics · Operator's Deep Dive</p><h1>The Effective Task Cost Framework: The Operator's Deep Dive</h1><p class="standfirst">If you are managing AI at scale, evaluating API models, or building automated workflows, consumer heuristics are not enough. You need to measure hard friction. The useful unit of AI economics is never a single API call or a processed token; it is a completed, validated job.</p><p class="standfirst" style="font-size:19px;max-width:760px;margin-top:18px">Here is the underlying math and operational logic for evaluating true AI task cost.</p></div></section><div class="shell body source-copy"><section class="section"><div class="section-label">01 · Cost</div><div class="section-content"><h2>01. The Cost Equation</h2>
 <p>Every task output consists of four distinct operational costs.</p>
@@ -237,7 +239,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div class="compare low"><h3>Setup A (Lowest Unit Price)</h3><p>Cheap initial attempts. A noticeable share fail validation. Automatic retries fix some failures, but the remaining records require employee correction. This is a low rate card with high remediation.</p></div>
 <div class="compare high"><h3>Setup B (Higher Unit Price)</h3><p>Higher cost per initial attempt. Formatting rules are followed reliably, and nearly all records complete on the first pass. Remaining edge cases resolve automatically. This is a higher rate card with a lower completed-job cost.</p></div>
 </div>
-<p>Once retries and human labor enter the picture, the cheapest attempt at the API level frequently becomes the most expensive operational job.</p></div></section><section class="section"><div class="section-label">04 · Value</div><div class="section-content"><h2>04. The Value Equation</h2>
+<p>Once retries and human labour enter the picture, the cheapest attempt at the API level frequently becomes the most expensive operational job.</p></div></section><section class="section"><div class="section-label">04 · Value</div><div class="section-content"><h2>04. The Value Equation</h2>
 <p>Cost alone is an incomplete metric because highly capable models occasionally expand the scope of a task in genuinely valuable ways.</p>
 <div class="math-label">Effective Task Value:</div>
 <div class="math-box">V<sub>core</sub> + V<sub>discovered</sub></div>
@@ -248,11 +250,17 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div class="grid-3">
 <div class="card"><h3>First-Time Success</h3><p>How often the job satisfies all rules on the first attempt without retries or repairs.</p></div>
 <div class="card"><h3>Human Involvement</h3><p>How often a person must inspect, steer, correct, or finish the output before it can be pushed to the next step.</p></div>
-<div class="card"><h3>Cost Per Completed Job</h3><p>The total software, retry, and labor cost divided strictly by verified usable results.</p></div>
+<div class="card"><h3>Cost Per Completed Job</h3><p>The total software, retry, and labour cost divided strictly by verified usable results.</p></div>
 </div>
 <div class="footer-links"><a class="source-link" href="framework-effective-task-cost.html">Back To The Main Framework →</a><a class="source-link" href="frameworks.html">All Frameworks →</a></div></div></section></div><div class="release-share-wrap"><div aria-label="Page sharing" class="share-row share-row-end"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div></main>
 <button aria-label="Back to the top" class="back-to-top" data-back-to-top type="button">↑ Back To The Top</button>
 <footer><div class="shell"><a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a></div><div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
+<div class="shell">
+  <aside class="aoai-studio-footer" aria-labelledby="studio-footer-heading">
+    <h2 id="studio-footer-heading">From Ideas To Implementation</h2>
+    <p>Done with theory? Good. Let's stack up some practice. <a class="aoai-studio-link" href="https://thestudiocy.framer.website/">Visit THE STUDIO</a></p>
+  </aside>
+</div>
 </footer>
 
 <script>
