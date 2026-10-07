@@ -1,4 +1,5 @@
 const CONTACT_PATH = "/api/contact";
+const SUBSCRIBE_PATH = "/api/subscribe";
 const RECIPIENT = "hello@ageofaimpires.com";
 const SENDER = "AGE OF AIMPIRES <hello@ageofaimpires.com>";
 
@@ -124,6 +125,61 @@ async function handleContact(request, env) {
   return json({ ok: true });
 }
 
+async function handleSubscribe(request, env) {
+  const failure = (status = 502) => json({
+    code: "signup_failed", error: "The signup could not be completed. Please try again.",
+  }, status);
+  if (request.method !== "POST") return json({ error: "Method not allowed." }, 405);
+  const origin = request.headers.get("Origin");
+  if (request.headers.get("Sec-Fetch-Site") === "cross-site" ||
+      (origin && origin !== new URL(request.url).origin)) {
+    return failure(403);
+  }
+  if (!(request.headers.get("Content-Type") || "").toLowerCase().includes("application/json")) {
+    return failure(415);
+  }
+  const rawBody = await request.text();
+  if (rawBody.length > 2048) return failure(413);
+  let body;
+  try { body = JSON.parse(rawBody); } catch { return failure(400); }
+  if (!body || typeof body !== "object" || Array.isArray(body)) return failure(400);
+  if (normalize(body.website, 200)) return json({ ok: true });
+  const name = typeof body.name === "string" ? body.name.trim() : "";
+  const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+  if (!name) return json({ code: "name_required", error: "Enter a name to continue." }, 400);
+  if (!email) return json({ code: "email_required", error: "Enter an email address to continue." }, 400);
+  if (!validEmail(email)) return json({ code: "invalid_email", error: "Check the email address and try again." }, 400);
+  if (name.length > 100 || /[\u0000-\u001f\u007f]/.test(name)) return failure(400);
+
+  const apiKey = env.RESEND_SUBSCRIBE_API_KEY || env.RESEND_API_KEY;
+  const segmentId = env.RESEND_ENTRY_SEGMENT_ID;
+  if (!apiKey || !segmentId) return failure(503);
+  const provider = (path, method = "GET", payload) => fetch(`https://api.resend.com${path}`, {
+    method,
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json", "User-Agent": "ageofaimpires-entry-signup/1.0" },
+    ...(payload ? { body: JSON.stringify(payload) } : {}),
+    signal: AbortSignal.timeout(10000),
+  });
+  const contactPath = `/contacts/${encodeURIComponent(email)}`;
+  const existing = await provider(contactPath);
+  if (existing.status === 404) {
+    // Keep the supplied name intact; do not guess how to split a person's name.
+    const created = await provider("/contacts", "POST", {
+      email, first_name: name, unsubscribed: false, segments: [{ id: segmentId }],
+    });
+    if (!created.ok) return failure();
+  } else if (existing.ok) {
+    // An explicit signup can rejoin the entry list without duplicating a contact.
+    const added = await provider(`${contactPath}/segments/${encodeURIComponent(segmentId)}`, "POST");
+    if (!added.ok) return failure();
+    const updated = await provider(contactPath, "PATCH", { first_name: name, unsubscribed: false });
+    if (!updated.ok) return failure();
+  } else {
+    return failure();
+  }
+  return json({ ok: true });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -140,6 +196,15 @@ export default {
       } catch (error) {
         console.error("Contact handler error:", error);
         return json({ error: "The message could not be delivered." }, 500);
+      }
+    }
+
+    if (url.pathname === SUBSCRIBE_PATH) {
+      try {
+        return await handleSubscribe(request, env);
+      } catch {
+        // Do not expose provider responses, subscriber details, or credentials.
+        return json({ code: "signup_failed", error: "The signup could not be completed. Please try again." }, 502);
       }
     }
 

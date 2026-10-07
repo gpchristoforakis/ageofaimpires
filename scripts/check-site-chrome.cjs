@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 
 const root = path.resolve(__dirname, '..');
 const excluded = new Set(['.git', 'node_modules', 'dist', '.astro', '.wrangler',
@@ -35,9 +36,16 @@ for (const file of pages) {
       fail(`missing shared ${asset} in the head`);
       continue;
     }
-    const local = path.resolve(reference.startsWith('/') ? root : path.dirname(file),
-      reference.replace(/^\//, ''));
+    const assetPath = reference.split(/[?#]/)[0];
+    const local = path.resolve(assetPath.startsWith('/') ? root : path.dirname(file),
+      assetPath.replace(/^\//, ''));
     if (!fs.existsSync(local)) fail(`shared asset does not exist: ${reference}`);
+    else if (asset.endsWith('.css')) {
+      const hash = crypto.createHash('sha256')
+        .update(fs.readFileSync(local, 'utf8').replace(/\r\n/g, '\n'))
+        .digest('hex').slice(0, 12);
+      if (!reference.includes(`?v=${hash}`)) fail(`outdated stylesheet version: ${reference}`);
+    }
     if (asset.endsWith('.js') && /\s(?:async|defer)(?:\s|=|>)/i.test(tag)) {
       fail('theme initialization must run before rendering');
     }

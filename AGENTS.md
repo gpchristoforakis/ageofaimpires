@@ -8,6 +8,12 @@
 - Load `assets/site-theme.js` in the head before page rendering (without `async`
   or `defer`). Load `assets/site-theme.css` after the page's existing styles.
   Adjust relative asset paths for pages in subdirectories.
+- When updating shared CSS, refresh its content-hash `?v=` version in every
+  page that loads it. Reuse the current versioned references on new pages.
+- Scope mobile menu rules to the primary header navigation. Generic `nav a`
+  rules must not hide the footer's social profiles.
+- Keep the shared primary header sticky on every page in both themes and at
+  mobile and desktop sizes. Preserve working mobile menu and theme controls.
 - Reuse the header's `.aoai-header-actions` and accessible
   `[data-theme-toggle]` button from an existing page. Keep the control visible
   on mobile. Do not replace or remove the existing navigation behavior.

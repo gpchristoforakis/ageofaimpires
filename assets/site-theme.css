@@ -1,5 +1,13 @@
 /* Shared controls and the two existing editorial palettes. */
 :root { color-scheme: light; }
+html { scroll-padding-block-start: 100px; }
+body > header, body > .site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 100;
+}
+body > header:not(.site-header) { background: var(--paper); }
+body > .site-header { background: var(--canvas, var(--paper)); }
 html[data-theme="dark"] {
   color-scheme: dark;
   --canvas: #0c1624;
@@ -76,7 +84,10 @@ nav.aoai-social-links {
   background: transparent;
   box-shadow: none;
 }
-.aoai-social-links a {
+/* Override legacy navigation rules that hide non-final links on mobile. */
+nav.aoai-social-links > a,
+nav.aoai-social-links > a:not(:last-child),
+nav.aoai-social-links > a:not(.active):not(:last-child) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -147,10 +158,6 @@ html[data-theme="dark"] .cta:hover {
   background: var(--teal);
   color: #0c1624;
 }
-html[data-theme="dark"] .page-home .colophon-avatar {
-  background: #111c2c;
-  color: #f1ede5;
-}
 html[data-theme="dark"] .how-to-reading { --how-to-navy: #91c6ed; }
 html[data-theme="dark"] .instruction-card pre[data-prompt-text] {
   background: var(--surface);
@@ -211,6 +218,7 @@ html[data-theme="dark"] .editorial-diagram {
   }
 }
 @media print {
+  body > header, body > .site-header { position: static; }
   html[data-theme="dark"] {
     color-scheme: light;
     --canvas: #fff;
