@@ -4,7 +4,10 @@
   "account_id": "2dfd4a1280d60d715d095a4c82a6c5e1",
   "compatibility_date": "2026-10-09",
   "workers_dev": true,
-  "vars": { "ARCHIVIST_QUERY_ENABLED": "true" },
+  "vars": {
+  "ARCHIVIST_QUERY_ENABLED": "true",
+  "OPENAI_APPS_CHALLENGE": "YeaLDX6d5-roMvXgq41J0YO7CCCx7l2ApxLCU7NI2gk"
+},
   "durable_objects": {
     "bindings": [{ "name": "ARCHIVIST_QUERY_BUDGET", "class_name": "ArchiveQueryBudget" }]
   },
