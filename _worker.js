@@ -1,6 +1,7 @@
 const CONTACT_PATH = "/api/contact";
 const SUBSCRIBE_PATH = "/api/subscribe";
 const CHAT_PATH = "/api/chat";
+const VOICE_TOKEN_PATH = "/api/voice/token";
 const RECIPIENT = "hello@ageofaimpires.com";
 const SENDER = "AGE OF AIMPIRES <hello@ageofaimpires.com>";
 
@@ -626,6 +627,41 @@ async function handleChat(request, env) {
   return queryArchivist(body, env.GEMINI_API_KEY);
 }
 
+async function handleVoiceToken(request, env) {
+  const failure = (code, error, status) => json({ code, error }, status);
+  if (request.method !== "POST") return failure("method_not_allowed", "Method not allowed.", 405);
+  const origin = request.headers.get("Origin");
+  if (request.headers.get("Sec-Fetch-Site") === "cross-site" || (origin && origin !== new URL(request.url).origin)) {
+    return failure("origin_not_allowed", "Request origin not allowed.", 403);
+  }
+  if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get("Content-Type") || "")) {
+    return failure("invalid_content_type", "Send the request as JSON.", 415);
+  }
+  try {
+    const raw = await readChatBody(request);
+    if (raw === null || raw.length > 1024) return failure("request_too_large", "The request is too large.", 413);
+    const body = JSON.parse(raw);
+    if (!body || typeof body !== "object" || Array.isArray(body) || Object.keys(body).length) {
+      return failure("invalid_request", "Invalid voice request.", 400);
+    }
+  } catch { return failure("invalid_request", "Invalid voice request.", 400); }
+  if (!env.GEMINI_API_KEY) return failure("voice_not_configured", "Voice is not configured in this environment.", 503);
+  const now = Date.now();
+  const response = await fetch("https://generativelanguage.googleapis.com/v1alpha/auth_tokens", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-goog-api-key": env.GEMINI_API_KEY },
+    body: JSON.stringify({ uses: 1, expireTime: new Date(now + 30 * 60 * 1000).toISOString(),
+      newSessionExpireTime: new Date(now + 2 * 60 * 1000).toISOString() }),
+    signal: AbortSignal.timeout(15000),
+  });
+  if (!response.ok) return failure("voice_unavailable", "Voice could not connect. Please try again later.", 502);
+  const result = await response.json();
+  if (typeof result.name !== "string" || !result.name.startsWith("auth_tokens/") || result.name.includes(env.GEMINI_API_KEY)) {
+    return failure("voice_unavailable", "Voice could not connect. Please try again later.", 502);
+  }
+  return json({ token: result.name });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -661,6 +697,15 @@ export default {
         return chatError(timedOut ? "chat_timeout" : "chat_unavailable",
           timedOut ? "The archive took too long to respond. Please try again." : "The Archivist could not reach the archive. Please try again later.",
           timedOut ? 504 : 502);
+      }
+    }
+
+    if (url.pathname === VOICE_TOKEN_PATH) {
+      try { return await handleVoiceToken(request, env); }
+      catch (error) {
+        const timedOut = error?.name === "TimeoutError" || error?.name === "AbortError";
+        return json({ code: timedOut ? "voice_timeout" : "voice_unavailable",
+          error: timedOut ? "Voice connection timed out. Please try again." : "Voice could not connect. Please try again later." }, timedOut ? 504 : 502);
       }
     }
 

@@ -78,7 +78,9 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
           assert.equal(await panel.locator('video').count(), 1);
           assert.equal(await panel.locator('video').getAttribute('src'), null, 'Reduced motion must not load video');
           assert.equal(await panel.locator('video').evaluate(node => node.paused), true);
-          assert.doesNotMatch(await panel.innerText(), /voice|microphone|Librarian/i);
+          assert.doesNotMatch(await panel.innerText(), /Librarian/i);
+          assert.ok(await panel.getByRole('button', { name: 'Start Voice', exact: true }).isVisible());
+          assert.equal(await panel.getByRole('button', { name: 'End Voice', exact: true }).isVisible(), false);
           if (file === 'index.html') await page.screenshot({ path: path.join(screenshotDir, `${viewport.width}-${theme}.png`) });
           await page.keyboard.press('Escape');
           await panel.waitFor({ state: 'hidden' });
@@ -190,6 +192,7 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
     assert.equal(await page.locator('.aoai-archivist-panel video').count(), 1);
     await page.waitForFunction(() => document.querySelector('.aoai-archivist-panel video').classList.contains('is-playing'));
     await page.locator('.aoai-archivist-close').click();
+    await page.waitForFunction(() => document.querySelector('.aoai-archivist-panel video').paused);
     assert.equal(await page.locator('.aoai-archivist-panel video').evaluate(node => node.paused), true);
     await page.locator('.aoai-archivist-launcher').click();
     await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -220,9 +223,83 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
     await page.waitForFunction(() => document.querySelector('.aoai-archivist-panel video').error !== null);
     assert.equal(await page.locator('.aoai-archivist-panel video').evaluate(node => getComputedStyle(node).opacity), '0');
     assert.ok(await page.locator('.aoai-archivist-panel-head img').isVisible());
+    // Offline UI voice acceptance with the real browser SDK serializer. No real
+    // microphone, Gemini traffic or global WebSocket replacement.
+    await page.goto(`${base}/index.html`);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await context.route('**/api/voice/token', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ token: 'auth_tokens/offline-ui' }) }));
+    let voiceLookups = 0;
+    await page.route('**/api/chat', route => {
+      voiceLookups++;
+      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ reply: 'The Completion Boundary is the usable finish.', sources: [source] }) });
+    });
+    await page.evaluate(async () => {
+      const fixture = window.__voiceFixture = { tracks: [], contexts: [], sockets: [], requests: 0, acknowledge: true };
+      class Node {
+        connect() {} disconnect() {} start() {} stop() {}
+      }
+      class Audio {
+        sampleRate = 48000; currentTime = 1; state = 'running'; destination = {};
+        constructor() { fixture.contexts.push(this); }
+        async resume() { this.state = 'running'; }
+        async close() { this.state = 'closed'; }
+        createMediaStreamSource() { return new Node(); }
+        createScriptProcessor() { return new Node(); }
+        createBufferSource() { return new Node(); }
+        createBuffer(_channels, length, rate) { return { duration: length / rate, getChannelData: () => new Float32Array(length) }; }
+      }
+      window.AudioContext = Audio;
+      navigator.mediaDevices.getUserMedia = async () => {
+        fixture.requests++;
+        const track = { readyState: 'live', stop() { this.readyState = 'ended'; } };
+        fixture.tracks.push(track); return { getTracks: () => [track] };
+      };
+      const { GoogleGenAI } = await import('/assets/vendor/google-genai-2.27.0.js');
+      const prototype = Object.getPrototypeOf(new GoogleGenAI({ apiKey: 'auth_tokens/offline-ui', httpOptions: { apiVersion: 'v1alpha' } }).live.webSocketFactory);
+      prototype.create = (_url, _headers, callbacks) => {
+        const socket = {
+          frames: [], closed: false,
+          connect() { callbacks.onopen(new Event('open')); },
+          receive(message) { callbacks.onmessage(new MessageEvent('message', { data: JSON.stringify(message) })); },
+          send(text) { const frame = JSON.parse(text); this.frames.push(frame); if (frame.setup && fixture.acknowledge) queueMicrotask(() => this.receive({ setupComplete: {} })); },
+          close() { if (!this.closed) { this.closed = true; callbacks.onclose({ code: 1000, reason: '' }); } },
+        };
+        fixture.sockets.push(socket); return socket;
+      };
+    });
+    await page.locator('.aoai-archivist-launcher').click();
+    assert.equal(await page.evaluate(() => window.__voiceFixture.requests), 0, 'Opening panel does not request microphone');
+    await page.getByRole('button', { name: 'Start Voice', exact: true }).click();
+    await page.waitForFunction(() => document.querySelector('.aoai-archivist-voice-status').textContent === 'Connected');
+    assert.ok(await page.locator('.aoai-archivist-voice-microphone').isVisible());
+    await page.setViewportSize({ width: 390, height: 844 });
+    assert.ok(await page.locator('#aoai-archivist-panel').evaluate(node => node.scrollWidth <= node.clientWidth));
+    await page.screenshot({ path: path.join(screenshotDir, 'voice-connected-mobile-offline.png') });
+    assert.equal(await page.evaluate(() => Function.prototype.toString.call(WebSocket).includes('[native code]')), true);
+    await page.evaluate(() => window.__voiceFixture.sockets.at(-1).receive({ toolCall: { functionCalls: [{ name: 'queryArchive', id: 'ui-lookup', args: { query: 'What is the Completion Boundary?' } }] } }));
+    await page.waitForFunction(() => window.__voiceFixture.sockets.at(-1).frames.some(frame => frame.toolResponse));
+    await page.evaluate(() => window.__voiceFixture.sockets.at(-1).receive({ serverContent: { inputTranscription: { text: 'What is the Completion Boundary?' }, outputTranscription: { text: 'A usable finish.' }, turnComplete: true } }));
+    assert.equal(voiceLookups, 1);
+    assert.equal(await page.locator('.aoai-archivist-message').last().locator('.aoai-archivist-source a').getAttribute('href'), source.canonicalUrl);
+    await page.evaluate(() => window.__voiceFixture.sockets.at(-1).receive({ serverContent: { inputTranscription: { text: 'Hello.' }, outputTranscription: { text: 'Hello.' }, turnComplete: true }, sources: [{ title: 'Invented by Live', canonicalUrl: 'https://ageofaimpires.com/draft' }] }));
+    assert.equal(await page.locator('.aoai-archivist-message').last().locator('.aoai-archivist-source').count(), 0);
+    assert.equal(voiceLookups, 1, 'Hello does not retrieve');
+    await page.getByRole('button', { name: 'End Voice', exact: true }).click();
+    assert.equal(await page.locator('.aoai-archivist-voice-status').textContent(), 'Disconnected');
+    assert.equal(await page.evaluate(() => window.__voiceFixture.tracks.every(track => track.readyState === 'ended') && window.__voiceFixture.contexts.every(context => context.state === 'closed') && window.__voiceFixture.sockets.every(socket => socket.closed)), true);
+    await page.evaluate(() => { window.__voiceFixture.acknowledge = false; });
+    await page.getByRole('button', { name: 'Start Voice', exact: true }).click();
+    await page.waitForFunction(() => window.__voiceFixture.sockets.length === 2);
+    assert.equal(await page.locator('.aoai-archivist-voice-status').textContent(), 'Connecting');
+    await page.getByRole('button', { name: 'End Voice', exact: true }).click();
+    await page.evaluate(() => window.__voiceFixture.sockets.at(-1).receive({ setupComplete: {} }));
+    assert.equal(await page.locator('.aoai-archivist-voice-status').textContent(), 'Disconnected');
+    assert.equal(await page.evaluate(() => window.__voiceFixture.tracks.every(track => track.readyState === 'ended') && window.__voiceFixture.sockets.every(socket => socket.closed)), true);
+    await page.screenshot({ path: path.join(screenshotDir, 'voice-controls.png') });
     assert.deepEqual(errors, [], 'Browser runtime errors');
     console.log(`Passed: ${pages.length} pages × 2 themes × desktop/mobile; panel dimensions, controls/focus, context, session history, loading/error/retry, source cards, text/URL safety, reduced motion, single idle video and image fallback. Gemini answers mocked; missing-secret response uses the real local Worker.`);
     console.log(`Screenshots: ${screenshotDir}`);
+    console.log('Passed: real SDK offline voice controls, no permission on panel open, source bridge, Hello without lookup, native WebSocket unchanged, End Voice and pending-handshake cancellation.');
     await context.close();
   } finally {
     if (browser) await browser.close();

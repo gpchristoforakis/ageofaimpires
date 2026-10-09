@@ -1,5 +1,8 @@
 # The Archivist V1: text integration
 
+This document records the text-only checkpoint. The separate voice preview
+extends it as described in [Archivist Voice Preview](archivist-voice-preview.md).
+
 The static site loads `assets/archivist.css` and `assets/archivist.js` on all
 18 public HTML pages. The launcher opens a native modal dialog: 440px at desktop
 widths and a full-screen drawer at widths up to 600px. Conversation state lives

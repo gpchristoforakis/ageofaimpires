@@ -4,6 +4,7 @@
   const assetRoot = new URL('./archivist/', document.currentScript.src);
   const portrait = new URL('archivist-portrait.jpg', assetRoot).href;
   const idleVideo = new URL('archivist-idle.mp4', assetRoot).href;
+  const voiceModuleUrl = new URL('./archivist-voice.js?v=dfbdce1bb311', document.currentScript.src).href;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const history = [];
   let loading = false;
@@ -11,6 +12,11 @@
   let lastFailedQuery = '';
   let focusBeforeOpen = null;
   const backgroundLoops = new Map();
+  let voiceClient = null;
+  let voicePromise = null;
+  let voiceAttempt = 0;
+  let voiceIntent = false;
+  const voiceMessages = { user: null, model: null };
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -146,7 +152,25 @@
   note.id = 'aoai-archivist-input-note';
   input.setAttribute('aria-describedby', note.id);
   form.append(label, row, note);
-  panel.append(head, scroll, form);
+  const voiceControls = element('div', 'aoai-archivist-voice-controls');
+  const startVoice = element('button', 'aoai-archivist-voice-button', 'Start Voice');
+  startVoice.type = 'button';
+  startVoice.setAttribute('aria-label', 'Start Voice');
+  const endVoice = element('button', 'aoai-archivist-voice-button', 'End Voice');
+  endVoice.type = 'button';
+  endVoice.setAttribute('aria-label', 'End Voice');
+  endVoice.hidden = true;
+  const voiceStatus = element('span', 'aoai-archivist-voice-status', 'Ready');
+  voiceStatus.setAttribute('role', 'status');
+  voiceStatus.setAttribute('aria-label', 'Voice connection');
+  const voiceActivity = element('span', 'aoai-archivist-voice-activity');
+  const microphone = element('span', 'aoai-archivist-voice-microphone', 'Microphone Active');
+  microphone.hidden = true;
+  const voiceNotice = element('p', 'aoai-archivist-voice-notice');
+  voiceNotice.hidden = true;
+  voiceNotice.setAttribute('role', 'alert');
+  voiceControls.append(startVoice, endVoice, voiceStatus, microphone, voiceActivity, voiceNotice);
+  panel.append(head, voiceControls, scroll, form);
   document.body.append(launcher, panel);
 
   function updateVideo() {
@@ -192,6 +216,8 @@
     input.focus({ preventScroll: true });
     pauseBackgroundLoops();
     updateVideo();
+    // Load only the small controller on panel open; no permission or token request.
+    ensureVoice().catch(() => {});
   });
   close.addEventListener('click', () => panel.close());
   panel.addEventListener('click', event => {
@@ -199,6 +225,7 @@
     if (event.target === panel && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) panel.close();
   });
   panel.addEventListener('close', () => {
+    stopVoice();
     launcher.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('aoai-archivist-open');
     updateVideo();
@@ -212,12 +239,79 @@
     if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) { event.preventDefault(); send(input.value); }
   });
 
+  function showVoiceStatus(status, notice = '') {
+    const active = status === 'Connecting' || status === 'Connected';
+    voiceIntent = active;
+    startVoice.hidden = active;
+    endVoice.hidden = !active;
+    voiceStatus.textContent = status;
+    voiceNotice.textContent = notice;
+    voiceNotice.hidden = !notice;
+    if (!active) { microphone.hidden = true; voiceActivity.textContent = ''; }
+  }
+
+  function ensureVoice() {
+    if (!voicePromise) {
+      voicePromise = import(voiceModuleUrl).then(({ ArchivistVoice }) => {
+        voiceClient = new ArchivistVoice({
+          pageContext,
+          onStatus: showVoiceStatus,
+          onMicrophone: active => { microphone.hidden = !active; },
+          onState: state => {
+            voiceActivity.textContent = voiceIntent ? ({ listening: 'Listening', thinking: 'Thinking', speaking: 'Speaking', idle: 'Listening' }[state] || '') : '';
+          },
+          onTranscript: event => {
+            if (!event.text) return;
+            suggestions.hidden = true;
+            const message = voiceMessages[event.role] || addMessage(event.role, event.text);
+            voiceMessages[event.role] = message;
+            message.querySelector('.aoai-archivist-message-text').textContent = event.text;
+            if (event.isFinal) {
+              if (event.role === 'model') appendSources(message, event.sources || []);
+              history.push({ role: event.role, content: event.text });
+              voiceMessages[event.role] = null;
+            }
+            scroll.scrollTop = scroll.scrollHeight;
+          },
+        });
+        return voiceClient;
+      }).catch(error => { voicePromise = null; throw error; });
+    }
+    return voicePromise;
+  }
+
+  startVoice.addEventListener('click', async () => {
+    const attempt = ++voiceAttempt;
+    showVoiceStatus('Connecting');
+    try {
+      const client = await ensureVoice();
+      if (attempt !== voiceAttempt || !panel.open) return;
+      await client.start();
+    } catch {
+      if (attempt === voiceAttempt) showVoiceStatus('Error', 'Voice could not load. Please try again.');
+    }
+  });
+  function stopVoice() {
+    ++voiceAttempt;
+    voiceIntent = false;
+    if (voiceClient) voiceClient.stop();
+    else showVoiceStatus('Disconnected');
+  }
+  endVoice.addEventListener('click', stopVoice);
+  window.addEventListener('pagehide', stopVoice);
+
   function addMessage(role, content, sources = []) {
     const message = element('div', `aoai-archivist-message ${role === 'user' ? 'aoai-archivist-message-reader' : ''}`);
     const name = element('div', 'aoai-archivist-message-label');
     if (role === 'model') name.append(avatar('aoai-archivist-avatar-message'));
     name.append(element('span', '', role === 'user' ? 'READER' : 'THE ARCHIVIST'));
     message.append(name, element('div', 'aoai-archivist-message-text', content));
+    appendSources(message, sources);
+    log.append(message);
+    return message;
+  }
+
+  function appendSources(message, sources) {
     if (sources.length) {
       const sourceList = element('div', 'aoai-archivist-sources');
       sourceList.append(element('h3', '', 'FROM THE ARCHIVE'));
@@ -239,7 +333,6 @@
       }
       if (sourceList.children.length > 1) message.append(sourceList);
     }
-    log.append(message);
   }
 
   function requestHistory() {
