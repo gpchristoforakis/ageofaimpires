@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 (async () => {
-  const source = fs.readFileSync(path.join(__dirname, '..', '_worker.js'), 'utf8');
+  const source = require('./load-worker-source.cjs')(path.join(__dirname, '..'));
   const worker = (await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`)).default;
   const originalFetch = global.fetch;
   const calls = [];

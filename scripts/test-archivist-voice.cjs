@@ -51,7 +51,7 @@ beforeEach(async () => {
   if (!Voice) {
     const module = await import('../assets/archivist-voice.js');
     Voice = module.ArchivistVoice; config = module.liveConfig;
-    worker = (await load(fs.readFileSync(path.join(root, '_worker.js'), 'utf8'))).default;
+    worker = (await load(require('./load-worker-source.cjs')(root))).default;
     const { GoogleGenAI } = await import('../assets/vendor/google-genai-2.27.0.js');
     factoryPrototype = Object.getPrototypeOf(new GoogleGenAI({ apiKey: token, httpOptions: { apiVersion: 'v1alpha' } }).live.webSocketFactory);
   }

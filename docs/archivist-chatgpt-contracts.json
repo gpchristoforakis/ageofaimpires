@@ -1,0 +1,384 @@
+{
+  "contractVersion": "0.1.0",
+  "status": "implemented_prototype",
+  "inspectedMain": "a0726fe9c1b73b5667b1d605daf00bfb19c2a313",
+  "schemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "notes": [
+    "Each inputSchema and outputSchema is self-contained; local $refs resolve within that schema.",
+    "JSON Schema does not enforce registry membership, grounding support, whitespace trimming, redirects or source-text fidelity. Those require application checks.",
+    "MCP content must include a text representation and explicit canonical Markdown links alongside successful structuredContent.",
+    "Error content uses errorContentSchema with isError=true; do not report provider failure as no_supported_sources.",
+    "These contracts are used by the local MCP prototype. They are not an installed ChatGPT plugin or a production release."
+  ],
+  "tools": [
+    {
+      "name": "query_archive",
+      "title": "Query The Archive",
+      "description": "Answer a self-contained question about the published AGE OF AIMPIRES archive using The Archivist's existing grounded retrieval. Returns entry-level canonical sources or an explicit lack of verifiable support. Does not search the general web. Resolve follow-ups into a self-contained question; do not send the whole conversation.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question"
+        ],
+        "properties": {
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000,
+            "description": "A self-contained archive question. Trim and reject whitespace-only values."
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "$defs": {
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "url",
+              "page_type",
+              "publication_date"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 2048,
+                "pattern": "^https://ageofaimpires\\.com/[a-z0-9-]+$"
+              },
+              "page_type": {
+                "type": "string",
+                "enum": [
+                  "entry",
+                  "framework",
+                  "how_to",
+                  "notebook",
+                  "about"
+                ]
+              },
+              "publication_date": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status",
+              "content_origin",
+              "answer",
+              "sources"
+            ],
+            "properties": {
+              "status": {
+                "const": "grounded"
+              },
+              "content_origin": {
+                "const": "file_search"
+              },
+              "answer": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 60000
+              },
+              "sources": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 100,
+                "items": {
+                  "$ref": "#/$defs/source"
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status",
+              "content_origin",
+              "answer",
+              "sources"
+            ],
+            "properties": {
+              "status": {
+                "const": "no_supported_sources"
+              },
+              "content_origin": {
+                "const": "file_search"
+              },
+              "answer": {
+                "const": "The available archive did not provide verifiable support for an answer to this question."
+              },
+              "sources": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        ]
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      },
+      "securitySchemes": [
+        {
+          "type": "noauth"
+        }
+      ]
+    },
+    {
+      "name": "fetch_entry",
+      "title": "Fetch A Published Entry",
+      "description": "Fetch cleaned editorial text for an exact public ID returned by query_archive. Covers eligible entries, frameworks, guides, notebook and about material. Returns current published text, which may be newer than the File Search snapshot. Does not accept arbitrary URLs, drafts or private documents.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Exact public slug from a returned source. Must match an eligible server registry record."
+          }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "status",
+          "content_origin",
+          "source",
+          "text",
+          "sections"
+        ],
+        "properties": {
+          "status": {
+            "const": "ok"
+          },
+          "content_origin": {
+            "const": "live_site"
+          },
+          "source": {
+            "$ref": "#/$defs/source"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60000
+          },
+          "sections": {
+            "type": "array",
+            "maxItems": 500,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "heading",
+                "anchor"
+              ],
+              "properties": {
+                "heading": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000
+                },
+                "anchor": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 500
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "$defs": {
+          "source": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "url",
+              "page_type",
+              "publication_date"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 2048,
+                "pattern": "^https://ageofaimpires\\.com/[a-z0-9-]+$"
+              },
+              "page_type": {
+                "type": "string",
+                "enum": [
+                  "entry",
+                  "framework",
+                  "how_to",
+                  "notebook",
+                  "about"
+                ]
+              },
+              "publication_date": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": true
+      },
+      "securitySchemes": [
+        {
+          "type": "noauth"
+        }
+      ]
+    }
+  ],
+  "errorContentSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "code",
+      "message",
+      "retryable"
+    ],
+    "properties": {
+      "code": {
+        "type": "string",
+        "enum": [
+          "invalid_arguments",
+          "archive_unavailable",
+          "archive_timeout",
+          "rate_limited",
+          "entry_not_found",
+          "entry_unavailable",
+          "entry_identity_mismatch",
+          "entry_too_large"
+        ]
+      },
+      "message": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      },
+      "retryable": {
+        "type": "boolean"
+      }
+    }
+  },
+  "examples": {
+    "queryInput": {
+      "question": "What is the Completion Boundary?"
+    },
+    "groundedResult": {
+      "status": "grounded",
+      "content_origin": "file_search",
+      "answer": "Grounded explanation supplied by the test fixture.",
+      "sources": [
+        {
+          "id": "age-of-aimpires-entry-01",
+          "title": "Fast AI. Expensive Lesson.",
+          "url": "https://ageofaimpires.com/age-of-aimpires-entry-01",
+          "page_type": "entry",
+          "publication_date": null
+        }
+      ]
+    },
+    "unsupportedResult": {
+      "status": "no_supported_sources",
+      "content_origin": "file_search",
+      "answer": "The available archive did not provide verifiable support for an answer to this question.",
+      "sources": []
+    },
+    "fetchInput": {
+      "id": "age-of-aimpires-entry-01"
+    },
+    "fetchResult": {
+      "status": "ok",
+      "content_origin": "live_site",
+      "source": {
+        "id": "age-of-aimpires-entry-01",
+        "title": "Fast AI. Expensive Lesson.",
+        "url": "https://ageofaimpires.com/age-of-aimpires-entry-01",
+        "page_type": "entry",
+        "publication_date": null
+      },
+      "text": "Published text supplied by the test fixture.",
+      "sections": [
+        {
+          "heading": "The Completion Boundary",
+          "anchor": null
+        }
+      ]
+    },
+    "errorContent": {
+      "code": "archive_timeout",
+      "message": "The archive took too long to respond. Please try again.",
+      "retryable": true
+    }
+  }
+}

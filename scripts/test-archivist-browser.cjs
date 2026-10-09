@@ -11,7 +11,7 @@ const screenshotDir = path.join(os.tmpdir(), 'ageofaimpires-archivist-v1-qa');
 const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.mp3': 'audio/mpeg', '.m4a': 'audio/mp4' };
 
 (async () => {
-  const source = fs.readFileSync(path.join(root, '_worker.js'), 'utf8');
+  const source = require('./load-worker-source.cjs')(root);
   const worker = (await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`)).default;
   const server = http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://localhost');
