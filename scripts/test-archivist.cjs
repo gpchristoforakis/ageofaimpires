@@ -25,8 +25,8 @@ const loadModule = code => import(`data:text/javascript;base64,${Buffer.from(cod
     assert.equal(source.match(pattern)[0], base('_worker.js').match(pattern)[0], `${name} changed`);
   }
   const runtime = read('assets/archivist.js');
-  assert.doesNotMatch(runtime, /GEMINI_API_KEY|AIza[\w-]{20,}|getUserMedia|WebSocket|VoiceControls|Gemini Live|Librarian/i);
-  assert.doesNotMatch(source, /import .*express|from ['"](?:node:)?fs|fileSearchStores\.create|uploadToFileSearchStore|\/api\/voice/);
+  assert.doesNotMatch(runtime, /GEMINI_API_KEY|AIza[\w-]{20,}|getUserMedia|WebSocket|Librarian/i);
+  assert.doesNotMatch(source, /import .*express|from ['"](?:node:)?fs|fileSearchStores\.create|uploadToFileSearchStore/);
 
   const fullRegistry = JSON.parse(fs.readFileSync(path.join(donor, 'data/document-registry.json'), 'utf8')).documents;
   const donorChat = fs.readFileSync(path.join(donor, 'server/chat.ts'), 'utf8').replace(/\r\n/g, '\n');

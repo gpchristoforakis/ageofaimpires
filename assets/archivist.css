@@ -107,6 +107,11 @@ body.aoai-archivist-open { overflow: hidden; }
 .aoai-archivist-send { flex: 0 0 auto; min-height: 44px; padding: 10px 14px; border: 1px solid var(--ar-accent); border-radius: 3px; background: var(--ar-accent); color: var(--ar-paper) !important; font-weight: 700 !important; }
 .aoai-archivist button:disabled { cursor: wait; opacity: .6; }
 .aoai-archivist-form-note { margin-top: 8px !important; font-size: 10px; color: var(--ar-muted); }
+.aoai-archivist-voice-controls { display: flex; flex: 0 0 auto; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 20px; border-bottom: 1px solid var(--ar-line); }
+.aoai-archivist-voice-button { min-height: 44px; padding: 8px 12px; border: 1px solid var(--ar-line); border-radius: 3px; background: var(--ar-surface); }
+.aoai-archivist-voice-status, .aoai-archivist-voice-activity, .aoai-archivist-voice-microphone { color: var(--ar-muted); font-size: 11px; }
+.aoai-archivist-voice-microphone { color: var(--ar-accent); }
+.aoai-archivist-voice-notice { width: 100%; color: var(--ar-error); font-size: 12px; }
 @media (max-width: 600px) {
   .aoai-archivist-launcher { bottom: max(16px, env(safe-area-inset-bottom)); right: max(16px, env(safe-area-inset-right)); }
   .aoai-archivist-panel { width: 100%; border-left: 0; }
