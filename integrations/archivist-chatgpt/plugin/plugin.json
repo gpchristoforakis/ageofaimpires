@@ -17,7 +17,7 @@
         "shortDescription": "Explore AGE OF AIMPIRES",
         "longDescription": "Ask questions about the published AGE OF AIMPIRES archive and open source pages with canonical links. The Archivist covers the publication's entries, frameworks and guides about practical AI use. It reports when the archive does not support an answer. Exact quotations should be checked against the current published page. Archive search uses a fixed indexed snapshot; page reading retrieves the current publication. This initial pilot has a shared allowance of 25 archive provider attempts per UTC day and 250 per UTC month, including retries. Reading published pages does not use that allowance.",
         "developerName": "George Paris Christoforakis",
-        "category": "Productivity",
+        "category": "Education & Research",
         "capabilities": ["Search The Published Archive", "Read Published Pages"],
         "websiteURL": "https://ageofaimpires.com",
         "supportURL": "https://ageofaimpires.com/contact",
@@ -34,6 +34,7 @@
         "logo": "./assets/icon.png"
       },
       "review": {
+        "demo_recording_url": "https://youtu.be/59OfAbTewwE",
         "test_cases": {
           "positive": [
             { "description": "Explain effective task cost", "prompt": "What does AGE OF AIMPIRES mean by effective task cost?", "tools_triggered": "query_archive", "expected_behavior": "Explain supported concepts and link Entry #01 and the Effective Task Cost Framework when returned as supporting sources." },
