@@ -10,7 +10,7 @@ const donor = process.env.ARCHIVIST_DONOR_PATH || path.join(root, '..', 'ageofai
 const read = file => fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n/g, '\n');
 const baselineRef = execFileSync('git', ['merge-base', 'HEAD', 'main'], { cwd: root, encoding: 'utf8' }).trim();
 const base = file => execFileSync('git', ['show', `${baselineRef}:${file}`], { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 }).replace(/\r\n/g, '\n');
-const source = read('_worker.js');
+const source = require('./load-worker-source.cjs')(root);
 const loadModule = code => import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`);
 
 (async () => {

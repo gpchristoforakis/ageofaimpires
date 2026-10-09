@@ -1,0 +1,13 @@
+{
+  "name": "aoai-archivist-mcp",
+  "main": "src/public-worker.mjs",
+  "account_id": "2dfd4a1280d60d715d095a4c82a6c5e1",
+  "compatibility_date": "2026-10-09",
+  "workers_dev": true,
+  "vars": { "ARCHIVIST_QUERY_ENABLED": "true" },
+  "durable_objects": {
+    "bindings": [{ "name": "ARCHIVIST_QUERY_BUDGET", "class_name": "ArchiveQueryBudget" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ArchiveQueryBudget"] }],
+  "observability": { "enabled": true, "head_sampling_rate": 1 }
+}
