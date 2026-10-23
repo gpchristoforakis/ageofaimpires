@@ -677,6 +677,15 @@ footer{
   font-size:20px;
   line-height:1.5;
 }
+/* Contact publication links are a compact two-by-two grid alongside the introduction. */
+body.page-contact nav.aoai-social-links.contact-publication-links{
+  display:grid;
+  grid-template-columns:repeat(2,44px);
+  gap:10px;
+  align-items:start;
+  justify-content:start;
+  margin:24px 0 0;
+}
 .connect-media{
   grid-area:media;
   width:100%;
@@ -927,6 +936,11 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div class="contact-heading">
 <h1>Connect With Me</h1>
 <p class="contact-intro">Questions, ideas, disagreements — send them over.</p>
+<nav class="aoai-social-links contact-publication-links" aria-label="AGE OF AIMPIRES social profiles and email">
+<a href="https://www.instagram.com/ageofaimpires/" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on Instagram (opens in a new tab)" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+<a href="https://www.linkedin.com/company/age-of-aimpires/" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on LinkedIn (opens in a new tab)" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5.3 3a2.3 2.3 0 1 0 0 4.6 2.3 2.3 0 0 0 0-4.6ZM3.4 9h3.8v12H3.4V9Zm5.9 0h3.6v1.6h.1c.5-1 1.7-1.9 3.5-1.9 3.8 0 4.5 2.5 4.5 5.7V21h-3.8v-5.9c0-1.4 0-3.2-1.9-3.2s-2.2 1.5-2.2 3.1v6H9.3V9Z"/></svg></a>
+<a href="https://x.com/ageofaimpires" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on X (opens in a new tab)" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L5.5 22H2.3l7.4-8.5L1.8 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L7.4 4H5.6l12.2 16Z"/></svg></a>
+<a href="mailto:hello@ageofaimpires.com" aria-label="Email AGE OF AIMPIRES" title="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 7 9-7"/></svg></a></nav>
 </div>
 <div class="connect-media">
 <figure class="portrait connect-portrait"><video id="contactPortraitVideo" autoplay loop muted playsinline webkit-playsinline preload="metadata" poster="media/contact-portrait-poster.jpg" aria-label="Animated portrait of George" width="720" height="1280" src="media/contact-portrait.mp4"></video></figure>
@@ -968,13 +982,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div>George Paris Christoforakis · Nicosia</div>
 </div>
 <div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
-<div class="shell aoai-social-shell">
-<nav class="aoai-social-links" aria-label="AGE OF AIMPIRES social profiles">
-<a href="https://www.instagram.com/ageofaimpires/" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on Instagram (opens in a new tab)" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-<a href="https://www.linkedin.com/company/age-of-aimpires/" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on LinkedIn (opens in a new tab)" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5.3 3a2.3 2.3 0 1 0 0 4.6 2.3 2.3 0 0 0 0-4.6ZM3.4 9h3.8v12H3.4V9Zm5.9 0h3.6v1.6h.1c.5-1 1.7-1.9 3.5-1.9 3.8 0 4.5 2.5 4.5 5.7V21h-3.8v-5.9c0-1.4 0-3.2-1.9-3.2s-2.2 1.5-2.2 3.1v6H9.3V9Z"/></svg></a>
-<a href="https://x.com/ageofaimpires" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on X (opens in a new tab)" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L5.5 22H2.3l7.4-8.5L1.8 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L7.4 4H5.6l12.2 16Z"/></svg></a>
-</nav>
-</div>
+
 <div class="shell">
   <aside class="aoai-studio-footer" aria-labelledby="studio-footer-heading">
     <h2 id="studio-footer-heading">From Ideas To Implementation</h2>
