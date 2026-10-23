@@ -54,13 +54,20 @@ for (const file of pages) {
   if (!toggle || !/aria-label="[^"]+"/.test(toggle) || !/aria-pressed="(?:true|false)"/.test(toggle)) {
     fail('missing accessible header theme toggle');
   }
-  const social = footer.match(/<nav\b[^>]*class="[^"]*\baoai-social-links\b[^"]*"[^>]*>[\s\S]*?<\/nav>/i)?.[0];
+  // Contact shows the same three profiles and an email icon in its main content.
+  const isContact = name === 'contact.html';
+  const main = isContact ? (html.match(/<main\b[^>]*>[\s\S]*?<\/main>/i)?.[0] || '') : '';
+  const socialArea = isContact ? main : footer;
+  const social = socialArea.match(/<nav\b[^>]*class="[^"]*\baoai-social-links\b[^"]*"[^>]*>[\s\S]*?<\/nav>/i)?.[0];
+  if (isContact && /class="[^"]*\baoai-social-links\b/i.test(footer)) {
+    fail('Contact footer must not repeat publication social icons');
+  }
   if (!social) {
-    fail('missing social icons in the footer');
+    fail(isContact ? 'missing publication icons in Contact main' : 'missing social icons in the footer');
     continue;
   }
   const links = [...social.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)].map(match => match[0]);
-  if (links.length !== profiles.length) fail('the footer must include all three publication profiles');
+  if (links.length !== profiles.length + (isContact ? 1 : 0)) fail(isContact ? 'Contact must have three profiles and an email icon' : 'the footer must include all three publication profiles');
   for (const profile of profiles) {
     const link = links.find(link => link.includes(`href="${profile}"`));
     if (!link || !/aria-label="[^"]+"/.test(link) || !/<svg\b/i.test(link)) {
@@ -70,6 +77,12 @@ for (const file of pages) {
       fail(`unsafe external link: ${profile}`);
     }
   }
+  if (isContact) {
+    const email = links.find(link => link.includes('href="mailto:hello@ageofaimpires.com"'));
+    if (!email || !/aria-label="[^"]+"/.test(email) || !/<svg\b/i.test(email)) {
+      fail('missing accessible Contact email icon');
+    }
+  }
 }
 
 if (!pages.length) failures.push('No site pages found.');
@@ -77,5 +90,5 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exitCode = 1;
 } else {
-  console.log(`Passed: shared theme assets, accessible toggle and three social icons on ${pages.length} pages.`);
+  console.log(`Passed: shared theme assets, accessible toggle and publication contact icons on ${pages.length} pages.`);
 }
