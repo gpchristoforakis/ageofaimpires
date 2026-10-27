@@ -1,0 +1,56 @@
+/* The task reference, comparison guide and time-value calculator. */
+.task-system { --task-text: var(--ink, var(--navy)); }
+.task-system a { text-underline-offset: .2em; }
+.task-system :is(a, button, input):focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+.task-system .task-contents { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 30px; }
+.task-system .task-contents a { min-height: 44px; display: inline-flex; align-items: center; font: 700 14px/1.4 Arial, sans-serif; color: var(--teal); }
+.task-system .task-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 28px; }
+.task-system .task-card { padding: 24px; border: 1px solid var(--line); background: var(--surface); }
+.task-system .task-card h3 { font-size: 29px; }
+.task-system .task-card p { font-size: 17px; }
+.task-system .task-card strong { color: var(--task-text); }
+.task-system .task-context { margin-top: 26px; }
+.task-system .task-context h3 { font: 700 19px/1.5 Georgia, "Times New Roman", serif; letter-spacing: 0; color: var(--task-text); }
+.task-system .task-context h3 strong { font-weight: 700; }
+.task-system .task-context h3 span { font-weight: 400; }
+.task-system .task-context p { margin-top: 8px; }
+.task-system .task-path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0; gap: 16px; list-style: none; margin: 28px 0 0; }
+.task-system .task-path li { margin: 0; padding: 22px; border-top: 3px solid var(--teal); background: var(--surface); font-size: 18px; }
+.task-system .task-path b { display: block; color: var(--task-text); margin-bottom: 8px; }
+.task-system .task-source { white-space: pre-wrap; overflow-wrap: anywhere; margin: 24px 0 0; padding: 24px; border: 1px solid var(--line); background: var(--surface); color: var(--task-text); font: 16px/1.65 Arial, sans-serif; }
+.task-system .task-table-wrap { overflow-x: auto; margin-top: 26px; border: 1px solid var(--line); }
+.task-system .task-table { width: 100%; border-collapse: collapse; color: var(--task-text); font: 16px/1.5 Arial, sans-serif; }
+.task-system .task-table caption { text-align: left; padding: 16px; font-weight: 700; }
+.task-system .task-table :is(th, td) { padding: 15px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+.task-system .task-table thead th { background: var(--surface); }
+.task-system .task-table tbody th { font-weight: 600; width: 32%; }
+.task-system .task-check { border: 1px solid var(--line); margin-top: 18px; padding: 18px 22px; background: var(--surface); }
+.task-system .task-check summary { cursor: pointer; min-height: 44px; color: var(--task-text); font: 700 16px/1.5 Arial, sans-serif; }
+.task-system .task-check p { font-size: 17px; }
+.task-system .task-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.task-system .task-button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: var(--surface); color: var(--task-text); padding: 10px 16px; font: 700 14px/1.4 Arial, sans-serif; cursor: pointer; text-decoration: none; }
+.task-system .task-button:hover { border-color: var(--teal); }
+.task-system .task-copy-status { display: block; min-height: 1.5em; margin-top: 10px; color: var(--slate); font: 14px/1.5 Arial, sans-serif; }
+.task-system .task-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
+.task-system .task-fields label:first-child { grid-column: 1 / -1; }
+.task-system .task-fields label { display: block; color: var(--task-text); font: 700 15px/1.5 Arial, sans-serif; }
+.task-system .task-fields input { display: block; width: 100%; margin-top: 8px; padding: 14px; min-height: 48px; border: 1px solid var(--line); background: var(--paper); color: var(--task-text); font: 20px/1.4 Arial, sans-serif; }
+.task-system .task-unit { display: block; margin-top: 7px; font-size: 14px; font-weight: 400; color: var(--slate); }
+.task-system .task-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; border-top: 1px solid var(--line); padding-top: 26px; margin-top: 24px; }
+.task-system .task-result { padding: 22px; background: var(--surface); }
+.task-system .task-result h3 { font: 700 15px/1.5 Arial, sans-serif; letter-spacing: 0; }
+.task-system .task-result output { display: block; margin-top: 14px; font: 500 clamp(27px, 4vw, 38px)/1.2 Georgia, serif; color: var(--teal); overflow-wrap: anywhere; }
+.task-system .task-result p { margin-top: 12px; font-size: 17px; }
+.task-system .task-warning { border-left: 3px solid var(--amber); padding-left: 18px; }
+.task-system .task-warning strong { color: var(--task-text); }
+.task-system .task-skip { position: fixed; top: 10px; left: 10px; z-index: 1001; padding: 12px 18px; background: var(--paper); color: var(--task-text); transform: translateY(-160%); }
+.task-system .task-skip:focus { transform: none; }
+@media (max-width: 640px) {
+  .task-system :is(.task-grid, .task-path, .task-fields, .task-results) { grid-template-columns: 1fr; }
+  .task-system .task-card, .task-system .task-source, .task-system .task-result { padding: 20px; }
+  .task-system .task-table :is(th, td) { padding: 12px; font-size: 14px; }
+}
+@media print {
+  .task-system .task-contents, .task-system .task-actions, .task-system .task-copy-status { display: none; }
+  .task-system .task-table-wrap { overflow: visible; }
+}
