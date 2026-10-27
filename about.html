@@ -172,7 +172,35 @@ h1{
   grid-template-columns:1fr;
   gap:18px;
 }
-.about-intro-grid .copy{max-width:920px}
+.about-intro-grid .copy{
+  width:min(100%,720px);
+  margin-inline:auto;
+}
+.page-about .aoai-publication-name{white-space:nowrap;font-weight:600}
+.page-about .aoai-publication-ai{color:var(--amber);font-weight:800}
+.page-about .about-intro-grid .aoai-publication-note{
+  margin:30px 0 28px;
+  padding:16px 20px 18px;
+  border-left:3px solid var(--teal);
+  background:var(--surface);
+}
+.page-about .aoai-publication-note-label{
+  display:block;
+  margin-bottom:8px;
+  color:var(--teal);
+  font:800 11px/1.4 Arial,Helvetica,sans-serif;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.page-about .copy .aoai-publication-note p{
+  margin:0;
+  color:var(--slate);
+  font:italic 17px/1.62 Georgia,"Times New Roman",serif;
+}
+@media(max-width:640px){
+  .page-about .about-intro-grid .aoai-publication-note{padding:14px 16px}
+  .page-about .copy .aoai-publication-note p{font-size:16px}
+}
 .section-label{
   margin:0;
   color:var(--teal);
@@ -900,7 +928,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <link rel="stylesheet" href="assets/site-theme.css?v=f7d224d79a6e">
 
 <link rel="stylesheet" href="assets/archivist.css?v=718170a3b9c0">
-<script src="assets/archivist.js?v=a24c2f5ed579" defer></script>
+<script src="assets/archivist.js?v=1cfcd3e8e170" defer></script>
 </head>
 <body class="page-about">
 <header>
@@ -939,7 +967,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div class="copy">
 <h2>Simply A Founder. Not AI Evangelist.</h2>
 <p class="lead">As a consumer tech entrepreneur with branding background, I’m interested in how an idea becomes something people understand, trust, choose and keep choosing over the alternatives.</p>
-<p class="aoai-publication-note">AGE OF AIMPIRES is not a startup or commercial venture. It is an independent publication about the economics, behaviour and consequences of AI becoming part of everyday life and work.</p>
+<aside class="aoai-publication-note" aria-label="Publication disclosure"><span class="aoai-publication-note-label">Editorial Disclosure</span><p><span class="aoai-publication-name">AGE OF <span class="aoai-publication-ai">AI</span>MPIRES</span> is not a startup or commercial venture. It is an independent publication about the economics, behaviour and consequences of AI becoming part of everyday life and work.</p></aside>
 <p>An F1 race car is ridiculously impressive, but that does not mean anyone can drive it. AI assistants are getting better by the hour, but they are also becoming more complex. That makes it harder for people to understand how they work, trust their results, or judge whether they are actually useful for the task in front of them.</p></div>
 </div>
 <div aria-label="Principles" class="shell principles">

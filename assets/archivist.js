@@ -4,7 +4,7 @@
   const assetRoot = new URL('./archivist/', document.currentScript.src);
   const portrait = new URL('archivist-portrait.jpg', assetRoot).href;
   const idleVideo = new URL('archivist-idle.mp4', assetRoot).href;
-  const voiceModuleUrl = new URL('./archivist-voice.js?v=dfbdce1bb311', document.currentScript.src).href;
+  const voiceModuleUrl = new URL('./archivist-voice.js?v=292c6530d8ef', document.currentScript.src).href;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const history = [];
   let loading = false;

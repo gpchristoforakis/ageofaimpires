@@ -517,6 +517,15 @@
 
 
     /* Homepage entry containers */
+    .home-reading-column {
+      width: min(100%, 720px);
+      margin-inline: auto;
+    }
+    .aoai-home-inline-ai {
+      color: var(--amber);
+      font-weight: 800;
+    }
+
     .entries-section {
       background: var(--paper);
       color: var(--navy)
@@ -885,7 +894,7 @@
 <link rel="stylesheet" href="assets/site-theme.css?v=f7d224d79a6e">
 
 <link rel="stylesheet" href="assets/archivist.css?v=718170a3b9c0">
-<script src="assets/archivist.js?v=a24c2f5ed579" defer></script>
+<script src="assets/archivist.js?v=1cfcd3e8e170" defer></script>
 </head>
 
 <body class="page-home">
@@ -908,9 +917,11 @@
     <section class="section dark home-hero">
       <div class="shell">
         <p class="section-label aoai-brand aoai-brand--section">Why AGE OF <span class="aoai-brand-ai">AI</span>MPIRES Exists</p>
-        <h1 class="home-headline">Pragmatics Of AI.<br><span>Zero Coding Noise.</span></h1>
-        <p class="home-subheadline">AI assistants are not just search engines with better manners. They can help with thinking, making, deciding, and getting real work done.</p>
-        <p class="home-subheadline">The real question is what happens next.</p>
+        <div class="home-reading-column">
+          <h1 class="home-headline">Pragmatics Of AI.<br><span>Zero Coding Noise.</span></h1>
+          <p class="home-subheadline">AI assistants are not just search engines with better manners. They can help with thinking, making, deciding, and getting real work done.</p>
+          <p class="home-subheadline">The real question is what happens next.</p>
+        </div>
         <div class="manifesto-banner">
           <h2 class="manifesto-title">Make The Idea <strong>Simpler.</strong> <strong>Not</strong> <span class="manifesto-smaller">Smaller.</span></h2>
           <p class="manifesto-text">No model worship. No sweeping claims that everything has changed. No code-heavy explanations for their own sake.</p>
@@ -926,8 +937,10 @@
     <section class="section entries-section">
       <div class="shell">
         <p class="section-label">Entries</p>
-        <h2>What Happens After The AI Replies.</h2>
-        <p class="entries-intro">Answers are easy. What comes next is the interesting part: the hidden work left behind, the fate of websites when assistants do the browsing, and where the money goes when nobody is watching the ads.</p>
+        <div class="home-reading-column">
+          <h2>What Happens After The AI Replies.</h2>
+          <p class="entries-intro">Answers are easy. What comes next is the interesting part: the hidden work left behind, the fate of websites when assistants do the browsing, and where the money goes when nobody is watching the ads.</p>
+        </div>
         <div class="entries-grid">
           <a class="entry-card" href="age-of-aimpires-entry-01.html" aria-label="Read Entry 01: Fast AI. Expensive Lesson.">
             <h3 class="typo-cover c1">Fast AI. Expensive Lesson.</h3>
@@ -958,7 +971,7 @@
     <section class="colophon-section">
       <div class="shell colophon-content">
         <div class="colophon-text">
-          <p><strong>Age of AImpires is written and maintained by George Paris Christoforakis.</strong></p>
+          <p><strong>AGE OF <span class="aoai-home-inline-ai">AI</span>MPIRES is written and maintained by George Paris Christoforakis.</strong></p>
           <p>Beyond writing about AI pragmatics, I run <strong><a href="https://thestudiocy.framer.website/">THE STUDIO</a></strong>—a business-first AI partner based in Cyprus. I help EU companies move past the AI hype to identify, test, and build capital-efficient AI workflows.</p>
         </div>
       </div>
