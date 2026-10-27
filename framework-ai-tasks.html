@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/media/favicon.svg">
+<meta charset="utf-8"/>
+<script src="assets/site-theme.js"></script>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Which AI Assistant Fits The Job? — AGE OF AIMPIRES</title>
+<meta name="description" content="Start with the work that needs doing. Define a usable result, compare assistants under the same conditions and account for human effort.">
+<style>
+  :root{
+    --paper:#F5F1E8;--navy:#111C2C;--deep:#0C1624;--slate:#53606D;--teal:#147D78;--amber:#D58A2A;--line:#DCD5C8;--surface:#ECE6DA;--max:1440px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--navy);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .shell{width:min(calc(100% - 80px),var(--max));margin:0 auto}
+  .header-shell{width:min(calc(100% - 128px),var(--max));margin:0 auto}
+  header{min-height:76px;display:flex;align-items:center;border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:32px}
+  .brand{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:#252c11}
+  .ai-mark{color:var(--teal);font-weight:800}
+  nav{display:flex;align-items:center;gap:28px;font-size:14px}
+  nav a{text-decoration:none;color:var(--slate)}
+  nav a:hover,nav a[aria-current="page"]{color:var(--navy)}
+  .hero{padding:72px 0 64px;border-bottom:1px solid var(--line)}
+  .back-link{display:inline-flex;margin-bottom:34px;color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+  .kicker,.section-label{margin:0 0 18px;color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.035em}
+  h1{margin:0;max-width:1040px;font-size:clamp(54px,6vw,92px);line-height:.96}
+  .standfirst{max-width:880px;margin:30px 0 0;color:var(--slate);font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2vw,28px);line-height:1.48}
+  .body{padding:0 0 92px}
+  .section{display:grid;grid-template-columns:180px minmax(0,1fr);gap:54px;padding:58px 0;border-bottom:1px solid var(--line)}
+  .section:last-child{border-bottom:0}
+  .section-content{max-width:980px}
+  .section h2{margin:0;font-size:clamp(38px,4vw,60px);line-height:1.02}
+  .section h3{margin:0;font-size:clamp(26px,2.7vw,38px);line-height:1.1}
+  .section p,.section li{color:var(--slate);font-family:Georgia,"Times New Roman",serif;font-size:19px;line-height:1.62}
+  .section p{margin:20px 0 0}
+  .section ul{margin:22px 0 0;padding-left:1.25em}
+  .section li+li{margin-top:10px}
+  .lead{font-size:23px!important;color:var(--navy)!important;line-height:1.52!important}
+  .formula{margin-top:32px;background:var(--navy);color:var(--paper);padding:32px 34px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(22px,2.3vw,32px);line-height:1.52}
+  .formula strong{color:#79C8C0;font-weight:500}
+  .formula small{display:block;margin-top:14px;color:#C7CEC9;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;letter-spacing:.01em}
+  .grid-2,.grid-3,.grid-4{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:30px}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);padding:26px}
+  .card .mini{display:block;margin-bottom:9px;color:var(--teal);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+  .card h3{font-size:27px;letter-spacing:-.025em}
+  .card p{margin-top:12px;font-size:17px;line-height:1.52}
+  .dark-band{margin-top:30px;background:var(--deep);padding:30px;color:var(--paper)}
+  .dark-band h3{color:var(--paper)}
+  .dark-band p{color:#CED4D0}
+  .boundary{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin-top:30px}
+  .boundary-box{padding:28px;background:var(--surface)}
+  .boundary-box.good{background:var(--navy);color:var(--paper)}
+  .boundary-box .mini{display:block;margin-bottom:10px;color:var(--teal);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+  .boundary-box.good .mini{color:#79C8C0}
+  .boundary-box h3{font-size:30px}
+  .boundary-box p{font-size:17px;margin-top:12px;color:var(--slate)}
+  .boundary-box.good p{color:#D5DAD6}
+  .arrow{display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--teal)}
+  .afp{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+  .afp .step{padding:28px;border:1px solid var(--line);background:var(--paper)}
+  .step b{display:block;color:var(--teal);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .step h3{font-size:32px}
+  .step p{font-size:17px;margin-top:10px}
+  .comparison{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:30px}
+  .compare{padding:28px;border:1px solid var(--line)}
+  .compare h3{font-size:31px}
+  .compare.low{background:var(--surface)}
+  .compare.high{background:var(--navy);color:var(--paper)}
+  .compare.high p,.compare.high li{color:#D5DAD6}
+  .compare .verdict{margin-top:22px;padding-top:18px;border-top:1px solid rgba(127,127,127,.35);font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+  .compare.high .verdict{color:#79C8C0}
+  .checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px}
+  .check{position:relative;padding:20px 22px 20px 54px;border:1px solid var(--line);font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.48;color:var(--slate)}
+  .check:before{content:"✓";position:absolute;left:21px;top:18px;color:var(--teal);font-family:Arial,Helvetica,sans-serif;font-weight:800}
+  .note{margin-top:28px;padding-left:22px;border-left:3px solid var(--amber);color:var(--slate);font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.58}
+  .footer-links{display:flex;flex-wrap:wrap;gap:24px;margin-top:32px}
+  .source-link{display:inline-flex;color:var(--teal);font-size:13px;font-weight:800;letter-spacing:.04em;text-decoration:none}
+  .source-link:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:24px 0 32px;color:var(--slate);font-size:12px}
+  @media(max-width:980px){
+    .shell{width:min(calc(100% - 36px),var(--max))}.header-shell{width:min(calc(100% - 48px),var(--max))}nav{gap:16px}nav[aria-label="Primary"] a:not(:last-child){display:none}
+    .hero{padding:56px 0 50px}.section{grid-template-columns:1fr;gap:18px;padding:46px 0}.grid-3,.grid-4{grid-template-columns:1fr 1fr}.boundary{grid-template-columns:1fr}.arrow{transform:rotate(90deg);min-height:22px}.afp,.comparison{grid-template-columns:1fr}
+  }
+  @media(max-width:640px){
+    header{min-height:64px}.header-shell{width:min(calc(100% - 36px),var(--max))}h1{font-size:clamp(48px,14vw,68px)}.standfirst{font-size:21px}.grid-2,.grid-3,.grid-4,.checklist{grid-template-columns:1fr}.formula{padding:26px 22px}.card,.compare,.step{padding:22px}
+  }
+
+  .source-copy strong{color:var(--navy)}
+  .source-copy .plain-list{margin-top:22px}
+  .source-copy .numbered{margin-top:22px;padding-left:1.4em}
+  .source-copy .numbered li{padding-left:.2em}
+  .source-copy .source-formula{margin-top:28px;background:var(--navy);color:var(--paper);padding:28px 32px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2.1vw,30px);line-height:1.5}
+  .source-copy .source-formula + .source-formula{margin-top:1px}
+  .source-copy .source-formula strong{color:#79C8C0;font-weight:500}
+  .source-copy .setup-copy p{margin-top:10px}
+
+.framework-cta{display:inline-flex;align-items:center;gap:9px;min-height:34px;margin-top:20px;padding:0 12px 0 7px;border:1px solid var(--line);background:rgba(255,255,255,.28);color:var(--navy);font-size:13px;font-weight:700;text-decoration:none}
+.framework-cta-icon{width:24px;height:24px;display:inline-grid;place-items:center;background:var(--navy);color:var(--paper);font-size:11px;line-height:1}
+.framework-cta:hover .framework-cta-icon{background:var(--teal)}
+.framework-cta:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* Floating back-to-top control */
+.back-to-top{position:fixed;right:24px;top:50%;z-index:60;min-height:44px;padding:0 15px;border:1px solid var(--line);background:rgba(245,241,232,.96);color:var(--navy);font:inherit;font-size:12px;font-weight:800;letter-spacing:.04em;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(calc(-50% + 8px));transition:opacity .18s ease,transform .18s ease,visibility .18s ease,border-color .18s ease;box-shadow:0 8px 24px rgba(12,22,36,.08)}
+.back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(-50%)}
+.back-to-top:hover{border-color:var(--navy)}
+.back-to-top:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+@media(max-width:700px){.back-to-top{right:12px;top:auto;bottom:18px;transform:translateY(8px);padding:0 11px;min-height:40px}.back-to-top.is-visible{transform:none}}
+
+
+.legal-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  padding-top:18px;
+  margin-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--slate);
+  font-size:12px;
+}
+.legal-links a{color:inherit;text-decoration:none}
+.legal-links a:hover{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+
+
+
+/* Mobile navigation — 29 Sep 2026 */
+.menu-toggle{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:0 13px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--navy);
+  font:inherit;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.04em;
+  cursor:pointer;
+}
+.menu-toggle:hover{border-color:var(--navy)}
+.menu-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+@media(max-width:980px){
+  header .nav{position:relative;flex-wrap:nowrap}
+  .menu-toggle{display:inline-flex;margin-left:auto}
+  nav[aria-label="Primary"]{
+    display:none;
+    position:absolute;
+    top:calc(100% + 12px);
+    right:0;
+    z-index:1000;
+    width:min(280px,calc(100vw - 36px));
+    padding:8px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    box-shadow:0 16px 36px rgba(12,22,36,.14);
+  }
+  nav[aria-label="Primary"].is-open{display:flex}
+  nav[aria-label="Primary"] a,
+  nav[aria-label="Primary"] a:not(:last-child),
+  nav[aria-label="Primary"] a:not(.active):not(:last-child){
+    display:block !important;
+    padding:12px 11px;
+    color:var(--navy);
+    border-bottom:1px solid var(--line);
+  }
+  nav[aria-label="Primary"] a:last-child{border-bottom:0}
+  nav[aria-label="Primary"] a:hover{background:rgba(236,230,218,.65)}
+}
+
+</style>
+<style id="aoai-consistency">
+/* Shared brand treatments: header/footer wordmark and reversed section wordmark. */
+:root{--brand-ink:var(--ink,#2b2b2b);--brand-gold:var(--gold-deep,#8a642e);--brand-white:#fff}
+.aoai-brand{--brand-base:var(--brand-ink);--brand-ai:var(--brand-gold);color:var(--brand-base)}
+.aoai-brand.aoai-brand--section{--brand-base:var(--brand-gold);--brand-ai:var(--brand-ink)}
+.aoai-brand .aoai-brand-ai{color:var(--brand-ai)}
+.dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
+.dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
+</style>
+<style id="release-consistency">
+/* Latest approved Guide 1 header/footer palette. */
+body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-footer .aoai-brand{--brand-base:#252c11;--brand-ai:#cd6a15;color:#252c11}
+body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
+
+.share-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:26px 0 34px}
+.share-row.share-row-end{margin:42px 0 0;padding-top:28px;border-top:1px solid var(--line,#d9d0c2)}
+.share-button{border:1px solid var(--line,#d9d0c2);background:#f5f1e8;color:var(--ink,#111c2c);font:inherit;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 15px}
+.share-button:hover{border-color:var(--ink,#111c2c)}
+.share-button:focus-visible{outline:2px solid var(--gold,#c9a46a);outline-offset:2px}
+.share-button.is-copied{border-color:var(--teal,#147d78);color:var(--teal,#147d78)}
+.share-status{color:var(--muted,#6f6a62);font-size:12px;min-height:1em}
+.release-share-wrap{width:min(calc(100% - 128px),1440px);margin-inline:auto;padding-block:1px 24px}
+@media(max-width:980px){.release-share-wrap{width:calc(100% - 48px)}}
+@media(max-width:640px){.release-share-wrap{width:calc(100% - 36px)}}
+</style><link rel="stylesheet" href="assets/editorial-studio.css?v=bf79ac73d8d9">
+<link rel="stylesheet" href="assets/editorial-spacing.css">
+<link rel="stylesheet" href="assets/task-framework.css?v=84b291c0e699">
+<link rel="stylesheet" href="assets/site-theme.css?v=572bd7dfb9a9">
+
+<link rel="stylesheet" href="assets/archivist.css?v=77cfaaeb3df9">
+<script src="assets/archivist.js?v=dc8a28d8f277" defer></script>
+<link rel="canonical" href="https://ageofaimpires.com/framework-ai-tasks">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Age of AI Empires"><meta property="og:title" content="Which AI Assistant Fits The Job?"><meta property="og:description" content="Start with the work that needs doing. Define a usable result, compare assistants under the same conditions and account for human effort."><meta property="og:url" content="https://ageofaimpires.com/framework-ai-tasks"><meta property="og:image" content="https://ageofaimpires.com/assets/og-default.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Pragmatics of AI. Zero Noise."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Which AI Assistant Fits The Job?"><meta name="twitter:description" content="Start with the work that needs doing. Define a usable result, compare assistants under the same conditions and account for human effort."><meta name="twitter:image" content="https://ageofaimpires.com/assets/og-default.png">
+</head>
+<body class="page-framework task-system"><a class="task-skip" href="#main-content">Skip to content</a>
+<header><div class="header-shell nav"><a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a><div class="aoai-header-actions"><button class="aoai-theme-toggle" type="button" data-theme-toggle aria-label="Toggle Theme: dark mode" aria-pressed="false" hidden><svg class="aoai-theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg><svg class="aoai-theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="aoai-theme-label">Toggle Theme</span></button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button></div>
+<nav id="primary-nav" aria-label="Primary"><a href="entries.html">Entries</a><a href="how-to.html">Guides</a><a href="notebook.html">Notebook</a><a aria-current="page" href="frameworks.html">Frameworks</a><a href="about.html">About</a>
+<a href="contact.html">Contact</a><a aria-label="Language" href="#">EN</a></nav></div></header>
+<main id="main-content"><section class="hero"><div class="header-shell"><a class="back-link" href="frameworks.html">Back To Frameworks</a><p class="kicker">Task Framework · Task Economics</p><h1>Which AI Assistant Fits The Job?</h1><p class="standfirst">Start with the work that needs doing. Define a usable result, compare assistants under the same conditions and account for human effort.</p><nav class="task-contents" aria-label="On this page"><a href="#families">Task Families</a><a href="#conditions">Conditions</a><a href="#finish">The Finish Line</a><a href="#scenario">The Meeting Example</a><a href="#measures">What To Measure</a><a href="#check">Quick Checks</a><a href="#time">Human Time</a></nav></div></section><div class="shell body source-copy"><div aria-label="Page sharing" class="share-row"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div><section class="section" id="start"><div class="section-label">01 · Start</div><div class="section-content"><h2>Better At What?</h2><p>A useful comparison starts with a familiar job. “Good at writing” is too broad: suggesting a short caption and compiling an annual report place different demands on an assistant.</p><ol class="task-path" aria-label="Three parts of a task comparison"><li><b>What Is The Job?</b>Choose the task family and describe the intended result.</li><li><b>What Must It Handle?</b>Specify the information, constraints and finish line.</li><li><b>How Well Did It Do?</b>Check quality, consistency, effort, speed and boundaries.</li></ol></div></section><section class="section" id="families"><div class="section-label">02 · Families</div><div class="section-content"><h2>Six Kinds Of Work</h2><p>These are task families, not levels of intelligence. A difficult explanation may demand more capability than a simple booking. Classify the main outcome; add other families when the job contains several stages.</p><div class="task-grid"><article class="task-card"><h3>Understand</h3><p>Explain or make sense of something: a concept, document or procedure.</p><p><strong>Usable means:</strong> accurate, clear and appropriate to the reader. A fluent explanation still needs its facts checked.</p></article><article class="task-card"><h3>Find</h3><p>Locate information or evidence: a file, a specification, a current price or an available appointment.</p><p><strong>Usable means:</strong> the relevant information is supported by a verifiable source. Time-sensitive facts need a current source.</p></article><article class="task-card"><h3>Transform</h3><p>Change existing material while preserving what matters: summarise, translate, rewrite or extract fields.</p><p><strong>Usable means:</strong> the required meaning and facts survive, and the output fits the requested format.</p></article><article class="task-card"><h3>Create</h3><p>Produce something new against a brief: an email, campaign ideas, a spreadsheet formula or a working calculator.</p><p><strong>Usable means:</strong> it meets the brief and works in its intended setting. Attractive output can still be wrong.</p></article><article class="task-card"><h3>Evaluate And Plan</h3><p>Compare possibilities and recommend a course: suppliers, flooring options, an itinerary or a sequence of work.</p><p><strong>Usable means:</strong> constraints are respected, assumptions are visible and the trade-offs support the decision.</p></article><article class="task-card"><h3>Act</h3><p>Make a change in a system or service: save a file, update a record, schedule an appointment or place an authorised booking.</p><p><strong>Usable means:</strong> the intended change actually happened, within the permissions granted, and the result is confirmed.</p></article></div><p>For example, planning and booking a trip involves finding, evaluating and acting. Keep the whole trip as the user’s job, but inspect each stage when something fails.</p></div></section><section class="section" id="conditions"><div class="section-label">03 · Conditions</div><div class="section-content"><h2>Same Family. Different Demands.</h2><div class="task-grid"><article class="task-card"><h3>Information</h3><p>Does the work use supplied material, general knowledge, live sources or private connected sources? Record the source and the access the assistant actually has.</p></article><article class="task-card"><h3>Completion Test</h3><p>Does the result require verification of exact fields or a calculation? Does it require judgement against a creative brief? Is exploration itself the intended outcome?</p></article><article class="task-card"><h3>Complexity</h3><p>Is this one bounded output or a chain of dependent steps? Note the length of the material, number of files and constraints that must remain consistent.</p></article><article class="task-card"><h3>Consequences</h3><p>Is a mistake easy to inspect and reverse, or costly to get wrong? Required review and permission are part of the task, not optional extras.</p></article></div><p>Record the language and domain when they matter. Success with an English invoice does not establish reliability with a Greek one.</p><div class="note">A missing connection is a limit of the assistant setup. A wrong answer despite access is a performance failure. Record the distinction.</div></div></section><section class="section" id="finish"><div class="section-label">04 · Finish</div><div class="section-content"><h2>Define Usable Before Testing</h2><p>Write the conditions that make the result usable. Decide them before seeing the assistants’ answers, so a polished response does not quietly lower the standard.</p><ul><li><strong>Required content:</strong> what must be included, and what must be excluded?</li><li><strong>Accuracy:</strong> which facts, numbers or source details must match?</li><li><strong>Format:</strong> what structure or file must work?</li><li><strong>Action:</strong> is advice enough, or must something actually be changed and confirmed?</li></ul><p>Exploration also needs a boundary. “Generate ten distinct campaign directions with one reason for each” is a task with a finish line. Extra ideas belong to the original task when the brief requests them.</p><p>This builds on <a href="framework-effective-task-cost.html">the Effective Task Cost Framework</a>: the assistant finishing a reply and the job being usable are separate events.</p></div></section><section class="section" id="scenario"><div class="section-label">05 · Example</div><div class="section-content"><h2>One Meeting. Three Assigned Actions.</h2><p>This fictional meeting recurs throughout the framework, guide and checks. The job is to turn the notes into a usable action table.</p><pre class="task-source">Mary: Send the revised budget by Thursday.
+Tom: Confirm supplier availability by Friday.
+Gloria: Update the launch checklist by Monday.
+Peter: A customer FAQ could be useful later.
+Meeting note: No owner or deadline was agreed for the FAQ.</pre><div class="task-context"><h3><strong>Task Family:</strong> <span>Transform</span></h3><p>The task reorganises existing meeting notes into a table while preserving the assigned actions, owners and deadlines.</p></div><div class="task-context"><h3>Working Conditions</h3><p>All required information is contained in the supplied notes. The assistant produces one table. No external research or changes to other systems are needed.</p></div><p><strong>Finish Line:</strong> include all three assigned actions with the correct owners and deadlines. Preserve the day names. Exclude the unassigned FAQ idea. Return an Action / Owner / Deadline table without extra commentary.</p><div class="task-table-wrap"><table class="task-table"><caption>The Usable Result For This Example</caption><thead><tr><th scope="col">Action</th><th scope="col">Owner</th><th scope="col">Deadline</th></tr></thead><tbody><tr><td>Send the revised budget</td><td>Mary</td><td>Thursday</td></tr><tr><td>Confirm supplier availability</td><td>Tom</td><td>Friday</td></tr><tr><td>Update the launch checklist</td><td>Gloria</td><td>Monday</td></tr></tbody></table></div><p>Equivalent wording is fine if it preserves the action. Inventing a calendar date, adding a fourth assigned action or omitting an owner fails the check.</p><p>A later request to put these actions into a calendar adds an Act stage. A request to verify supplier availability adds a Find stage using current information.</p></div></section><section class="section" id="measures"><div class="section-label">06 · Compare</div><div class="section-content"><h2>Measure More Than The First Reply</h2><div class="task-table-wrap"><table class="task-table"><caption>Keep Each Measure Tied To The Same Job And Conditions</caption><thead><tr><th scope="col">Measure</th><th scope="col">What To Check</th></tr></thead><tbody><tr><th scope="row">Capability</th><td>Can it meet the completion criteria on representative examples, with the tools available?</td></tr><tr><th scope="row">Quality</th><td>How well does the result meet the brief? In the meeting example, check completeness and fidelity to the notes.</td></tr><tr><th scope="row">Reliability</th><td>How consistently does it pass across fresh attempts and different examples? Record successes and attempts, not just the best answer.</td></tr><tr><th scope="row">Efficiency</th><td>How much active human time goes into prompting, reading, checking, correcting and finishing?</td></tr><tr><th scope="row">Speed</th><td>How much elapsed time passes from starting the job to a usable result, including waiting?</td></tr><tr><th scope="row">Scope Discipline</th><td>Does it finish the requested job and keep optional suggestions separate? Useful extra work still requires a deliberate decision to pursue it.</td></tr></tbody></table></div><p>One successful answer shows a success. It does not establish reliability. Repeat in fresh chats and vary the source material: longer notes, missing deadlines, conflicting statements and other examples drawn from routine work.</p><p>Use the same starting brief, source and correction budget for each assistant. Record the product, model or mode when visible, plan, available tools and date. When comparing complete assistants, tool access is part of their usefulness.</p><div class="note">Report failures and time spent on them. A quick result that fails the completion test is not a cheap completed job. Small personal trials are useful evidence for the workflow tested, not a universal ranking.</div></div></section><section class="section" id="check"><div class="section-label">07 · Check</div><div class="section-content"><h2>What Makes The Difference?</h2><details class="task-check"><summary>The table looks right, but Thursday has become an invented calendar date. Is the job usable?</summary><p>No. The brief requires deadlines as written. A plausible extra detail is still a failure of accuracy and scope.</p></details><details class="task-check"><summary>The three actions are correct. A follow-up request asks for reminder emails. Is that correction or going further?</summary><p>Going further. The original table was already usable; drafting emails is an additional Create task. Correcting a missing action would still belong to reaching the original finish line.</p></details><details class="task-check"><summary>One assistant takes longer to respond but needs less checking and editing. Which is more efficient?</summary><p>Compare active human effort separately from elapsed speed. The slower response can require less human time. Both observations matter when choosing.</p></details></div></section><section class="section" id="time"><div class="section-label">08 · Time</div><div class="section-content"><h2>Put A Value On Human Effort</h2><p>Track the active human time spent reaching the usable result. Separately track the time deliberately spent beyond that finish line. The <a href="time-cost-calculator.html">time-cost calculator</a> values those two stages at the chosen hourly rate.</p><p>Ten minutes spent editing is different from ten minutes waiting while other work continues. Record elapsed time separately; count waiting in active time only when it requires attention.</p><p>The calculator does not measure quality, reliability, the value of discoveries or AI fees. Use the performance checks first, then use the calculator to understand the time consequences.</p><div class="task-actions"><a class="task-button" href="framework-ai-tasks.html">Understand The Task Framework</a><a class="task-button" href="compare-assistants-on-one-task.html">Compare Two Assistants</a><a class="task-button" href="time-cost-calculator.html">Value The Time Spent</a></div></div></section><section class="section" id="basis"><div class="section-label">09 · Basis</div><div class="section-content"><h2>A Practical Framework, Not A Leaderboard</h2><p>This is the publication’s way of organising real jobs and personal comparisons. It is not a validated benchmark or a claim that one assistant wins every kind of work.</p><p>The distinction between task scenarios and multiple performance measures is informed by <a href="https://crfm.stanford.edu/2022/11/17/helm.html">Stanford’s HELM research</a>. Repeated attempts as a test of consistency are also explored in <a href="https://arxiv.org/abs/2406.12045">the τ-bench paper</a>. The six reader-facing task families are an editorial proposal, not categories taken from those studies.</p></div></section><div class="share-row share-row-end"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div></main>
+<button aria-label="Back to the top" class="back-to-top" data-back-to-top type="button">↑ Back To The Top</button>
+<footer><div class="shell"><a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a></div><div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
+<div class="shell aoai-social-shell">
+<nav class="aoai-social-links" aria-label="AGE OF AIMPIRES social profiles">
+<a href="https://www.instagram.com/ageofaimpires/" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on Instagram (opens in a new tab)" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+<a href="https://www.linkedin.com/company/age-of-aimpires/" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on LinkedIn (opens in a new tab)" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5.3 3a2.3 2.3 0 1 0 0 4.6 2.3 2.3 0 0 0 0-4.6ZM3.4 9h3.8v12H3.4V9Zm5.9 0h3.6v1.6h.1c.5-1 1.7-1.9 3.5-1.9 3.8 0 4.5 2.5 4.5 5.7V21h-3.8v-5.9c0-1.4 0-3.2-1.9-3.2s-2.2 1.5-2.2 3.1v6H9.3V9Z"/></svg></a>
+<a href="https://x.com/ageofaimpires" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on X (opens in a new tab)" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L5.5 22H2.3l7.4-8.5L1.8 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L7.4 4H5.6l12.2 16Z"/></svg></a>
+</nav>
+</div>
+<div class="shell">
+  <aside class="aoai-studio-footer" aria-labelledby="studio-footer-heading">
+    <h2 id="studio-footer-heading">From Ideas To Implementation</h2>
+    <p>From theory to practice. <a class="aoai-studio-link" href="https://thestudiocy.framer.website/">Visit THE STUDIO</a></p>
+  </aside>
+</div>
+</footer>
+
+<script>
+(() => {
+  const button = document.querySelector('[data-back-to-top]');
+  if (!button) return;
+  const sync = () => button.classList.toggle('is-visible', window.scrollY > 520);
+  sync();
+  window.addEventListener('scroll', sync, {passive:true});
+  button.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+})();
+</script>
+
+
+<script>
+(() => {
+  const button = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('nav[aria-label="Primary"]');
+  if (!button || !menu) return;
+
+  const closeMenu = () => {
+    menu.classList.remove('is-open');
+    button.setAttribute('aria-expanded', 'false');
+  };
+
+  button.addEventListener('click', () => {
+    const opening = !menu.classList.contains('is-open');
+    menu.classList.toggle('is-open', opening);
+    button.setAttribute('aria-expanded', String(opening));
+  });
+
+  menu.addEventListener('click', (event) => {
+    if (event.target.closest('a')) closeMenu();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!menu.classList.contains('is-open')) return;
+    if (menu.contains(event.target) || button.contains(event.target)) return;
+    closeMenu();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+      button.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) closeMenu();
+  });
+})();
+</script>
+
+<script>
+(() => {
+  document.querySelectorAll('[data-share-button]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const status = button.parentElement?.querySelector('[data-share-status]');
+      const label = button.querySelector('[data-share-label]');
+      const shareData = {
+        title: document.title,
+        text: document.querySelector('meta[name="description"]')?.content || '',
+        url: window.location.href.split('#')[0]
+      };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          if (status) status.textContent = 'Shared.';
+          return;
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        if (label) label.textContent = 'Link copied';
+        button.classList.add('is-copied');
+        setTimeout(() => {
+          if (label) label.textContent = 'Share this';
+          button.classList.remove('is-copied');
+        }, 1800);
+      } catch (_) {
+        window.prompt('Copy this link:', shareData.url);
+      }
+    });
+  });
+})();
+</script><script src="assets/task-tools.js?v=8609c265abfc" defer></script>
+</body>
+</html>
