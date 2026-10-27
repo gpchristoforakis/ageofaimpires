@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "the-archivist",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Search the published AGE OF AIMPIRES archive and read source pages with canonical links.",
   "author": {
     "name": "George Paris Christoforakis",
@@ -14,19 +14,19 @@
     "com.openai": {
       "interface": {
         "displayName": "The Archivist",
-        "shortDescription": "Explore AGE OF AIMPIRES",
-        "longDescription": "Ask questions about the published AGE OF AIMPIRES archive and open source pages with canonical links. The Archivist covers the publication's entries, frameworks and guides about practical AI use. It reports when the archive does not support an answer. Exact quotations should be checked against the current published page. Archive search uses a fixed indexed snapshot; page reading retrieves the current publication. This initial pilot has a shared allowance of 25 archive provider attempts per UTC day and 250 per UTC month, including retries. Reading published pages does not use that allowance.",
+        "shortDescription": "Practical AI. With Sources.",
+        "longDescription": "AI can finish a response without finishing the job.\n\nThe Archivist helps readers explore AGE OF AIMPIRES, an independent publication about the economics, behaviour and consequences of AI in everyday life and work.\n\nAsk about a published idea or describe what you're trying to achieve. For selected goals, The Archivist recommends a curated reading path, checked against the current published pages. For other questions, it searches the archive.\n\nAnswers link to relevant Entries, Guides and Frameworks. The Archivist uses only published AGE OF AIMPIRES material. It does not search the wider web, access private information or invent sources. When the archive cannot support an answer, it says so.\n\nArchive search uses an indexed snapshot that may lag behind the website. A shared allowance of 50 search-provider attempts per UTC day and 500 per UTC month applies, including retries. Reading published pages does not consume this allowance.",
         "developerName": "George Paris Christoforakis",
         "category": "Education & Research",
-        "capabilities": ["Search The Published Archive", "Read Published Pages"],
+        "capabilities": ["Find Relevant Published Reading", "Read Current Published Pages"],
         "websiteURL": "https://ageofaimpires.com",
         "supportURL": "https://ageofaimpires.com/contact",
         "privacyPolicyURL": "https://ageofaimpires.com/privacy-policy",
         "termsOfServiceURL": "https://ageofaimpires.com/terms",
         "defaultPrompt": [
+          "I'm trying to figure out which AI assistant is right for me, but I've never really used one before. Where should I start?",
           "What does AGE OF AIMPIRES mean by effective task cost?",
-          "Quote what Entry #01 says about stopping and completion.",
-          "How should I compare two free AI assistants?"
+          "How do I know whether AI has actually finished the job?"
         ],
         "brandColor": "#111C2C",
         "brandColorDark": "#F5F1E8",
@@ -37,11 +37,11 @@
         "demo_recording_url": "https://youtu.be/59OfAbTewwE",
         "test_cases": {
           "positive": [
-            { "description": "Explain effective task cost", "prompt": "What does AGE OF AIMPIRES mean by effective task cost?", "tools_triggered": "query_archive", "expected_behavior": "Explain supported concepts and link Entry #01 and the Effective Task Cost Framework when returned as supporting sources." },
+            { "description": "Beginner assistant discovery", "prompt": "I'm trying to figure out which AI assistant is right for me, but I've never really used one before. Where should I start?", "tools_triggered": "query_archive", "expected_behavior": "Return only The Effective Task Cost Framework from the curated live-site path, explain how to compare assistants using an everyday task, useful completion and correction effort, and do not claim an independent commercial ranking." },
+            { "description": "Compare assistants for client proposals", "prompt": "I'm trying to work out which of two AI assistants is better for writing client proposals. I care about the quality of the final proposal, how much time I spend correcting it, and whether the assistant actually saves me work. What should I read first in AGE OF AIMPIRES?", "tools_triggered": "query_archive", "expected_behavior": "Return the approved curated reading path in editorial order with live-site and curated-selection provenance and canonical links." },
+            { "description": "Explain effective task cost", "prompt": "What does AGE OF AIMPIRES mean by effective task cost?", "tools_triggered": "query_archive", "expected_behavior": "Use Gemini File Search for the open-ended archive question, preserve file-search provenance and return only strictly validated canonical sources." },
             { "description": "Verify an exact quotation", "prompt": "Quote the two sentences from Entry #01 about stopping and completion.", "tools_triggered": "query_archive, fetch_entry", "expected_behavior": "Read the current published entry before quoting and cite its canonical URL." },
-            { "description": "Compare free assistants", "prompt": "If both AI assistants are free, how should I compare their effective task cost?", "tools_triggered": "query_archive", "expected_behavior": "Distinguish human time and attention from direct AI fees; label invented numerical examples as illustrative." },
-            { "description": "Read a public page", "prompt": "Read the published About page of AGE OF AIMPIRES and tell me who writes it.", "tools_triggered": "fetch_entry", "expected_behavior": "Fetch the approved about ID, identify George Paris Christoforakis from the returned page and cite the canonical About URL." },
-            { "description": "Resolve a follow-up", "prompt": "What is the completion boundary? Then explain how it affects comparing two free assistants.", "tools_triggered": "query_archive", "expected_behavior": "Send self-contained archive questions, preserve source identities and distinguish publication claims from additional analysis." }
+            { "description": "Read a public page", "prompt": "Read the published About page of AGE OF AIMPIRES and tell me who writes it.", "tools_triggered": "fetch_entry", "expected_behavior": "Fetch the approved about ID, identify George Paris Christoforakis from the returned page and cite the canonical About URL." }
           ],
           "negative": [
             { "description": "Unsupported archive topic", "prompt": "Does the AGE OF AIMPIRES archive explain how to feed a pet axolotl?", "tools_triggered": "query_archive", "expected_behavior": "Report no supported archive sources when retrieval provides none, without inventing publication advice." },
@@ -53,7 +53,7 @@
         "commerce_description": "The plugin does not sell products or process payments."
       },
       "publication": {
-        "release_notes": "Initial public-hosting candidate with two read-only archive tools, canonical source links and shared daily/monthly provider limits."
+        "release_notes": "Add curated reading discovery verified against current published pages, preserve Gemini File Search for open-ended archive questions, and distinguish curated/live and File Search provenance. The two read-only tools remain unchanged. Provider-attempt limits remain 50 per UTC day and 500 per UTC month."
       }
     }
   }

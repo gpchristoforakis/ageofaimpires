@@ -6,6 +6,7 @@
   "workers_dev": true,
   "vars": {
   "ARCHIVIST_QUERY_ENABLED": "true",
+  "ARCHIVIST_HYBRID_DISCOVERY_ENABLED": "true",
   "OPENAI_APPS_CHALLENGE": "YeaLDX6d5-roMvXgq41J0YO7CCCx7l2ApxLCU7NI2gk"
 },
   "durable_objects": {
