@@ -15,7 +15,7 @@
     {
       "name": "query_archive",
       "title": "Query The Archive",
-      "description": "Use this when a reader asks about published AGE OF AIMPIRES material, wants relevant reading, or is new to AI assistants and asks how to choose or where to start. Tightly matched reading goals may use an editorially curated path verified against current published pages; other questions use The Archivist's existing Gemini File Search retrieval. Returns canonical sources or an explicit lack of verifiable support. Does not search the general web or private material. Resolve follow-ups into a self-contained question; do not send the whole conversation.",
+      "description": "Find answers and reading in the published AGE OF AIMPIRES archive. Ask about an idea, look for something relevant to read, or find a starting point if you're new to AI assistants. Some recommendations are checked against current published pages; other answers use the archive search. The Archivist links to its sources and says when the archive cannot support an answer. It cannot search the wider web or private material.",
       "inputSchema": {
         "type": "object",
         "additionalProperties": false,
@@ -223,7 +223,7 @@
     {
       "name": "fetch_entry",
       "title": "Fetch A Published Page",
-      "description": "Use this when a reader asks for current published text, supporting material or an exact quotation from an AGE OF AIMPIRES source. Fetches an exact registry-controlled public ID for an Entry, Guide, Framework, Notebook or About page. Returns current published text, which may be newer than the File Search snapshot. Does not accept arbitrary URLs, drafts or private documents.",
+      "description": "Read the current published text of an AGE OF AIMPIRES Entry, Guide, Framework, Notebook or About page. Explore a recommended reading, examine the original wording or verify an exact quotation. This tool cannot access drafts, private documents or unrelated websites.",
       "inputSchema": {
         "type": "object",
         "additionalProperties": false,

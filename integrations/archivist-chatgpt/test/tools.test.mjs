@@ -287,10 +287,12 @@ test('MCP host instructions distinguish curated live verification from Gemini Fi
   assert.match(INSTRUCTIONS, /not as a generic productivity service/);
 });
 
-test('query_archive description prompts the host to route beginner assistant-choice questions', async () => {
+test('public tool descriptions match the approved reader-facing guidance', async () => {
   const contracts = JSON.parse(await readFile(new URL('../../../docs/archivist-chatgpt-contracts.json', import.meta.url), 'utf8'));
-  const description = contracts.tools.find(tool => tool.name === 'query_archive').description;
-  assert.match(description, /new to AI assistants and asks how to choose or where to start/);
+  const queryDescription = contracts.tools.find(tool => tool.name === 'query_archive').description;
+  const fetchDescription = contracts.tools.find(tool => tool.name === 'fetch_entry').description;
+  assert.equal(queryDescription, "Find answers and reading in the published AGE OF AIMPIRES archive. Ask about an idea, look for something relevant to read, or find a starting point if you're new to AI assistants. Some recommendations are checked against current published pages; other answers use the archive search. The Archivist links to its sources and says when the archive cannot support an answer. It cannot search the wider web or private material.");
+  assert.equal(fetchDescription, 'Read the current published text of an AGE OF AIMPIRES Entry, Guide, Framework, Notebook or About page. Explore a recommended reading, examine the original wording or verify an exact quotation. This tool cannot access drafts, private documents or unrelated websites.');
 });
 
 for (const [name, metadata] of [
