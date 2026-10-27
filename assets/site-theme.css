@@ -47,19 +47,25 @@ body > header .nav > nav, .site-header .nav-wrap > nav { order: 1; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 0;
+  width: 44px;
   min-height: 44px;
-  padding: 0 12px;
+  padding: 0;
   border: 1px solid var(--line);
   border-radius: 4px;
   background: transparent;
   color: var(--ink, var(--navy));
   font: 600 12px/1.2 Arial, Helvetica, sans-serif;
   white-space: nowrap;
+  overflow: hidden;
   cursor: pointer;
+  transition: width .24s ease, padding .24s ease, gap .24s ease;
 }
+.aoai-theme-toggle.is-label-expanded { width: 126px; gap: 8px; padding: 0 12px; }
 .aoai-theme-toggle[hidden] { display: none; }
 .aoai-theme-toggle svg { width: 18px; height: 18px; flex-shrink: 0; }
+.aoai-theme-label { max-width: 0; opacity: 0; overflow: hidden; transition: max-width .24s ease, opacity .18s ease; }
+.aoai-theme-toggle.is-label-expanded .aoai-theme-label { max-width: 78px; opacity: 1; }
 .aoai-theme-toggle .aoai-theme-sun { display: none; }
 html[data-theme="dark"] .aoai-theme-toggle .aoai-theme-sun { display: block; }
 html[data-theme="dark"] .aoai-theme-toggle .aoai-theme-moon { display: none; }
@@ -146,7 +152,7 @@ html[data-theme="dark"] .principle-brand {
 html[data-theme="dark"] .principle-brand :is(.principle-emphasis, .aside-quote) {
   color: var(--gold-deep);
 }
-html[data-theme="dark"] .principle-technology .principle-emphasis { color: #f5f1e8; }
+html[data-theme="dark"] .principle-technology .principle-emphasis { color: var(--amber); }
 html[data-theme="dark"] .button-dark:hover { background: var(--surface); color: var(--ink); }
 html[data-theme="dark"] .social-badge { color: var(--ink); }
 html[data-theme="dark"] .dark .cta {
@@ -223,10 +229,11 @@ body :is(div.note, aside.note, .aoai-editorial-note, .callout,
   }
 }
 @media (max-width: 640px) {
-  .aoai-theme-toggle { width: 44px; padding: 0; }
-  .aoai-theme-label { display: none; }
   body > header .nav, .site-header .nav-wrap { gap: 8px; }
   .aoai-header-actions .menu-toggle { min-height: 44px; padding: 0 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aoai-theme-toggle, .aoai-theme-label { transition: none; }
 }
 @media (max-width: 380px) {
   body > header .aoai-brand, .site-header .aoai-brand {

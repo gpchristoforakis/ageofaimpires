@@ -3,7 +3,17 @@
   const root = document.documentElement;
   const system = window.matchMedia('(prefers-color-scheme: dark)');
   const valid = value => value === 'light' || value === 'dark';
+  const labelSessionKey = 'ageofaimpires:theme-label-seen:v1';
   let preference = null;
+  let showIntroLabel = false;
+
+  try {
+    showIntroLabel = window.sessionStorage.getItem(labelSessionKey) !== '1';
+    if (showIntroLabel) window.sessionStorage.setItem(labelSessionKey, '1');
+  } catch {
+    // Keep the label expanded briefly when session storage is unavailable.
+    showIntroLabel = true;
+  }
 
   function readPreference() {
     try {
@@ -28,7 +38,8 @@
   applyTheme();
 
   function connectControls() {
-    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+    const buttons = document.querySelectorAll('[data-theme-toggle]');
+    buttons.forEach(button => {
       button.addEventListener('click', () => {
         preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
         try {
@@ -38,8 +49,14 @@
         }
         applyTheme();
       });
+      button.classList.toggle('is-label-expanded', showIntroLabel);
     });
     applyTheme();
+    if (showIntroLabel) {
+      window.setTimeout(() => {
+        buttons.forEach(button => button.classList.remove('is-label-expanded'));
+      }, 2000);
+    }
   }
 
   if (document.readyState === 'loading') {

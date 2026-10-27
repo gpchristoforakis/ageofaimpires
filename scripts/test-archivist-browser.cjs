@@ -63,7 +63,8 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
           for (const link of await page.locator('footer .aoai-social-links a').all()) assert.ok(await link.isVisible());
           assert.equal(await page.locator('footer .aoai-social-links a').count(), 3);
           assert.equal(await page.locator('body > header').getByText('The Archivist', { exact: false }).count(), 0);
-          assert.equal(await launcher.getAttribute('aria-label'), file.startsWith('age-of-aimpires-entry-') ? 'Ask about this entry' : 'Ask The Archivist');
+          assert.equal(await launcher.getAttribute('aria-label'), 'TALK WITH THE ARCHIVIST');
+          assert.equal((await launcher.innerText()).trim(), 'TALK WITH THE ARCHIVIST');
           const launcherBounds = await launcher.boundingBox();
           assert.ok(launcherBounds.x >= 0 && launcherBounds.x + launcherBounds.width <= viewport.width);
           assert.ok(launcherBounds.y + launcherBounds.height <= viewport.height);

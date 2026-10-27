@@ -6,6 +6,8 @@
   --ar-muted: #53606d;
   --ar-line: #dcd5c8;
   --ar-accent: #147d78;
+  --ar-launcher: #147d78;
+  --ar-launcher-ink: #ffffff;
   --ar-error: #a13326;
   box-sizing: border-box;
   color: var(--ar-ink);
@@ -20,6 +22,8 @@ html[data-theme="dark"] .aoai-archivist {
   --ar-muted: #b8c2ce;
   --ar-line: #3e4d5f;
   --ar-accent: #79c8c0;
+  --ar-launcher: #e7a750;
+  --ar-launcher-ink: #0c1624;
   --ar-error: #ef9a81;
 }
 .aoai-archivist *, .aoai-archivist *::before, .aoai-archivist *::after { box-sizing: border-box; }
@@ -35,16 +39,19 @@ html[data-theme="dark"] .aoai-archivist {
   z-index: 120;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px 10px 10px;
-  min-height: 58px;
+  gap: 12px;
+  padding: 11px 20px 11px 11px;
+  min-height: 72px;
   max-width: calc(100vw - 32px);
-  background: var(--ar-paper);
-  border: 1px solid var(--ar-line);
-  border-radius: 4px;
-  box-shadow: 0 4px 22px #0c162425;
+  background: var(--ar-launcher);
+  color: var(--ar-launcher-ink);
+  border: 2px solid var(--ar-launcher-ink);
+  border-radius: 6px;
+  box-shadow: 0 8px 28px #0c162440;
   cursor: pointer;
 }
+.aoai-archivist-launcher:hover { transform: translateY(-2px); box-shadow: 0 11px 32px #0c16244d; }
+.aoai-archivist-launcher:focus-visible { outline-color: var(--ar-launcher-ink); }
 .aoai-archivist-avatar { position: relative; flex: 0 0 auto; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: var(--ar-surface); border: 1px solid var(--ar-line); }
 .aoai-archivist-avatar img, .aoai-archivist-avatar video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .aoai-archivist-avatar video { opacity: 0; }
@@ -52,8 +59,9 @@ html[data-theme="dark"] .aoai-archivist {
 .aoai-archivist-avatar-small { width: 36px; height: 36px; }
 .aoai-archivist-avatar-message { width: 24px; height: 24px; }
 .aoai-archivist-avatar::before { content: "A"; position: absolute; inset: 0; display: grid; place-items: center; font: 26px/1 Georgia, serif; }
-.aoai-archivist-name { display: block; font-size: 11px; line-height: 1.4; font-weight: 700; letter-spacing: .13em; }
+.aoai-archivist-name { display: block; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: .11em; }
 .aoai-archivist-launcher-label { display: block; margin-top: 2px; font-size: 12px; color: var(--ar-muted); }
+.aoai-archivist-launcher .aoai-archivist-avatar-small { width: 48px; height: 48px; border-color: color-mix(in srgb, var(--ar-launcher-ink) 55%, transparent); }
 .aoai-archivist-panel {
   position: fixed;
   inset: 0 0 0 auto;
@@ -120,5 +128,6 @@ body.aoai-archivist-open { overflow: hidden; }
   .aoai-archivist-form { padding-inline: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .aoai-archivist-launcher:hover { transform: none; }
   .aoai-archivist-avatar video { display: none; }
 }

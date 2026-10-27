@@ -130,6 +130,11 @@ nav a:hover{color:var(--navy)}
 .entry .section:first-child{
   margin-top:36px;
 }
+.entry .section > p{
+  text-align:justify;
+  text-align-last:left;
+  hyphens:auto;
+}
 .section-number{
   display:block;
   margin-bottom:12px;
@@ -576,10 +581,10 @@ body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-f
 body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
 </style><link rel="stylesheet" href="assets/editorial-studio.css?v=bf79ac73d8d9">
 <link rel="stylesheet" href="assets/editorial-spacing.css">
-<link rel="stylesheet" href="assets/site-theme.css?v=572bd7dfb9a9">
+<link rel="stylesheet" href="assets/site-theme.css?v=f7d224d79a6e">
 
-<link rel="stylesheet" href="assets/archivist.css?v=68ec13854401">
-<script src="assets/archivist.js?v=451607c5de40" defer></script>
+<link rel="stylesheet" href="assets/archivist.css?v=718170a3b9c0">
+<script src="assets/archivist.js?v=a24c2f5ed579" defer></script>
 </head>
 <body class="page-entry">
 
@@ -604,7 +609,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
     <div class="shell">
       <h1 class="sr-only">Fast AI. Expensive Lesson.</h1>
       <div class="entry-hero"><img src="assets/entry-01-hero.png" alt="Fast AI. Expensive Lesson hero illustration"/></div>
-      <p class="deck">You wouldn’t choose a car by petrol price alone.<br/>Cheap fuel means nothing if the car keeps taking you the wrong way.</p>
+      <p class="deck">Cheap fuel means nothing if the car keeps taking you the wrong way.</p>
       <div class="meta-row">
         <span>10 min read</span>
         <span class="meta-dot"></span>
@@ -880,33 +885,24 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <script>
 (() => {
   document.querySelectorAll('[data-share-button]').forEach((button) => {
+    let feedbackTimer;
     button.addEventListener('click', async () => {
       const status = button.parentElement?.querySelector('[data-share-status]');
       const label = button.querySelector('[data-share-label]');
-      const shareData = {
-        title: document.title,
-        text: document.querySelector('meta[name="description"]')?.content || '',
-        url: window.location.href.split('#')[0]
-      };
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-          if (status) status.textContent = 'Shared.';
-          return;
-        } catch (error) {
-          if (error && error.name === 'AbortError') return;
-        }
-      }
+      const shareUrl = window.location.href.split('#')[0];
       try {
-        await navigator.clipboard.writeText(shareData.url);
+        await navigator.clipboard.writeText(shareUrl);
         if (label) label.textContent = 'Link copied';
+        if (status) status.textContent = 'Link copied.';
         button.classList.add('is-copied');
-        setTimeout(() => {
+        clearTimeout(feedbackTimer);
+        feedbackTimer = setTimeout(() => {
           if (label) label.textContent = 'Share this';
+          if (status) status.textContent = '';
           button.classList.remove('is-copied');
         }, 1800);
       } catch (_) {
-        window.prompt('Copy this link:', shareData.url);
+        window.prompt('Copy this link:', shareUrl);
       }
     });
   });

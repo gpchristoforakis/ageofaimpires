@@ -168,6 +168,11 @@ h1{
   grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);
   gap:72px;
 }
+.about-intro-grid{
+  grid-template-columns:1fr;
+  gap:18px;
+}
+.about-intro-grid .copy{max-width:920px}
 .section-label{
   margin:0;
   color:var(--teal);
@@ -267,6 +272,7 @@ h2{
 }
 .principle-emphasis{display:block;margin-top:8px;font-weight:700}
 .principle-brand .principle-emphasis{color:#8A4F14}
+.principle-technology .principle-prefix{color:#79C8C0}
 .principle-technology .principle-emphasis{color:var(--amber)}
 .principle-brand{
   width:100%;
@@ -891,10 +897,10 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 @media(max-width:640px){.release-share-wrap{width:calc(100% - 36px)}}
 </style><link rel="stylesheet" href="assets/editorial-studio.css?v=bf79ac73d8d9">
 <link rel="stylesheet" href="assets/editorial-spacing.css">
-<link rel="stylesheet" href="assets/site-theme.css?v=572bd7dfb9a9">
+<link rel="stylesheet" href="assets/site-theme.css?v=f7d224d79a6e">
 
-<link rel="stylesheet" href="assets/archivist.css?v=68ec13854401">
-<script src="assets/archivist.js?v=451607c5de40" defer></script>
+<link rel="stylesheet" href="assets/archivist.css?v=718170a3b9c0">
+<script src="assets/archivist.js?v=a24c2f5ed579" defer></script>
 </head>
 <body class="page-about">
 <header>
@@ -928,22 +934,20 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 </aside>
 </section><div class="release-share-wrap"><div aria-label="Page sharing" class="share-row"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div>
 <section class="section">
-<div class="shell grid-2">
+<div class="shell grid-2 about-intro-grid">
 <div><p class="section-label">The Short Version</p></div>
 <div class="copy">
 <h2>Simply A Founder. Not AI Evangelist.</h2>
-<p class="lead">As a tech entrepreneur with core expertise in consumer tech and branding, I’m interested in how an idea becomes something people understand, trust, choose and keep choosing over the alternatives.</p>
-<p class="aoai-studio-bio">I write Age of AI Empires and run <a href="https://thestudiocy.framer.website/">THE STUDIO</a>, where I help businesses find practical ways to use AI.</p>
+<p class="lead">As a consumer tech entrepreneur with branding background, I’m interested in how an idea becomes something people understand, trust, choose and keep choosing over the alternatives.</p>
 <p class="aoai-publication-note">AGE OF AIMPIRES is not a startup or commercial venture. It is an independent publication about the economics, behaviour and consequences of AI becoming part of everyday life and work.</p>
-<h3 class="ai-approach-heading">That Is Also My Approach To AI:</h3>
-<p>A model can be technically impressive, but if people do not understand what it is for, trust the result, or see how it fits the task in front of them, <strong>being impressive means very little in the end.</strong></p></div>
+<p>An F1 race car is ridiculously impressive, but that does not mean anyone can drive it. AI assistants are getting better by the hour, but they are also becoming more complex. That makes it harder for people to understand how they work, trust their results, or judge whether they are actually useful for the task in front of them.</p></div>
 </div>
 <div aria-label="Principles" class="shell principles">
 <div class="principle principle-brand">
 <p>“Branding Without Behaviour Change Is <strong class="principle-emphasis">Decoration.”</strong></p>
 </div>
 <div class="principle principle-technology">
-<p>“Technology Without Adoption Is <strong class="principle-emphasis">Theatre.”</strong></p>
+<p><span class="principle-prefix">“Technology</span> Without Adoption Is <strong class="principle-emphasis">Theatre.”</strong></p>
 </div>
 </div>
 </section>
@@ -1124,33 +1128,24 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <script>
 (() => {
   document.querySelectorAll('[data-share-button]').forEach((button) => {
+    let feedbackTimer;
     button.addEventListener('click', async () => {
       const status = button.parentElement?.querySelector('[data-share-status]');
       const label = button.querySelector('[data-share-label]');
-      const shareData = {
-        title: document.title,
-        text: document.querySelector('meta[name="description"]')?.content || '',
-        url: window.location.href.split('#')[0]
-      };
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-          if (status) status.textContent = 'Shared.';
-          return;
-        } catch (error) {
-          if (error && error.name === 'AbortError') return;
-        }
-      }
+      const shareUrl = window.location.href.split('#')[0];
       try {
-        await navigator.clipboard.writeText(shareData.url);
+        await navigator.clipboard.writeText(shareUrl);
         if (label) label.textContent = 'Link copied';
+        if (status) status.textContent = 'Link copied.';
         button.classList.add('is-copied');
-        setTimeout(() => {
+        clearTimeout(feedbackTimer);
+        feedbackTimer = setTimeout(() => {
           if (label) label.textContent = 'Share this';
+          if (status) status.textContent = '';
           button.classList.remove('is-copied');
         }, 1800);
       } catch (_) {
-        window.prompt('Copy this link:', shareData.url);
+        window.prompt('Copy this link:', shareUrl);
       }
     });
   });

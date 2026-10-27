@@ -79,15 +79,14 @@
   }
 
   const context = pageContext();
-  const prompt = context.current_entry ? 'Ask about this entry' : 'Ask The Archivist';
+  const prompt = 'TALK WITH THE ARCHIVIST';
   const launcher = element('button', 'aoai-archivist aoai-archivist-launcher');
   launcher.type = 'button';
   launcher.setAttribute('aria-label', prompt);
   launcher.setAttribute('aria-haspopup', 'dialog');
   launcher.setAttribute('aria-controls', 'aoai-archivist-panel');
   launcher.setAttribute('aria-expanded', 'false');
-  const launcherText = element('span');
-  launcherText.append(element('span', 'aoai-archivist-name', 'THE ARCHIVIST'), element('span', 'aoai-archivist-launcher-label', prompt));
+  const launcherText = element('span', 'aoai-archivist-name', prompt);
   launcher.append(avatar('aoai-archivist-avatar-small'), launcherText);
 
   const panel = element('dialog', 'aoai-archivist aoai-archivist-panel');

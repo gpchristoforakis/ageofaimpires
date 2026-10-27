@@ -882,10 +882,10 @@
 <link rel="stylesheet" href="assets/editorial-studio.css?v=bf79ac73d8d9">
 <link rel="stylesheet" href="assets/editorial-spacing.css">
 <link rel="stylesheet" href="assets/homepage.css?v=548651c2aae6">
-<link rel="stylesheet" href="assets/site-theme.css?v=572bd7dfb9a9">
+<link rel="stylesheet" href="assets/site-theme.css?v=f7d224d79a6e">
 
-<link rel="stylesheet" href="assets/archivist.css?v=68ec13854401">
-<script src="assets/archivist.js?v=451607c5de40" defer></script>
+<link rel="stylesheet" href="assets/archivist.css?v=718170a3b9c0">
+<script src="assets/archivist.js?v=a24c2f5ed579" defer></script>
 </head>
 
 <body class="page-home">
@@ -1054,40 +1054,31 @@
   </script>
 
   <script>
-    (() => {
-      document.querySelectorAll('[data-share-button]').forEach((button) => {
-        button.addEventListener('click', async () => {
-          const status = button.parentElement?.querySelector('[data-share-status]');
-          const label = button.querySelector('[data-share-label]');
-          const shareData = {
-            title: document.title,
-            text: document.querySelector('meta[name="description"]')?.content || '',
-            url: window.location.href.split('#')[0]
-          };
-          if (navigator.share) {
-            try {
-              await navigator.share(shareData);
-              if (status) status.textContent = 'Shared.';
-              return;
-            } catch (error) {
-              if (error && error.name === 'AbortError') return;
-            }
-          }
-          try {
-            await navigator.clipboard.writeText(shareData.url);
-            if (label) label.textContent = 'Link copied';
-            button.classList.add('is-copied');
-            setTimeout(() => {
-              if (label) label.textContent = 'Share this';
-              button.classList.remove('is-copied');
-            }, 1800);
-          } catch (_) {
-            window.prompt('Copy this link:', shareData.url);
-          }
-        });
-      });
-    })();
-  </script>
+(() => {
+  document.querySelectorAll('[data-share-button]').forEach((button) => {
+    let feedbackTimer;
+    button.addEventListener('click', async () => {
+      const status = button.parentElement?.querySelector('[data-share-status]');
+      const label = button.querySelector('[data-share-label]');
+      const shareUrl = window.location.href.split('#')[0];
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        if (label) label.textContent = 'Link copied';
+        if (status) status.textContent = 'Link copied.';
+        button.classList.add('is-copied');
+        clearTimeout(feedbackTimer);
+        feedbackTimer = setTimeout(() => {
+          if (label) label.textContent = 'Share this';
+          if (status) status.textContent = '';
+          button.classList.remove('is-copied');
+        }, 1800);
+      } catch (_) {
+        window.prompt('Copy this link:', shareUrl);
+      }
+    });
+  });
+})();
+</script>
 </body>
 
 </html>
