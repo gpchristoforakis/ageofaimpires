@@ -20,8 +20,11 @@ export const publicSource = doc => ({
 const citationInstruction = 'SOURCE IDENTITIES FOR THIS MCP ADAPTER:\n' +
   'Use the exact published source titles and page types in this catalogue. ' +
   'Only sources with page_type entry and an age-of-aimpires-entry-NN ID have an Entry number. ' +
-  'Frameworks and guides have no Entry number. A numbered section such as 02 is not Entry #02. ' +
+  'Frameworks and guides have no Entry number; guides use page_type how_to. A numbered section such as 02 is not Entry #02. ' +
   'When citing a framework, use its title rather than inventing an Entry number. ' +
+  'For reading recommendations, use content retrieved by File Search rather than this catalogue alone. ' +
+  'Recommend only a concise, curated set whose retrieved text addresses the reader\'s goal, and briefly explain why each source is relevant. ' +
+  'Do not recommend a catalogue source unless its retrieved content supports the recommendation. ' +
   'This catalogue identifies sources; their actual retrieved text remains the only evidence for claims.\n' +
   JSON.stringify(registry.map(publicSource));
 

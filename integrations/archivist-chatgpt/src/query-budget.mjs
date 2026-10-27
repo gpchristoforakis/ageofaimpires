@@ -1,7 +1,7 @@
 import { ToolError } from './archive.mjs';
 
-export const DAILY_QUERY_LIMIT = 25;
-export const MONTHLY_QUERY_LIMIT = 250;
+export const DAILY_QUERY_LIMIT = 50;
+export const MONTHLY_QUERY_LIMIT = 500;
 export const MAX_OUTPUT_TOKENS = 2048;
 
 // This one durable record is shared by every public Worker instance. It stores

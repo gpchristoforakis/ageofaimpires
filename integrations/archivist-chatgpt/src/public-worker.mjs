@@ -10,9 +10,11 @@ export default {
     const url = new URL(request.url);
     const configured = Boolean(env.GEMINI_API_KEY && env.ARCHIVIST_QUERY_BUDGET);
     const enabled = env.ARCHIVIST_QUERY_ENABLED === 'true' && configured;
+    const hybridDiscoveryEnabled = env.ARCHIVIST_HYBRID_DISCOVERY_ENABLED === 'true';
     if (request.method === 'GET' && url.pathname === '/') {
-      return Response.json({ name: 'The Archivist MCP', version: '0.2.0',
+      return Response.json({ name: 'The Archivist MCP', version: '0.2.2',
         mode: enabled ? 'live' : 'awaiting_activation', queryEnabled: enabled,
+        hybridDiscoveryEnabled,
         archiveConfigured: configured, providerAttemptsPerDay: DAILY_QUERY_LIMIT,
         providerAttemptsPerMonth: MONTHLY_QUERY_LIMIT, budgetTimezone: 'UTC',
       }, { headers });
@@ -24,6 +26,7 @@ export default {
     }
     return createMcpHandler({ apiKey: enabled ? env.GEMINI_API_KEY : undefined, guard,
       fetchImpl: budgetedGeminiFetch(env.ARCHIVIST_QUERY_BUDGET), entryFetchImpl: globalThis.fetch,
+      curatedDiscoveryEnabled: hybridDiscoveryEnabled,
       allowedOrigins: [url.origin, ...(env.MCP_ALLOWED_ORIGINS ?? '').split(',').filter(Boolean)],
     })(request);
   },
