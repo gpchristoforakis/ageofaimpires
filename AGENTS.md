@@ -28,3 +28,20 @@
   page changes. This check is required alongside any relevant functional and
   visual checks.
 - Commit, push, and publish only when the user authorizes those actions.
+
+# Editorial rules
+
+- Capitalise the first letter of every word in public titles, headings and
+  display labels, including articles and prepositions. Apply this to card
+  titles and table captions too. Preserve acronyms and use sentence case for
+  body copy, descriptions, quotations and complete quiz questions.
+- In fictional examples, prefer widely recognised names such as Mary, Tom,
+  Peter and Gloria. Use names with a clear conventional male or female
+  association; avoid unisex or gender-ambiguous names such as Taylor.
+- Keep each fictional character's name consistent across source material,
+  prompts, examples, tests and expected results.
+- Editorial notes, warnings and callouts must differ from surrounding body
+  copy through both text colour and typography. A left-hand rule alone is
+  insufficient. Use the existing ink colour and sans-serif type at a medium
+  or semibold weight, with readable contrast in both themes and at all widths.
+  Preserve structured content such as formulas and existing text emphasis.
