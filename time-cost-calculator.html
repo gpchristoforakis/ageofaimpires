@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+  <link rel="icon" type="image/svg+xml" href="/media/favicon.svg">
+<meta charset="utf-8"/>
+<script src="assets/site-theme.js"></script>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>The Time-Cost Calculator — AGE OF AIMPIRES</title>
+<meta name="description" content="Put a value on the time spent reaching a usable result and the time spent going further. Keep the two stages visible.">
+<style>
+  :root{
+    --paper:#F5F1E8;--navy:#111C2C;--deep:#0C1624;--slate:#53606D;--teal:#147D78;--amber:#D58A2A;--line:#DCD5C8;--surface:#ECE6DA;--max:1440px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--navy);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .shell{width:min(calc(100% - 80px),var(--max));margin:0 auto}
+  .header-shell{width:min(calc(100% - 128px),var(--max));margin:0 auto}
+  header{min-height:76px;display:flex;align-items:center;border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:32px}
+  .brand{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:#252c11}
+  .ai-mark{color:var(--teal);font-weight:800}
+  nav{display:flex;align-items:center;gap:28px;font-size:14px}
+  nav a{text-decoration:none;color:var(--slate)}
+  nav a:hover,nav a[aria-current="page"]{color:var(--navy)}
+  .hero{padding:72px 0 64px;border-bottom:1px solid var(--line)}
+  .back-link{display:inline-flex;margin-bottom:34px;color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+  .kicker,.section-label{margin:0 0 18px;color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.035em}
+  h1{margin:0;max-width:1040px;font-size:clamp(54px,6vw,92px);line-height:.96}
+  .standfirst{max-width:880px;margin:30px 0 0;color:var(--slate);font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2vw,28px);line-height:1.48}
+  .body{padding:0 0 92px}
+  .section{display:grid;grid-template-columns:180px minmax(0,1fr);gap:54px;padding:58px 0;border-bottom:1px solid var(--line)}
+  .section:last-child{border-bottom:0}
+  .section-content{max-width:980px}
+  .section h2{margin:0;font-size:clamp(38px,4vw,60px);line-height:1.02}
+  .section h3{margin:0;font-size:clamp(26px,2.7vw,38px);line-height:1.1}
+  .section p,.section li{color:var(--slate);font-family:Georgia,"Times New Roman",serif;font-size:19px;line-height:1.62}
+  .section p{margin:20px 0 0}
+  .section ul{margin:22px 0 0;padding-left:1.25em}
+  .section li+li{margin-top:10px}
+  .lead{font-size:23px!important;color:var(--navy)!important;line-height:1.52!important}
+  .formula{margin-top:32px;background:var(--navy);color:var(--paper);padding:32px 34px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(22px,2.3vw,32px);line-height:1.52}
+  .formula strong{color:#79C8C0;font-weight:500}
+  .formula small{display:block;margin-top:14px;color:#C7CEC9;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;letter-spacing:.01em}
+  .grid-2,.grid-3,.grid-4{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:30px}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--paper);padding:26px}
+  .card .mini{display:block;margin-bottom:9px;color:var(--teal);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+  .card h3{font-size:27px;letter-spacing:-.025em}
+  .card p{margin-top:12px;font-size:17px;line-height:1.52}
+  .dark-band{margin-top:30px;background:var(--deep);padding:30px;color:var(--paper)}
+  .dark-band h3{color:var(--paper)}
+  .dark-band p{color:#CED4D0}
+  .boundary{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin-top:30px}
+  .boundary-box{padding:28px;background:var(--surface)}
+  .boundary-box.good{background:var(--navy);color:var(--paper)}
+  .boundary-box .mini{display:block;margin-bottom:10px;color:var(--teal);font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+  .boundary-box.good .mini{color:#79C8C0}
+  .boundary-box h3{font-size:30px}
+  .boundary-box p{font-size:17px;margin-top:12px;color:var(--slate)}
+  .boundary-box.good p{color:#D5DAD6}
+  .arrow{display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--teal)}
+  .afp{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+  .afp .step{padding:28px;border:1px solid var(--line);background:var(--paper)}
+  .step b{display:block;color:var(--teal);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .step h3{font-size:32px}
+  .step p{font-size:17px;margin-top:10px}
+  .comparison{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:30px}
+  .compare{padding:28px;border:1px solid var(--line)}
+  .compare h3{font-size:31px}
+  .compare.low{background:var(--surface)}
+  .compare.high{background:var(--navy);color:var(--paper)}
+  .compare.high p,.compare.high li{color:#D5DAD6}
+  .compare .verdict{margin-top:22px;padding-top:18px;border-top:1px solid rgba(127,127,127,.35);font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+  .compare.high .verdict{color:#79C8C0}
+  .checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px}
+  .check{position:relative;padding:20px 22px 20px 54px;border:1px solid var(--line);font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.48;color:var(--slate)}
+  .check:before{content:"✓";position:absolute;left:21px;top:18px;color:var(--teal);font-family:Arial,Helvetica,sans-serif;font-weight:800}
+  .note{margin-top:28px;padding-left:22px;border-left:3px solid var(--amber);color:var(--slate);font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.58}
+  .footer-links{display:flex;flex-wrap:wrap;gap:24px;margin-top:32px}
+  .source-link{display:inline-flex;color:var(--teal);font-size:13px;font-weight:800;letter-spacing:.04em;text-decoration:none}
+  .source-link:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:24px 0 32px;color:var(--slate);font-size:12px}
+  @media(max-width:980px){
+    .shell{width:min(calc(100% - 36px),var(--max))}.header-shell{width:min(calc(100% - 48px),var(--max))}nav{gap:16px}nav[aria-label="Primary"] a:not(:last-child){display:none}
+    .hero{padding:56px 0 50px}.section{grid-template-columns:1fr;gap:18px;padding:46px 0}.grid-3,.grid-4{grid-template-columns:1fr 1fr}.boundary{grid-template-columns:1fr}.arrow{transform:rotate(90deg);min-height:22px}.afp,.comparison{grid-template-columns:1fr}
+  }
+  @media(max-width:640px){
+    header{min-height:64px}.header-shell{width:min(calc(100% - 36px),var(--max))}h1{font-size:clamp(48px,14vw,68px)}.standfirst{font-size:21px}.grid-2,.grid-3,.grid-4,.checklist{grid-template-columns:1fr}.formula{padding:26px 22px}.card,.compare,.step{padding:22px}
+  }
+
+  .source-copy strong{color:var(--navy)}
+  .source-copy .plain-list{margin-top:22px}
+  .source-copy .numbered{margin-top:22px;padding-left:1.4em}
+  .source-copy .numbered li{padding-left:.2em}
+  .source-copy .source-formula{margin-top:28px;background:var(--navy);color:var(--paper);padding:28px 32px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2.1vw,30px);line-height:1.5}
+  .source-copy .source-formula + .source-formula{margin-top:1px}
+  .source-copy .source-formula strong{color:#79C8C0;font-weight:500}
+  .source-copy .setup-copy p{margin-top:10px}
+
+.framework-cta{display:inline-flex;align-items:center;gap:9px;min-height:34px;margin-top:20px;padding:0 12px 0 7px;border:1px solid var(--line);background:rgba(255,255,255,.28);color:var(--navy);font-size:13px;font-weight:700;text-decoration:none}
+.framework-cta-icon{width:24px;height:24px;display:inline-grid;place-items:center;background:var(--navy);color:var(--paper);font-size:11px;line-height:1}
+.framework-cta:hover .framework-cta-icon{background:var(--teal)}
+.framework-cta:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* Floating back-to-top control */
+.back-to-top{position:fixed;right:24px;top:50%;z-index:60;min-height:44px;padding:0 15px;border:1px solid var(--line);background:rgba(245,241,232,.96);color:var(--navy);font:inherit;font-size:12px;font-weight:800;letter-spacing:.04em;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(calc(-50% + 8px));transition:opacity .18s ease,transform .18s ease,visibility .18s ease,border-color .18s ease;box-shadow:0 8px 24px rgba(12,22,36,.08)}
+.back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(-50%)}
+.back-to-top:hover{border-color:var(--navy)}
+.back-to-top:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+@media(max-width:700px){.back-to-top{right:12px;top:auto;bottom:18px;transform:translateY(8px);padding:0 11px;min-height:40px}.back-to-top.is-visible{transform:none}}
+
+
+.legal-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  padding-top:18px;
+  margin-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--slate);
+  font-size:12px;
+}
+.legal-links a{color:inherit;text-decoration:none}
+.legal-links a:hover{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+
+
+
+/* Mobile navigation — 29 Sep 2026 */
+.menu-toggle{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:0 13px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--navy);
+  font:inherit;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.04em;
+  cursor:pointer;
+}
+.menu-toggle:hover{border-color:var(--navy)}
+.menu-toggle:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+@media(max-width:980px){
+  header .nav{position:relative;flex-wrap:nowrap}
+  .menu-toggle{display:inline-flex;margin-left:auto}
+  nav[aria-label="Primary"]{
+    display:none;
+    position:absolute;
+    top:calc(100% + 12px);
+    right:0;
+    z-index:1000;
+    width:min(280px,calc(100vw - 36px));
+    padding:8px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    background:var(--paper);
+    border:1px solid var(--line);
+    box-shadow:0 16px 36px rgba(12,22,36,.14);
+  }
+  nav[aria-label="Primary"].is-open{display:flex}
+  nav[aria-label="Primary"] a,
+  nav[aria-label="Primary"] a:not(:last-child),
+  nav[aria-label="Primary"] a:not(.active):not(:last-child){
+    display:block !important;
+    padding:12px 11px;
+    color:var(--navy);
+    border-bottom:1px solid var(--line);
+  }
+  nav[aria-label="Primary"] a:last-child{border-bottom:0}
+  nav[aria-label="Primary"] a:hover{background:rgba(236,230,218,.65)}
+}
+
+</style>
+<style id="aoai-consistency">
+/* Shared brand treatments: header/footer wordmark and reversed section wordmark. */
+:root{--brand-ink:var(--ink,#2b2b2b);--brand-gold:var(--gold-deep,#8a642e);--brand-white:#fff}
+.aoai-brand{--brand-base:var(--brand-ink);--brand-ai:var(--brand-gold);color:var(--brand-base)}
+.aoai-brand.aoai-brand--section{--brand-base:var(--brand-gold);--brand-ai:var(--brand-ink)}
+.aoai-brand .aoai-brand-ai{color:var(--brand-ai)}
+.dark .aoai-brand,.aoai-brand.aoai-brand--dark{--brand-base:var(--brand-white);--brand-ai:var(--brand-white)}
+.dark .aoai-brand.aoai-brand--section,.aoai-brand.aoai-brand--section.aoai-brand--dark{--brand-base:var(--amber,#D58A2A)}
+</style>
+<style id="release-consistency">
+/* Latest approved Guide 1 header/footer palette. */
+body>header .aoai-brand,body>footer .aoai-brand,.site-header .aoai-brand,.site-footer .aoai-brand{--brand-base:#252c11;--brand-ai:#cd6a15;color:#252c11}
+body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.site-header .aoai-brand .aoai-brand-ai,.site-footer .aoai-brand .aoai-brand-ai{color:#cd6a15}
+
+.share-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:26px 0 34px}
+.share-row.share-row-end{margin:42px 0 0;padding-top:28px;border-top:1px solid var(--line,#d9d0c2)}
+.share-button{border:1px solid var(--line,#d9d0c2);background:#f5f1e8;color:var(--ink,#111c2c);font:inherit;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 15px}
+.share-button:hover{border-color:var(--ink,#111c2c)}
+.share-button:focus-visible{outline:2px solid var(--gold,#c9a46a);outline-offset:2px}
+.share-button.is-copied{border-color:var(--teal,#147d78);color:var(--teal,#147d78)}
+.share-status{color:var(--muted,#6f6a62);font-size:12px;min-height:1em}
+.release-share-wrap{width:min(calc(100% - 128px),1440px);margin-inline:auto;padding-block:1px 24px}
+@media(max-width:980px){.release-share-wrap{width:calc(100% - 48px)}}
+@media(max-width:640px){.release-share-wrap{width:calc(100% - 36px)}}
+</style><link rel="stylesheet" href="assets/editorial-studio.css?v=bf79ac73d8d9">
+<link rel="stylesheet" href="assets/editorial-spacing.css">
+<link rel="stylesheet" href="assets/task-framework.css?v=84b291c0e699">
+<link rel="stylesheet" href="assets/site-theme.css?v=572bd7dfb9a9">
+
+<link rel="stylesheet" href="assets/archivist.css?v=77cfaaeb3df9">
+<script src="assets/archivist.js?v=dc8a28d8f277" defer></script>
+<link rel="canonical" href="https://ageofaimpires.com/time-cost-calculator">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Age of AI Empires"><meta property="og:title" content="The Time-Cost Calculator"><meta property="og:description" content="Put a value on the time spent reaching a usable result and the time spent going further. Keep the two stages visible."><meta property="og:url" content="https://ageofaimpires.com/time-cost-calculator"><meta property="og:image" content="https://ageofaimpires.com/assets/og-default.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Pragmatics of AI. Zero Noise."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Time-Cost Calculator"><meta name="twitter:description" content="Put a value on the time spent reaching a usable result and the time spent going further. Keep the two stages visible."><meta name="twitter:image" content="https://ageofaimpires.com/assets/og-default.png">
+</head>
+<body class="page-framework task-system"><a class="task-skip" href="#main-content">Skip to content</a>
+<header><div class="header-shell nav"><a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a><div class="aoai-header-actions"><button class="aoai-theme-toggle" type="button" data-theme-toggle aria-label="Toggle Theme: dark mode" aria-pressed="false" hidden><svg class="aoai-theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg><svg class="aoai-theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="aoai-theme-label">Toggle Theme</span></button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button></div>
+<nav id="primary-nav" aria-label="Primary"><a href="entries.html">Entries</a><a href="how-to.html">Guides</a><a href="notebook.html">Notebook</a><a aria-current="page" href="frameworks.html">Frameworks</a><a href="about.html">About</a>
+<a href="contact.html">Contact</a><a aria-label="Language" href="#">EN</a></nav></div></header>
+<main id="main-content"><section class="hero"><div class="header-shell"><a class="back-link" href="frameworks.html">Back To Frameworks</a><p class="kicker">Interactive Tool · Task Economics</p><h1>The Time-Cost Calculator</h1><p class="standfirst">Put a value on the time spent reaching a usable result and the time spent going further. Keep the two stages visible.</p><nav class="task-contents" aria-label="On this page"><a href="#use">What To Count</a><a href="#calculator">Calculator</a><a href="#meaning">What It Means</a></nav></div></section><div class="shell body source-copy"><div aria-label="Page sharing" class="share-row"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div><section class="section" id="use"><div class="section-label">01 · Use</div><div class="section-content"><h2>Two Stages. One Hourly Time Value.</h2><p>Use this after defining the job and checking that its result is usable. The first stage includes prompting, reading, checking, correction and manual finishing. The second is additional work deliberately pursued after that point.</p><p>Enter active human time. Track elapsed waiting separately unless it requires attention. Exploration counts as the original task when exploration is the requested outcome.</p><p>For the meeting example, correcting an owner belongs to reaching a usable result. Asking for reminder emails after the action table is correct means going further.</p></div></section><section class="section" id="calculator"><div class="section-label">02 · Calculate</div><div class="section-content"><h2>What Was The Time Cost?</h2><div data-time-calculator><div class="task-fields"><label for="hourlyRate">Hourly Time Value<input id="hourlyRate" name="hourlyRate" type="number" value="75" min="0" step="any" inputmode="decimal" aria-describedby="hourly-unit time-error"><span class="task-unit" id="hourly-unit">€ / hour</span></label><label for="taskMinutes">How Long To Reach A Usable Result?<input id="taskMinutes" name="taskMinutes" type="number" value="20" min="0" step="any" inputmode="decimal" aria-describedby="task-unit time-error"><span class="task-unit" id="task-unit">Minutes</span></label><label for="expansionMinutes">Time Spent Going Further<input id="expansionMinutes" name="expansionMinutes" type="number" value="35" min="0" step="any" inputmode="decimal" aria-describedby="expansion-unit time-error"><span class="task-unit" id="expansion-unit">Minutes</span></label></div><p>Tip: This calculator measures human time. AI subscription costs are excluded.</p><p class="task-warning" id="time-fees-note"><strong>Costs are based on the value of time. AI usage fees are not included.</strong></p><p id="time-error" data-time-error role="status"></p><div class="task-results" aria-live="polite" aria-atomic="true" aria-describedby="time-fees-note"><div class="task-result"><h3>Cost Of Getting To A Usable Result</h3><output id="taskTotal" for="hourlyRate taskMinutes">€25.00</output><p>The value of the time spent reaching a usable result.</p></div><div class="task-result"><h3>Cost Of Going Further</h3><output id="expansionTotal" for="hourlyRate expansionMinutes">€43.75</output><p>The value of the time spent beyond the original task.</p></div><div class="task-result"><h3>Total Time</h3><output id="totalTime" for="taskMinutes expansionMinutes">55 minutes</output><p>The full time spent across both stages.</p></div><div class="task-result"><h3>Total Cost</h3><output id="totalCost" for="hourlyRate taskMinutes expansionMinutes">€68.75</output><p>The total value of the time spent.</p></div></div><noscript><p>Enable JavaScript for live results. The displayed example uses €75/hour, 20 minutes to a usable result and 35 minutes going further. To calculate manually, multiply each stage’s minutes by the chosen hourly rate and divide by 60.</p></noscript></div></div></section><section class="section" id="meaning"><div class="section-label">03 · Interpret</div><div class="section-content"><h2>Time Cost Is One Part Of The Decision</h2><p>At €75 an hour, 20 minutes to a usable result values the time spent at €25. Another 35 minutes going further adds €43.75. Together, that is 55 minutes and €68.75 in time value.</p><p>This is a value assigned to time, not necessarily money paid. Total Cost here means the total value of time across both stages. It does not include subscriptions, AI usage, tool charges or other expenses.</p><p>A lower number does not establish better quality or reliability. Extra work may be worth pursuing, but its value requires a separate judgement. If no usable result was reached, record a failed attempt separately in the comparison guide.</p><p>The broader <a href="framework-effective-task-cost.html">Effective Task Cost Framework</a> also covers software fees and operational costs. This simpler tool deliberately isolates human time.</p><div class="task-actions"><a class="task-button" href="framework-ai-tasks.html">Understand The Task Framework</a><a class="task-button" href="compare-assistants-on-one-task.html">Compare Two Assistants</a><a class="task-button" href="time-cost-calculator.html">Value The Time Spent</a></div></div></section><div class="share-row share-row-end"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div></main>
+<button aria-label="Back to the top" class="back-to-top" data-back-to-top type="button">↑ Back To The Top</button>
+<footer><div class="shell"><a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a></div><div class="shell legal-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms &amp; Conditions</a></div>
+<div class="shell aoai-social-shell">
+<nav class="aoai-social-links" aria-label="AGE OF AIMPIRES social profiles">
+<a href="https://www.instagram.com/ageofaimpires/" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on Instagram (opens in a new tab)" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+<a href="https://www.linkedin.com/company/age-of-aimpires/" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on LinkedIn (opens in a new tab)" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5.3 3a2.3 2.3 0 1 0 0 4.6 2.3 2.3 0 0 0 0-4.6ZM3.4 9h3.8v12H3.4V9Zm5.9 0h3.6v1.6h.1c.5-1 1.7-1.9 3.5-1.9 3.8 0 4.5 2.5 4.5 5.7V21h-3.8v-5.9c0-1.4 0-3.2-1.9-3.2s-2.2 1.5-2.2 3.1v6H9.3V9Z"/></svg></a>
+<a href="https://x.com/ageofaimpires" target="_blank" rel="noopener noreferrer" aria-label="AGE OF AIMPIRES on X (opens in a new tab)" title="X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.4L5.5 22H2.3l7.4-8.5L1.8 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L7.4 4H5.6l12.2 16Z"/></svg></a>
+</nav>
+</div>
+<div class="shell">
+  <aside class="aoai-studio-footer" aria-labelledby="studio-footer-heading">
+    <h2 id="studio-footer-heading">From Ideas To Implementation</h2>
+    <p>From theory to practice. <a class="aoai-studio-link" href="https://thestudiocy.framer.website/">Visit THE STUDIO</a></p>
+  </aside>
+</div>
+</footer>
+
+<script>
+(() => {
+  const button = document.querySelector('[data-back-to-top]');
+  if (!button) return;
+  const sync = () => button.classList.toggle('is-visible', window.scrollY > 520);
+  sync();
+  window.addEventListener('scroll', sync, {passive:true});
+  button.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+})();
+</script>
+
+
+<script>
+(() => {
+  const button = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('nav[aria-label="Primary"]');
+  if (!button || !menu) return;
+
+  const closeMenu = () => {
+    menu.classList.remove('is-open');
+    button.setAttribute('aria-expanded', 'false');
+  };
+
+  button.addEventListener('click', () => {
+    const opening = !menu.classList.contains('is-open');
+    menu.classList.toggle('is-open', opening);
+    button.setAttribute('aria-expanded', String(opening));
+  });
+
+  menu.addEventListener('click', (event) => {
+    if (event.target.closest('a')) closeMenu();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!menu.classList.contains('is-open')) return;
+    if (menu.contains(event.target) || button.contains(event.target)) return;
+    closeMenu();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+      button.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 980) closeMenu();
+  });
+})();
+</script>
+
+<script>
+(() => {
+  document.querySelectorAll('[data-share-button]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const status = button.parentElement?.querySelector('[data-share-status]');
+      const label = button.querySelector('[data-share-label]');
+      const shareData = {
+        title: document.title,
+        text: document.querySelector('meta[name="description"]')?.content || '',
+        url: window.location.href.split('#')[0]
+      };
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          if (status) status.textContent = 'Shared.';
+          return;
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        if (label) label.textContent = 'Link copied';
+        button.classList.add('is-copied');
+        setTimeout(() => {
+          if (label) label.textContent = 'Share this';
+          button.classList.remove('is-copied');
+        }, 1800);
+      } catch (_) {
+        window.prompt('Copy this link:', shareData.url);
+      }
+    });
+  });
+})();
+</script><script src="assets/task-tools.js?v=8609c265abfc" defer></script>
+</body>
+</html>
