@@ -31,6 +31,12 @@
 
 # Editorial rules
 
+- Publication identity is `AGE OF AIMPIRES` (never `Age of AI Empires` or
+  `Age of Empires`); use the exact spelling in all visible text, `<title>`
+  strings, Open Graph/Twitter metadata, and future published copy. The `AI`
+  letters may have an accent colour in visible wordmarks, with readable contrast
+  in both light and dark themes. Do not apply wordmark markup inside metadata.
+
 - Capitalise the first letter of every word in public titles, headings and
   display labels, including articles and prepositions. Apply this to card
   titles and table captions too. Preserve acronyms and use sentence case for
