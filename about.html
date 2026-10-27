@@ -864,6 +864,69 @@ footer{
 .contact-honeypot{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;}
 .contact-submit[disabled]{opacity:.65;cursor:wait;}
 
+
+/* About layout and publication disclosure — 27 October 2026 */
+.page-about .about-intro-layout{
+  grid-template-columns:minmax(265px,.74fr) minmax(0,1.26fr);
+  gap:clamp(44px,5vw,88px);
+  align-items:start;
+}
+.page-about .about-intro-aside{min-width:0}
+.page-about .about-intro-aside > .section-label{margin:0 0 34px}
+.page-about .about-intro-portrait{width:min(100%,370px);max-width:370px;margin:0}
+.page-about .about-intro-portrait .connect-socials{gap:6px}
+.page-about .about-intro-portrait .social-badge{
+  min-width:0;padding-inline:5px;font-size:11px;letter-spacing:.03em;
+}
+.page-about .about-intro-layout .copy{min-width:0}
+.page-about .about-intro-layout .copy > h2{max-width:920px}
+.page-about .about-intro-layout .copy > p{max-width:810px}
+.page-about .aoai-publication-name{white-space:nowrap;font-weight:600}
+.page-about .aoai-publication-ai{color:var(--amber);font-weight:800}
+.page-about .aoai-publication-note{
+  max-width:810px;margin:30px 0 28px;padding:16px 20px 18px;
+  border-left:3px solid var(--teal);background:var(--surface);
+}
+.page-about .aoai-publication-note-label{
+  display:block;margin-bottom:8px;color:var(--teal);
+  font:800 11px/1.4 Arial,Helvetica,sans-serif;letter-spacing:.13em;text-transform:uppercase;
+}
+.page-about .copy .aoai-publication-note p{
+  margin:0;font:italic 17px/1.62 Georgia,"Times New Roman",serif;color:var(--slate);
+}
+.page-about .copy .aoai-publication-note .aoai-publication-name{font-weight:600}
+/* The portrait now accompanies the introduction; contact has room to breathe. */
+.page-about .connect-section .contact-layout{
+  display:grid;grid-template-columns:minmax(0,1fr);
+  grid-template-areas:"heading" "form";gap:28px;align-items:start;
+}
+.page-about .connect-section .contact-heading{max-width:1180px}
+.page-about .connect-section .contact-form{width:min(100%,1180px);max-width:none}
+.page-about .connect-section .contact-row{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(14px,2.6vw,34px);
+}
+@media(max-width:980px){
+  .page-about .about-intro-layout{
+    display:grid;grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"label" "copy" "portrait";gap:0;
+  }
+  .page-about .about-intro-aside{display:contents}
+  .page-about .about-intro-aside > .section-label{grid-area:label;margin:0 0 24px}
+  .page-about .about-intro-layout .copy{grid-area:copy}
+  .page-about .about-intro-aside > .about-intro-portrait{
+    grid-area:portrait;margin-top:32px;width:min(100%,370px);
+  }
+}
+@media(max-width:640px){
+  .page-about .aoai-publication-note{padding:14px 16px}
+  .page-about .copy .aoai-publication-note p{font-size:16px}
+  .page-about .connect-section .contact-row{grid-template-columns:1fr}
+  .page-about .about-intro-portrait .connect-socials{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .page-about .about-intro-portrait .social-badge{font-size:11px;padding-inline:4px}
+}
+
 </style>
 <style id="aoai-consistency">
 /* Shared brand treatments: header/footer wordmark and reversed section wordmark. */
@@ -928,15 +991,20 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 </aside>
 </section><div class="release-share-wrap"><div aria-label="Page sharing" class="share-row"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div>
 <section class="section">
-<div class="shell grid-2">
-<div><p class="section-label">The Short Version</p></div>
+<div class="shell grid-2 about-intro-layout">
+<div class="about-intro-aside"><p class="section-label">The Short Version</p>
+<div class="connect-media about-intro-portrait">
+<figure class="portrait connect-portrait"><img alt="Portrait of George in profile, partly sharp and partly blurred" height="1256" loading="lazy" src="media/about-portrait.png" width="848"/></figure>
+<div aria-label="George on social media" class="social-links connect-socials"><a class="social-badge" href="https://www.instagram.com/gpchristoforakis" rel="noopener noreferrer" target="_blank">Instagram</a><a class="social-badge" href="https://www.facebook.com/gpchristoforakis" rel="noopener noreferrer" target="_blank">Facebook</a><a class="social-badge" href="https://open.spotify.com/user/1190050886" rel="noopener noreferrer" target="_blank">Spotify</a></div>
+</div>
+</div>
 <div class="copy">
 <h2>Simply A Founder. Not AI Evangelist.</h2>
 <p class="lead">As a tech entrepreneur with core expertise in consumer tech and branding, I’m interested in how an idea becomes something people understand, trust, choose and keep choosing over the alternatives.</p>
-<p class="aoai-studio-bio">I write Age of AI Empires and run <a href="https://thestudiocy.framer.website/">THE STUDIO</a>, where I help businesses find practical ways to use AI.</p>
-<p class="aoai-publication-note">AGE OF AIMPIRES is not a startup or commercial venture. It is an independent publication about the economics, behaviour and consequences of AI becoming part of everyday life and work.</p>
+<p class="aoai-studio-bio">I write <span class="aoai-publication-name">AGE OF <span class="aoai-publication-ai">AI</span>MPIRES</span> and run <a href="https://thestudiocy.framer.website/">THE STUDIO</a>, where I help businesses find practical ways to use AI.</p>
+<aside class="aoai-publication-note" aria-label="Publication disclosure"><span class="aoai-publication-note-label">Editorial Disclosure</span><p><span class="aoai-publication-name">AGE OF <span class="aoai-publication-ai">AI</span>MPIRES</span> is not a startup or commercial venture. It is an independent publication about the economics, behaviour and consequences of AI becoming part of everyday life and work.</p></aside>
 <h3 class="ai-approach-heading">That Is Also My Approach To AI:</h3>
-<p>A model can be technically impressive, but if people do not understand what it is for, trust the result, or see how it fits the task in front of them, <strong>being impressive means very little in the end.</strong></p></div>
+<p>A model can be technically powerful, but if people do not understand what it is for, trust the result, or see how it fits the task in front of them, <strong>being impressive means very little in the end.</strong></p></div>
 </div>
 <div aria-label="Principles" class="shell principles">
 <div class="principle principle-brand">
@@ -954,10 +1022,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <h2>Connect With Me</h2>
 <p class="contact-intro">Questions, ideas, disagreements — send them over.</p>
 </div>
-<div class="connect-media">
-<figure class="portrait connect-portrait"><img alt="Portrait of George in profile, partly sharp and partly blurred" height="1256" loading="lazy" src="media/about-portrait.png" width="848"/></figure>
-<div aria-label="George on social media" class="social-links connect-socials"><a class="social-badge" href="https://www.instagram.com/gpchristoforakis" rel="noopener noreferrer" target="_blank">Instagram</a><a class="social-badge" href="https://www.facebook.com/gpchristoforakis" rel="noopener noreferrer" target="_blank">Facebook</a><a class="social-badge" href="https://open.spotify.com/user/1190050886" rel="noopener noreferrer" target="_blank">Spotify</a></div>
-</div>
+
 <form class="contact-form" data-contact-form="" novalidate="">
 <div class="contact-honeypot" aria-hidden="true">
 <label for="contact-website">Website</label>
