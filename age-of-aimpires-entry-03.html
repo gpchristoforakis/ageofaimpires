@@ -444,7 +444,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <h1 class="sr-only">Attention Fades. Money Moves.</h1>
 <div class="entry-hero"><img src="assets/entry-03-hero.png" alt="Attention Fades. Money Moves. hero illustration"/></div>
 <p class="deck">The ad-supported web was a long-running arrangement, not a permanent one. As AI assistants handle more of the research, human attention becomes less valuable — and a new digital economy starts to take shape.</p>
-<div class="meta-row"><span>Reads In: 8 Mins</span><span class="meta-dot"></span><span>AGE OF AIMPIRES</span></div>
+<div class="meta-row"><span>Reads In: 8 Mins</span><span class="meta-dot"></span><span>AGE OF AIMPIRES</span><div class="meta-audio-group"><div class="mini-player" data-audio-player="overview"><button aria-label="Play audio overview" class="mini-player-button" type="button"><span aria-hidden="true" class="mini-player-icon">▶</span></button><span class="mini-player-label">Audio Overview</span><input aria-label="Audio overview progress" class="mini-player-progress" max="100" min="0" step="0.1" type="range" value="0"/><span class="mini-player-time"><span class="mini-player-current">0:00</span> / <span class="mini-player-duration">19:02</span></span><audio preload="metadata"><source src="audio/entry-03-audio-overview.m4a" type="audio/mp4"/></audio></div></div></div>
 </div></section>
 <section class="entry">
 <div aria-label="Entry sharing" class="share-row"><button class="share-button" data-share-button="" type="button"><span aria-hidden="true">↗</span><span data-share-label="">Share this</span></button><span aria-live="polite" class="share-status" data-share-status=""></span></div>
@@ -636,5 +636,51 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 })();
 </script>
 
+<script>
+(() => {
+  document.querySelectorAll('[data-audio-player]').forEach((player) => {
+    const button = player.querySelector('.mini-player-button');
+    const icon = player.querySelector('.mini-player-icon');
+    const progress = player.querySelector('.mini-player-progress');
+    const current = player.querySelector('.mini-player-current');
+    const duration = player.querySelector('.mini-player-duration');
+    const audio = player.querySelector('audio');
+    if (!button || !audio) return;
+
+    const fmt = (seconds) => {
+      if (!Number.isFinite(seconds)) return '0:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    };
+
+    button.addEventListener('click', async () => {
+      if (audio.paused) {
+        document.querySelectorAll('audio').forEach((other) => {
+          if (other !== audio) other.pause();
+        });
+        try { await audio.play(); } catch (_) {}
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play', () => { if (icon) icon.textContent = '❚❚'; });
+    audio.addEventListener('pause', () => { if (icon) icon.textContent = '▶'; });
+    audio.addEventListener('loadedmetadata', () => {
+      if (duration) duration.textContent = fmt(audio.duration);
+    });
+    audio.addEventListener('timeupdate', () => {
+      if (current) current.textContent = fmt(audio.currentTime);
+      if (progress && audio.duration) progress.value = String((audio.currentTime / audio.duration) * 100);
+    });
+    if (progress) {
+      progress.addEventListener('input', () => {
+        if (audio.duration) audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+      });
+    }
+  });
+})();
+</script>
 </body>
 </html>
