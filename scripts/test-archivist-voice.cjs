@@ -227,7 +227,8 @@ test('local speech and server interruption stop queued playback while keeping ca
 test('locked donor instructions/config port, ordinary WebSocket and pagehide cleanup are preserved', () => {
   const donor=process.env.ARCHIVIST_DONOR_PATH; assert.ok(donor,'Set ARCHIVIST_DONOR_PATH for checkpoint comparison');
   const donorCode=execFileSync('git',['show','b9af7bf9fab676ec042615d88d9770468e7c1d28:src/services/archivistVoiceClient.ts'],{cwd:donor,encoding:'utf8'});
-  assert.equal(config().systemInstruction,donorCode.match(/export const ARCHIVIST_LIVE_SYSTEM_INSTRUCTION = `([\s\S]*?)`;/)[1]);
+  // Production adopted the uppercase publication name after the donor checkpoint.
+  assert.equal(config().systemInstruction,donorCode.match(/export const ARCHIVIST_LIVE_SYSTEM_INSTRUCTION = `([\s\S]*?)`;/)[1].replaceAll('Age of AImpires', 'AGE OF AIMPIRES'));
   assert.doesNotMatch(voiceCode,/ProxiedWebSocket|createElement\(['"]iframe|Object\.defineProperty\(globalThis/);
   const main=fs.readFileSync(path.join(root,'assets/archivist.js'),'utf8');assert.match(main,/addEventListener\('pagehide', stopVoice\)/);
   assert.doesNotMatch(main,/GEMINI_API_KEY|AIza[\w-]{20,}/);assert.doesNotMatch(voiceCode,/GEMINI_API_KEY|AIza[\w-]{20,}/);

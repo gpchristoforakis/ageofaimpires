@@ -60,8 +60,8 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
           assert.equal(await page.locator('html').getAttribute('data-theme'), theme);
           assert.ok(await page.locator('[data-theme-toggle]').isVisible());
           assert.equal(await page.locator('body > header').evaluate(node => getComputedStyle(node).position), 'sticky');
-          for (const link of await page.locator('footer .aoai-social-links a').all()) assert.ok(await link.isVisible());
-          assert.equal(await page.locator('footer .aoai-social-links a').count(), 3);
+          for (const link of await page.locator(file === 'contact.html' ? 'main .aoai-social-links a' : 'footer .aoai-social-links a').all()) assert.ok(await link.isVisible());
+          assert.equal(await page.locator(file === 'contact.html' ? 'main .aoai-social-links a' : 'footer .aoai-social-links a').count(), file === 'contact.html' ? 4 : 3);
           assert.equal(await page.locator('body > header').getByText('The Archivist', { exact: false }).count(), 0);
           assert.equal(await launcher.getAttribute('aria-label'), 'TALK WITH THE ARCHIVIST');
           assert.equal((await launcher.innerText()).trim(), 'TALK WITH THE ARCHIVIST');
@@ -148,7 +148,9 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
     assert.deepEqual(requests[0].history, [], 'Failed turns must not enter history');
     const source = { title: 'Fast AI. Expensive Lesson.', canonicalUrl: 'https://ageofaimpires.com/age-of-aimpires-entry-01', section: 'The Completion Boundary', pageType: 'entry', snippet: 'A published passage.' };
     finishRequest({ body: { reply: 'Fixture: the Completion Boundary.\nA second paragraph.', sources: [source] } });
-    await page.locator('.aoai-archivist-source').waitFor();
+    await page.locator('.aoai-archivist-source').waitFor({ state: 'attached' });
+    assert.equal(await page.locator('.aoai-archivist-source').isVisible(), false);
+    await page.getByRole('button', { name: 'Sources (1)', exact: true }).click();
     assert.equal(await page.locator('.aoai-archivist-message-reader').count(), 1, 'Retry must not duplicate the failed question');
     assert.equal(await page.locator('.aoai-archivist-sources h3').innerText(), 'FROM THE ARCHIVE');
     const link = page.locator('.aoai-archivist-source a');
@@ -187,7 +189,7 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
 
     await page.goto(`${base}/index.html`);
     await page.locator('.aoai-archivist-launcher').click();
-    assert.equal(await page.locator('.aoai-archivist-message').count(), 0, 'New page starts a new conversation');
+    assert.equal(await page.locator('.aoai-archivist-message').count(), 4, 'New page restores the conversation');
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.waitForFunction(() => !!document.querySelector('.aoai-archivist-panel video')?.src);
     assert.equal(await page.locator('.aoai-archivist-panel video').count(), 1);
@@ -297,6 +299,7 @@ const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
     assert.equal(await page.locator('.aoai-archivist-voice-status').textContent(), 'Disconnected');
     assert.equal(await page.evaluate(() => window.__voiceFixture.tracks.every(track => track.readyState === 'ended') && window.__voiceFixture.sockets.every(socket => socket.closed)), true);
     await page.screenshot({ path: path.join(screenshotDir, 'voice-controls.png') });
+    await require('./test-archivist-ui.cjs')(context, base, screenshotDir);
     assert.deepEqual(errors, [], 'Browser runtime errors');
     console.log(`Passed: ${pages.length} pages × 2 themes × desktop/mobile; panel dimensions, controls/focus, context, session history, loading/error/retry, source cards, text/URL safety, reduced motion, single idle video and image fallback. Gemini answers mocked; missing-secret response uses the real local Worker.`);
     console.log(`Screenshots: ${screenshotDir}`);

@@ -8,6 +8,8 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const history = [];
   let loading = false;
+  let activeRequest = null;
+  let sourceListId = 0;
   let videoFailed = false;
   let lastFailedQuery = '';
   let focusBeforeOpen = null;
@@ -78,6 +80,9 @@
     };
   }
 
+  const sessionKey = 'aoai:archivist:conversation:v1';
+  let transcript = [];
+  let pending = null;
   const context = pageContext();
   const prompt = 'TALK WITH THE ARCHIVIST';
   const launcher = element('button', 'aoai-archivist aoai-archivist-launcher');
@@ -94,22 +99,21 @@
   panel.setAttribute('aria-labelledby', 'aoai-archivist-title');
   const head = element('div', 'aoai-archivist-panel-head');
   const identity = element('div');
-  const title = element('h2', '', 'THE ARCHIVIST');
+  const title = element('h2', '', prompt);
   title.id = 'aoai-archivist-title';
-  identity.append(title, element('p', 'aoai-archivist-subtitle', 'Guide to the archive'));
-  const close = element('button', 'aoai-archivist-close', '\u00d7');
+  identity.append(title);
+  const close = element('button', 'aoai-archivist-close', '\u2212');
   close.type = 'button';
-  close.setAttribute('aria-label', 'Close The Archivist');
+  close.setAttribute('aria-label', 'Collapse The Archivist');
   head.append(avatar('', true), identity, close);
   const video = head.querySelector('video');
 
   const scroll = element('div', 'aoai-archivist-scroll');
   const intro = element('div', 'aoai-archivist-intro');
-  intro.append(element('p', '', 'Explore the ideas in the published archive.'));
-  intro.append(element('span', 'aoai-archivist-context', context.current_entry ? `${context.current_entry} · ${context.current_page}` : 'Answers grounded in AGE OF AIMPIRES.'));
+  intro.append(element('p', '', 'Explore The Entries In The Published Archive.'));
   const suggestions = element('div', 'aoai-archivist-suggestions');
-  const queries = context.current_entry ? ['What does this entry argue?', 'What is the Completion Boundary?'] :
-    ['What is the Completion Boundary?', 'Explain Effective Task Cost.'];
+  const queries = ['What is the Completion Boundary?', 'How to write more effective prompts.',
+    'When to automate tasks and how to scope their authority.', 'Which Assistant fits the Job Description best?'];
   for (const query of queries) {
     const button = element('button', '', query);
     button.type = 'button';
@@ -130,13 +134,11 @@
   const errorText = element('p');
   const retry = element('button', 'aoai-archivist-retry', 'Try again');
   retry.type = 'button';
-  retry.addEventListener('click', () => send(lastFailedQuery, true));
+  retry.addEventListener('click', () => send(lastFailedQuery, true, pending?.body));
   error.append(errorText, retry);
   scroll.append(intro, log, thinking, error);
 
   const form = element('form', 'aoai-archivist-form');
-  const label = element('label', '', prompt);
-  label.htmlFor = 'aoai-archivist-input';
   const row = element('div', 'aoai-archivist-input-row');
   const input = element('textarea', 'aoai-archivist-input');
   input.id = 'aoai-archivist-input';
@@ -150,7 +152,8 @@
   const note = element('p', 'aoai-archivist-form-note', 'Enter to send · Shift + Enter for a new line');
   note.id = 'aoai-archivist-input-note';
   input.setAttribute('aria-describedby', note.id);
-  form.append(label, row, note);
+  input.setAttribute('aria-label', 'Question for The Archivist');
+  form.append(row, note);
   const voiceControls = element('div', 'aoai-archivist-voice-controls');
   const startVoice = element('button', 'aoai-archivist-voice-button', 'Start Voice');
   startVoice.type = 'button';
@@ -168,8 +171,12 @@
   const voiceNotice = element('p', 'aoai-archivist-voice-notice');
   voiceNotice.hidden = true;
   voiceNotice.setAttribute('role', 'alert');
-  voiceControls.append(startVoice, endVoice, voiceStatus, microphone, voiceActivity, voiceNotice);
-  panel.append(head, voiceControls, scroll, form);
+  row.insertBefore(startVoice, sendButton);
+  row.insertBefore(endVoice, sendButton);
+  voiceControls.hidden = true;
+  voiceControls.append(voiceStatus, microphone, voiceActivity, voiceNotice);
+  form.append(voiceControls);
+  panel.append(head, scroll, form);
   document.body.append(launcher, panel);
 
   function updateVideo() {
@@ -213,6 +220,7 @@
     launcher.setAttribute('aria-expanded', 'true');
     document.body.classList.add('aoai-archivist-open');
     input.focus({ preventScroll: true });
+    scroll.scrollTop = scroll.scrollHeight;
     pauseBackgroundLoops();
     updateVideo();
     // Load only the small controller on panel open; no permission or token request.
@@ -240,6 +248,7 @@
 
   function showVoiceStatus(status, notice = '') {
     const active = status === 'Connecting' || status === 'Connected';
+    voiceControls.hidden = !active && !notice;
     voiceIntent = active;
     startVoice.hidden = active;
     endVoice.hidden = !active;
@@ -268,6 +277,9 @@
             if (event.isFinal) {
               if (event.role === 'model') appendSources(message, event.sources || []);
               history.push({ role: event.role, content: event.text });
+              transcript.push({ role: event.role, content: event.text, sources: event.sources || [] });
+              if (event.role === 'model') addActions(message);
+              save();
               voiceMessages[event.role] = null;
             }
             scroll.scrollTop = scroll.scrollHeight;
@@ -298,6 +310,7 @@
   }
   endVoice.addEventListener('click', stopVoice);
   window.addEventListener('pagehide', stopVoice);
+  window.addEventListener('pagehide', cancelSearch);
 
   function addMessage(role, content, sources = []) {
     const message = element('div', `aoai-archivist-message ${role === 'user' ? 'aoai-archivist-message-reader' : ''}`);
@@ -312,7 +325,7 @@
 
   function appendSources(message, sources) {
     if (sources.length) {
-      const sourceList = element('div', 'aoai-archivist-sources');
+      const sourceList = element('div', 'aoai-archivist-source-list');
       sourceList.append(element('h3', '', 'FROM THE ARCHIVE'));
       for (const source of sources) {
         // The server supplies canonical URLs; refuse executable/unrelated URLs.
@@ -330,7 +343,22 @@
         if (source.snippet) card.append(element('p', 'aoai-archivist-source-snippet', source.snippet));
         sourceList.append(card);
       }
-      if (sourceList.children.length > 1) message.append(sourceList);
+      const count = sourceList.children.length - 1;
+      if (count) {
+        const sourcesSection = element('div', 'aoai-archivist-sources');
+        const toggle = element('button', 'aoai-archivist-sources-toggle', `Sources (${count})`);
+        toggle.type = 'button';
+        sourceList.id = `aoai-archivist-sources-${++sourceListId}`;
+        sourceList.hidden = true;
+        toggle.setAttribute('aria-controls', sourceList.id);
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.addEventListener('click', () => {
+          sourceList.hidden = !sourceList.hidden;
+          toggle.setAttribute('aria-expanded', String(!sourceList.hidden));
+        });
+        sourcesSection.append(toggle, sourceList);
+        message.append(sourcesSection);
+      }
     }
   }
 
@@ -347,42 +375,116 @@
     return JSON.stringify(body);
   }
 
-  async function send(value, isRetry = false) {
+  function setLoading(active) {
+    loading = active;
+    thinking.hidden = !active;
+    sendButton.disabled = active;
+    sendButton.textContent = active ? 'Wait' : 'Send';
+  }
+
+  function cancelSearch() {
+    const request = activeRequest;
+    activeRequest = null;
+    request?.abort();
+    setLoading(false);
+  }
+
+  async function send(value, isRetry = false, originalBody = null) {
     const query = value.trim();
     if (!query || loading || query.length > 4000) return;
-    loading = true;
-    thinking.hidden = false;
+    const request = new AbortController();
+    activeRequest = request;
+    setLoading(true);
     error.hidden = true;
     input.value = '';
-    sendButton.disabled = true;
-    sendButton.textContent = 'Wait';
     suggestions.hidden = true;
-    if (!isRetry) addMessage('user', query);
+    if (!isRetry) { addMessage('user', query); transcript.push({role: 'user', content: query}); }
+    pending = { query, body: originalBody || requestBody(query) };
+    save();
     scroll.scrollTop = scroll.scrollHeight;
     try {
       const response = await fetch('/api/chat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: requestBody(query),
-        signal: AbortSignal.timeout(95000),
+        body: pending.body,
+        signal: AbortSignal.any([request.signal, AbortSignal.timeout(95000)]),
       });
       const data = await response.json();
+      if (activeRequest !== request) return;
       if (!response.ok) throw new Error(data.error || 'The Archivist is unavailable. Please try again.');
       if (typeof data.reply !== 'string' || !Array.isArray(data.sources)) throw new Error('The archive returned an unreadable answer. Please try again.');
-      addMessage('model', data.reply, data.sources);
+      addActions(addMessage('model', data.reply, data.sources));
+      transcript.push({ role: 'model', content: data.reply, sources: data.sources });
+      pending = null;
       history.push({ role: 'user', content: query }, { role: 'model', content: data.reply });
       lastFailedQuery = '';
     } catch (failure) {
+      if (activeRequest !== request) return;
+      pending = null;
       lastFailedQuery = query;
       errorText.textContent = failure.name === 'TimeoutError' ? 'The archive took too long to respond. Please try again.' :
         failure instanceof TypeError || failure instanceof SyntaxError ? 'The archive could not be reached. Please try again.' : failure.message;
       error.hidden = false;
     } finally {
-      loading = false;
-      thinking.hidden = true;
-      sendButton.disabled = false;
-      sendButton.textContent = 'Send';
-      scroll.scrollTop = scroll.scrollHeight;
-      if (panel.open) input.focus({ preventScroll: true });
+      // A cancelled request must not clear the state of a newer request.
+      if (activeRequest === request) {
+        activeRequest = null;
+        save();
+        setLoading(false);
+        scroll.scrollTop = scroll.scrollHeight;
+        if (panel.open) input.focus({ preventScroll: true });
+      }
     }
   }
+  function addActions(message) {
+    const bar = element('div', 'aoai-archivist-answer-actions');
+    const copy = element('button', '', 'Copy');
+    const download = element('button', '', 'Export');
+    copy.type = download.type = 'button';
+    const output = () => {
+      const links = [...message.querySelectorAll('.aoai-archivist-source a')].map(a => a.textContent + ': ' + a.href);
+      return message.querySelector('.aoai-archivist-message-text').textContent + (links.length ? '\n\nSources\n' + links.join('\n') : '');
+    };
+    copy.onclick = async () => {
+      try { await navigator.clipboard.writeText(output()); copy.textContent = 'Copied'; }
+      catch { copy.textContent = 'Copy unavailable'; }
+    };
+    download.onclick = () => {
+      const a = element('a');
+      a.href = URL.createObjectURL(new Blob([output()], { type: 'text/markdown;charset=utf-8' }));
+      a.download = 'archivist-response.md'; a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    };
+    bar.append(copy, download); message.append(bar);
+  }
+
+  function markResume() {
+    launcherText.textContent = transcript.length ? 'RESUME CHAT WITH THE ARCHIVIST' : prompt;
+    launcher.setAttribute('aria-label', launcherText.textContent);
+  }
+  function save() {
+    markResume();
+    try { sessionStorage.setItem(sessionKey, JSON.stringify({ transcript, history, pending, lastFailedQuery })); }
+    catch { /* Storage unavailable: the current page still retains the conversation. */ }
+  }
+  function restore(internalNavigation) {
+    let state;
+    try { state = JSON.parse(sessionStorage.getItem(sessionKey)); } catch { return; }
+    if (!Array.isArray(state?.transcript) || !Array.isArray(state.history)) return;
+    transcript = state.transcript;
+    log.replaceChildren();
+    history.length = 0; history.push(...state.history);
+    for (const turn of transcript) {
+      const message = addMessage(turn.role, turn.content, turn.sources || []);
+      if (turn.role === 'model') addActions(message);
+    }
+    suggestions.hidden = transcript.length > 0;
+    markResume();
+    pending = state.pending;
+    lastFailedQuery = pending?.query || state.lastFailedQuery || '';
+    error.hidden = !lastFailedQuery;
+    if (lastFailedQuery) errorText.textContent = 'The last question did not finish. Try again to continue.';
+    if (pending && internalNavigation) send(pending.query, true, pending.body);
+  }
+  restore(document.referrer.startsWith(location.origin + '/'));
+  window.addEventListener('pageshow', event => { if (event.persisted) restore(false); });
 })();
