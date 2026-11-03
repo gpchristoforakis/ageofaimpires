@@ -52,7 +52,15 @@ module.exports = async (context, base, screenshotDir) => {
     assert.ok(await send.isEnabled());
 
     await submit('One source');
-    await reply([source]);
+    const formatted = '### A useful result\n\n**Fixture answer.**\n\n1. Read the *brief*.\n2. Check the result.\n\n- Keep <img src=x> literal.';
+    await reply([source], formatted);
+    const answer = lastMessage.locator('.aoai-archivist-answer');
+    assert.equal(await answer.locator('h3').innerText(), 'A useful result');
+    assert.equal(await answer.locator('strong').innerText(), 'Fixture answer.');
+    assert.equal(await answer.locator('ol li').count(), 2);
+    assert.equal(await answer.locator('em').innerText(), 'brief');
+    assert.equal(await answer.locator('ul li').innerText(), 'Keep <img src=x> literal.');
+    assert.equal(await answer.locator('img,a').count(), 0);
     const toggle = lastMessage.getByRole('button', { name: 'Sources (1)', exact: true });
     assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
     const controlledId = await toggle.getAttribute('aria-controls');
@@ -64,7 +72,7 @@ module.exports = async (context, base, screenshotDir) => {
     await page.keyboard.press('Enter');
     assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
     assert.equal(await page.locator(`#${controlledId}`).isVisible(), true);
-    assert.equal(await lastMessage.locator('h3').innerText(), 'FROM THE ARCHIVE');
+    assert.equal(await lastMessage.locator('.aoai-archivist-sources h3').innerText(), 'FROM THE ARCHIVE');
     const link = lastMessage.locator('.aoai-archivist-source a');
     await page.keyboard.press('Tab');
     assert.equal(await link.evaluate(node => node === document.activeElement), true);
@@ -92,7 +100,9 @@ module.exports = async (context, base, screenshotDir) => {
     assert.ok(copied.includes(source.canonicalUrl) && copied.includes('Fixture answer.'));
     const [download] = await Promise.all([page.waitForEvent('download'), lastMessage.getByRole('button', { name: 'Export' }).click()]);
     assert.equal(download.suggestedFilename(), 'archivist-response.md');
-    assert.equal(require('node:fs').readFileSync(await download.path(), 'utf8'), copied);
+    assert.ok(copied.includes('1. Read the brief.') && !copied.includes('**'));
+    const exported = require('node:fs').readFileSync(await download.path(), 'utf8');
+    assert.ok(exported.startsWith(formatted) && exported.includes(source.canonicalUrl));
 
     await submit('Multiple sources and rejected URLs');
     await reply([source, { ...source, title: 'Second source' }, { ...source, title: 'Third source' },

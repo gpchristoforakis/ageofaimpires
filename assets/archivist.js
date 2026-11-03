@@ -435,22 +435,74 @@
       }
     }
   }
+  // Render a small prose-only Markdown subset. Model text never becomes HTML
+  // or a clickable URL; links remain the responsibility of the source cards.
+  function formatAnswer(body, raw) {
+    function inline(node, text) {
+      let start = 0;
+      for (const m of text.matchAll(/(\x60)([^\x60\n]+)\1|(\*\*|__)(\S(?:[^\n]*?\S)?)\3|(\*)([^*\n]+?)\5/g)) {
+        node.append(text.slice(start, m.index), element(m[1] ? 'code' : m[3] ? 'strong' : 'em', '', m[2] || m[4] || m[6]));
+        start = m.index + m[0].length;
+      }
+      node.append(text.slice(start));
+    }
+    body.replaceChildren();
+    body.classList.add('aoai-archivist-answer');
+    let paragraph = [], list, code;
+    const flush = () => {
+      if (!paragraph.length) return;
+      const p = element('p'); inline(p, paragraph.join('\n')); body.append(p); paragraph = [];
+    };
+    for (const line of raw.replace(/\r\n?/g, '\n').split('\n')) {
+      if (/^\s*\x60{3}/.test(line)) {
+        flush(); list = null;
+        if (code) code = null;
+        else { code = element('pre'); body.append(code); }
+        continue;
+      }
+      if (code) { code.append(line + '\n'); continue; }
+      if (!line.trim()) { flush(); continue; }
+      const item = line.match(/^\s*(?:(\d{1,9})[.)]|[-+*])\s+(.+)$/);
+      const heading = line.match(/^#{1,6}\s+(.+)$/);
+      if (item) {
+        flush();
+        const tag = item[1] ? 'ol' : 'ul';
+        if (list?.localName !== tag) { list = element(tag); body.append(list); }
+        const li = element('li'); if (item[1]) li.value = Number(item[1]);
+        inline(li, item[2]); list.append(li);
+      } else if (list && /^\s{2,}/.test(line)) {
+        list.lastElementChild.append('\n'); inline(list.lastElementChild, line.trim());
+      } else {
+        list = null;
+        if (heading) { flush(); const h = element('h3'); inline(h, heading[1]); body.append(h); }
+        else paragraph.push(line);
+      }
+    }
+    flush();
+    return [...body.children].map(el => el.matches('ul,ol')
+      ? [...el.children].map(li => (el.localName === 'ol' ? li.value + '. ' : '• ') + li.textContent).join('\n')
+      : el.textContent).join('\n\n');
+  }
+
   function addActions(message) {
+    const body = message.querySelector('.aoai-archivist-message-text');
+    const raw = body.textContent;
+    const plain = formatAnswer(body, raw);
     const bar = element('div', 'aoai-archivist-answer-actions');
     const copy = element('button', '', 'Copy');
     const download = element('button', '', 'Export');
     copy.type = download.type = 'button';
-    const output = () => {
+    const output = text => {
       const links = [...message.querySelectorAll('.aoai-archivist-source a')].map(a => a.textContent + ': ' + a.href);
-      return message.querySelector('.aoai-archivist-message-text').textContent + (links.length ? '\n\nSources\n' + links.join('\n') : '');
+      return text + (links.length ? '\n\nSources\n' + links.join('\n') : '');
     };
     copy.onclick = async () => {
-      try { await navigator.clipboard.writeText(output()); copy.textContent = 'Copied'; }
+      try { await navigator.clipboard.writeText(output(plain)); copy.textContent = 'Copied'; }
       catch { copy.textContent = 'Copy unavailable'; }
     };
     download.onclick = () => {
       const a = element('a');
-      a.href = URL.createObjectURL(new Blob([output()], { type: 'text/markdown;charset=utf-8' }));
+      a.href = URL.createObjectURL(new Blob([output(raw)], { type: 'text/markdown;charset=utf-8' }));
       a.download = 'archivist-response.md'; a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     };
