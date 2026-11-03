@@ -168,13 +168,23 @@ h1{
   grid-template-columns:minmax(260px,.72fr) minmax(0,1.28fr);
   gap:72px;
 }
-.about-intro-grid{
-  grid-template-columns:1fr;
-  gap:18px;
+.grid-2.about-intro-grid{
+  grid-template-columns:minmax(220px,340px) minmax(0,720px);
+  grid-template-areas:"label copy" "media copy";
+  grid-template-rows:auto 1fr;
+  gap:16px clamp(32px,5vw,72px);
+  justify-content:center;
+  align-items:start;
 }
-.about-intro-grid .copy{
-  width:min(100%,720px);
-  margin-inline:auto;
+.about-intro-grid > .section-label{grid-area:label;margin:0}
+.about-intro-grid > .copy{grid-area:copy}
+@media(max-width:900px){
+  .grid-2.about-intro-grid{
+    grid-template-columns:minmax(0,720px);
+    grid-template-areas:"label" "copy" "media";
+    grid-template-rows:auto;
+    gap:24px;
+  }
 }
 .page-about .aoai-publication-name{white-space:nowrap;font-weight:600}
 .page-about .aoai-publication-ai{color:var(--amber);font-weight:800}
@@ -685,11 +695,10 @@ footer{
 .connect-section{padding-top:60px;padding-bottom:64px}
 .contact-layout{
   display:grid;
-  grid-template-columns:minmax(340px,.4fr) minmax(0,.6fr);
-  grid-template-areas:
-    "media heading"
-    "media form";
-  column-gap:clamp(44px,5vw,76px);
+  max-width:720px;
+  margin-inline:auto;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-areas:"heading" "form";
   row-gap:24px;
   align-items:start;
 }
@@ -804,23 +813,11 @@ footer{
   font:13px/1.45 Arial,Helvetica,sans-serif!important;
 }
 @media(max-width:980px){
-  .contact-layout{
-    grid-template-columns:minmax(280px,.42fr) minmax(0,.58fr);
-    column-gap:34px;
-  }
   .connect-media{max-width:360px}
   .contact-row{grid-template-columns:1fr}
 }
 @media(max-width:760px){
   .connect-section{padding-top:52px;padding-bottom:58px}
-  .contact-layout{
-    grid-template-columns:1fr;
-    grid-template-areas:
-      "heading"
-      "media"
-      "form";
-    gap:28px;
-  }
   .connect-media{width:min(100%,420px);max-width:none}
   .contact-heading h2{font-size:clamp(42px,12vw,58px)}
   .contact-intro{font-size:19px}
@@ -960,15 +957,19 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div class="route-stop"><span class="chapter">Anchored in</span><span class="city">Nicosia.</span></div>
 </div>
 </aside>
-</section><div class="release-share-wrap"><div aria-label="Page sharing" class="share-row"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div>
+</section>
 <section class="section">
 <div class="shell grid-2 about-intro-grid">
-<div><p class="section-label">The Short Version</p></div>
+<p class="section-label">The Short Version</p>
 <div class="copy">
 <h2>Simply A Founder. Not AI Evangelist.</h2>
 <p class="lead">As a consumer tech entrepreneur with branding background, I’m interested in how an idea becomes something people understand, trust, choose and keep choosing over the alternatives.</p>
 <aside class="aoai-publication-note" aria-label="Publication disclosure"><span class="aoai-publication-note-label">Editorial Disclosure</span><p><span class="aoai-publication-name">AGE OF <span class="aoai-publication-ai">AI</span>MPIRES</span> is not a startup or commercial venture. It is an independent publication about the economics, behaviour and consequences of AI becoming part of everyday life and work.</p></aside>
 <p>An F1 race car is ridiculously impressive, but that does not mean anyone can drive it. AI assistants are getting better by the hour, but they are also becoming more complex. That makes it harder for people to understand how they work, trust their results, or judge whether they are actually useful for the task in front of them.</p></div>
+<div class="connect-media">
+<figure class="portrait connect-portrait"><img alt="Portrait of George in profile, partly sharp and partly blurred" height="1256" loading="lazy" src="media/about-portrait.png" width="848"/></figure>
+<div aria-label="George on social media" class="social-links connect-socials"><a class="social-badge" href="https://www.instagram.com/gpchristoforakis" rel="noopener noreferrer" target="_blank">Instagram</a><a class="social-badge" href="https://www.facebook.com/gpchristoforakis" rel="noopener noreferrer" target="_blank">Facebook</a><a class="social-badge" href="https://open.spotify.com/user/1190050886" rel="noopener noreferrer" target="_blank">Spotify</a></div>
+</div>
 </div>
 <div aria-label="Principles" class="shell principles">
 <div class="principle principle-brand">
@@ -985,10 +986,6 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <div class="contact-heading">
 <h2>Connect With Me</h2>
 <p class="contact-intro">Questions, ideas, disagreements — send them over.</p>
-</div>
-<div class="connect-media">
-<figure class="portrait connect-portrait"><img alt="Portrait of George in profile, partly sharp and partly blurred" height="1256" loading="lazy" src="media/about-portrait.png" width="848"/></figure>
-<div aria-label="George on social media" class="social-links connect-socials"><a class="social-badge" href="https://www.instagram.com/gpchristoforakis" rel="noopener noreferrer" target="_blank">Instagram</a><a class="social-badge" href="https://www.facebook.com/gpchristoforakis" rel="noopener noreferrer" target="_blank">Facebook</a><a class="social-badge" href="https://open.spotify.com/user/1190050886" rel="noopener noreferrer" target="_blank">Spotify</a></div>
 </div>
 <form class="contact-form" data-contact-form="" novalidate="">
 <div class="contact-honeypot" aria-hidden="true">

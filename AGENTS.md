@@ -31,6 +31,9 @@
 
 # Editorial rules
 
+- Use AGE OF AIMPIRES exactly in public copy, titles, and sharing metadata.
+  Accent the AI letters only in visible wordmarks, with readable contrast in both themes.
+
 - Capitalise the first letter of every word in public titles, headings and
   display labels, including articles and prepositions. Apply this to card
   titles and table captions too. Preserve acronyms and use sentence case for
