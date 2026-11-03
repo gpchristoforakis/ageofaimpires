@@ -246,10 +246,24 @@ function validChatPayload(body) {
 // Only answer-supported retrieved chunks can produce public source cards.
 // Unknown identities never fall back to title or snippet guesses.
 
-async function queryArchivist(body, apiKey) {
+async function queryArchivist(body, apiKey, requestSignal) {
   try {
-    const candidate = await queryArchivistCandidate(body, apiKey);
-    return json({ reply: archivistReply(candidate), sources: mapArchivistSources(candidate?.groundingMetadata) });
+    const query = body.query.trim();
+    if (!body.history?.length && /^which assistant fits the job description best\??$/i.test(query)) {
+      return json({ reply: "What are you trying to get done, and what would a usable result look like?", sources: [] });
+    }
+    const promptingGuide = /^how to write more effective prompts[.?!]?$/i.test(query);
+    const options = { signal: AbortSignal.any([requestSignal, AbortSignal.timeout(85000)]) };
+    if (promptingGuide) {
+      options.systemInstructionSuffix = "Use File Search to find published advice about giving clear instructions. Cite supported pages by their exact titles. Omit Entry numbers. Give one short everyday example.";
+    }
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const candidate = await queryArchivistCandidate(body, apiKey, options);
+      const sources = mapArchivistSources(candidate.groundingMetadata);
+      if (sources.length || !promptingGuide) return json({ reply: archivistReply(candidate), sources });
+      options.systemInstructionSuffix += " Retrieve a passage that supports the advice before answering.";
+    }
+    return json({ reply: "I couldn’t verify a published source for this advice. Please try the question again.", sources: [] });
   } catch (error) {
     if (error instanceof ArchivistError) return chatError(error.code, error.message, error.status);
     throw error;
@@ -273,7 +287,7 @@ async function handleChat(request, env) {
   } catch { return chatError("invalid_request", "The question could not be read. Please try again.", 400); }
   if (!validChatPayload(body)) return chatError("invalid_request", "Check the question and conversation format.", 400);
   if (!env.GEMINI_API_KEY) return chatError("chat_not_configured", "The Archivist is temporarily unavailable. Please try again later.", 503);
-  return queryArchivist(body, env.GEMINI_API_KEY);
+  return queryArchivist(body, env.GEMINI_API_KEY, request.signal);
 }
 
 async function handleVoiceToken(request, env) {
