@@ -224,10 +224,12 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
 <link rel="stylesheet" href="assets/entries.css">
 <link rel="canonical" href="https://ageofaimpires.com/entries">
 <script src="assets/entry-overviews.js" defer></script>
-<link rel="stylesheet" href="assets/site-theme.css?v=f7d224d79a6e">
+<link rel="stylesheet" href="assets/site-theme.css?v=d63274419f78">
 
 <link rel="stylesheet" href="assets/archivist.css?v=9313c8310a54">
 <script src="assets/archivist.js?v=45512558761c" defer></script>
+<link rel="stylesheet" href="assets/comments.css?v=39e9b7d6946c">
+<script defer src="assets/comments.js"></script>
 </head>
 <body class="page-directory">
 <header>
@@ -241,7 +243,7 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <a href="frameworks.html">Frameworks</a>
       <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
-      <a aria-label="Language" href="#">EN</a>
+      <span lang="en" title="English">EN</span>
     </nav>
   </div>
 </header>
@@ -302,7 +304,25 @@ body>header .aoai-brand .aoai-brand-ai,body>footer .aoai-brand .aoai-brand-ai,.s
       <div class="entry-controls"><a class="read-link" href="age-of-aimpires-entry-04.html">Read This Entry <span aria-hidden="true">→</span></a><span class="entry-reading-time">5 min read</span></div>
     </section>
   </section>
-<div class="release-share-wrap"><div aria-label="Page sharing" class="share-row share-row-end"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div></main>
+<div class="release-share-wrap"><div aria-label="Page sharing" class="share-row share-row-end"><button class="share-button" data-share-button type="button"><span aria-hidden="true">↗</span><span data-share-label>Share this</span></button><span aria-live="polite" class="share-status" data-share-status></span></div></div>
+<section class="aoai-comments" data-comments="/entries" aria-labelledby="aoai-comments-heading">
+<h2 id="aoai-comments-heading">Comments</h2>
+<p>Share a useful example, question or correction. Comments appear immediately. Please keep the discussion relevant and respectful.</p>
+<p role="status" data-comments-load-status></p>
+<ol data-comments-list aria-label="Published comments"></ol>
+<button type="button" data-comments-more hidden>Load More Comments</button>
+<form>
+<label for="aoai-comment-name">Display Name<input id="aoai-comment-name" name="name" autocomplete="nickname" required maxlength="80"></label>
+<label for="aoai-comment-text">Your Comment<textarea id="aoai-comment-text" name="comment" required maxlength="3000" aria-describedby="aoai-comment-note"></textarea></label>
+<p id="aoai-comment-note">Up to 3,000 characters. Your name and comment will be public immediately. Please leave out private information. We do not ask for your email address. <a href="privacy-policy.html">Privacy Policy</a>.</p>
+<div hidden aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<label class="comments-consent"><input type="checkbox" name="consent" required> I agree to immediate publication of my display name and comment.</label>
+<button type="submit">Post Comment</button>
+<p role="status" data-comment-status></p>
+</form>
+<noscript><p>Enable JavaScript to read and submit comments.</p></noscript>
+</section>
+</main>
 
 <footer>
   <div class="shell"><a class="brand aoai-brand" href="index.html">AGE OF <span class="aoai-brand-ai">AI</span>MPIRES</a></div>

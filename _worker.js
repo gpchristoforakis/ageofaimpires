@@ -1,3 +1,4 @@
+import { handleComments } from "./lib/comments.mjs";
 import { queryArchivistCandidate, archivistReply, mapArchivistSources, ArchivistError } from "./lib/archivist-core.mjs";
 
 const CONTACT_PATH = "/api/contact";
@@ -343,6 +344,8 @@ export default {
       url.pathname = "/entries";
       return Response.redirect(url.toString(), 301);
     }
+
+    if (url.pathname === "/api/comments") return handleComments(request, env);
 
     if (url.pathname === CONTACT_PATH) {
       try {

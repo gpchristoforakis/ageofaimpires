@@ -43,7 +43,8 @@ for (const phrase of ['Mary: Send the revised budget by Thursday.', 'No owner or
   assert.ok(guide.includes(phrase) && framework.includes(phrase), 'Shared scenario: ' + phrase);
 }
 const calc = read('time-cost-calculator.html');
-assert.equal((calc.match(/<input\b/g) || []).length, 3);
+const calculatorMarkup = calc.match(/<div data-time-calculator>[\s\S]*?<\/noscript>/)?.[0] || '';
+assert.equal((calculatorMarkup.match(/<input\b/g) || []).length, 3);
 assert.equal((calc.match(/<output\b/g) || []).length, 4);
 assert.ok(calc.indexOf('AI usage fees are not included.') < calc.indexOf('class="task-results"'));
 const elements = {};

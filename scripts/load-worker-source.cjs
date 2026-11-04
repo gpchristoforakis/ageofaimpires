@@ -5,7 +5,9 @@ module.exports = root => {
   const core = fs.readFileSync(path.join(root, 'lib/archivist-core.mjs'), 'utf8')
     .replace(/^export \{[^}]+\};?\s*$/gm, '')
     .replace(/^export /gm, '');
+  const comments = fs.readFileSync(path.join(root, 'lib/comments.mjs'), 'utf8').replace(/^export /gm, '');
   return fs.readFileSync(path.join(root, '_worker.js'), 'utf8')
     .replace(/^import \{[^}]+\} from "\.\/lib\/archivist-core\.mjs";\r?\n/m, core + '\n')
+    .replace(/^import \{ handleComments \} from "\.\/lib\/comments\.mjs";\r?\n/m, comments + '\n')
     .replace(/\r\n/g, '\n');
 };
